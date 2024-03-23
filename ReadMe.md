@@ -1,7 +1,3 @@
-Certainly! Here's a README file tailored to your project:
-
----
-
 # Productivity Panda
 *Stay Focused, Stay Productive with Productivity Panda*
 
