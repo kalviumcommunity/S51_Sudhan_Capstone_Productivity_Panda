@@ -5,6 +5,9 @@ import HomeIcons from '../../assets/images/Home 1.png'
 import AddIcon from "../../assets/images/plus-square.png"
 import TrashIcon from '../../assets/images/delete.png'
 import Log_in from '../../assets/images/log-in-03.png'
+import Arrow_Left from '../../assets/images/Arrow Left 1.png'
+import Switch_Left from '../../assets/images/Swicht_Left.png'
+import Bell from '../../assets/images/Bell.png'
 
 function MainPage() {
   return (
@@ -34,8 +37,25 @@ function MainPage() {
           </div>
         </div>
       </div>
-      <div className='Vertical-bar'></div>
-      <hr />
+      <div className='Vertical-bar'>
+      </div>
+      <div className='nav-bar'>
+        <div className='Go-back-to-home-page'>
+          <img src={Arrow_Left} alt="Go-back-to-home-page-icon" />
+          <p>Home</p>
+        </div>
+        <div className='cover-up-div-of-top-upper-right-icons'>
+          <div className='Switch-left'>
+            <img src={Switch_Left} alt="Switch-left-icon" />
+          </div>
+          <div className='Bell'>
+            <img src={Bell} alt="Bell-icon" />
+          </div>
+          <div className='Profile'>
+            <div className='Profile-icon'></div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

@@ -43,7 +43,7 @@ hr{
     justify-content: space-evenly;
     width: 65%;
 }
-.homeIcon p,.addIcon p, .trashIcon p,.log-in p{
+.homeIcon p,.addIcon p, .trashIcon p,.log-in p, .Go-back-to-home-page p{
     font-size: larger;
 }
 .homeIcon img{
@@ -78,4 +78,53 @@ hr{
     align-items: center;
     justify-content: space-evenly;
     width: 65%;
+}
+.Go-back-to-home-page{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 13%;
+    height: 100%;
+    left: 15.2%;
+} 
+.Go-back-to-home-page img{
+    margin-left: -15%;
+}
+.nav-bar{
+    height:8%;
+    border-bottom: 4px solid black;
+    width:84.8vw;
+    position: absolute;
+    left: 15.2%;
+    top: 0;
+}
+.Switch-left, .Bell{
+    height: 100%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Profile{
+    height: 100%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Profile-icon{
+    height: 40px;
+    width: 40px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: #9BCF53;
+}
+.cover-up-div-of-top-upper-right-icons {
+    height: 100%;
+    width: 18%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: 82%;
+    margin-top: -4.2%;
 }
