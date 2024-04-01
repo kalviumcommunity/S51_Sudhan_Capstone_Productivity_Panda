@@ -43,7 +43,7 @@ hr{
     justify-content: space-evenly;
     width: 65%;
 }
-.homeIcon p,.addIcon p, .trashIcon p,.log-in p, .Arrow-left p{
+.homeIcon p,.addIcon p, .trashIcon p,.log-in p, .Go-back-to-home-page p{
     font-size: larger;
 }
 .homeIcon img{
@@ -79,7 +79,7 @@ hr{
     justify-content: space-evenly;
     width: 65%;
 }
-.Arrow-left{
+.Go-back-to-home-page{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -87,7 +87,7 @@ hr{
     height: 100%;
     left: 15.2%;
 } 
-.Arrow-left img{
+.Go-back-to-home-page img{
     margin-left: -15%;
 }
 .nav-bar{

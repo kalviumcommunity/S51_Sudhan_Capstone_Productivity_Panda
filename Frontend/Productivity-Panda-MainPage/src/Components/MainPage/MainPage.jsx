@@ -40,8 +40,8 @@ function MainPage() {
       <div className='Vertical-bar'>
       </div>
       <div className='nav-bar'>
-        <div className='Arrow-left'>
-          <img src={Arrow_Left} alt="Arrow-left-icon" />
+        <div className='Go-back-to-home-page'>
+          <img src={Arrow_Left} alt="Go-back-to-home-page-icon" />
           <p>Home</p>
         </div>
         <div className='cover-up-div-of-top-upper-right-icons'>
