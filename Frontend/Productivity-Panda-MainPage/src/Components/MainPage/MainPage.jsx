@@ -99,6 +99,7 @@ function MainPage() {
         <div className='TodaysTask'>
           <img src={Calendar} alt="Calendar" />
           <p>Today's Task</p>
+          
         </div>
         <div className='border-bottom-line'></div>
         <div className='TodaysTaskRow'>
