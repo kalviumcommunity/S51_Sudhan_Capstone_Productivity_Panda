@@ -99,11 +99,10 @@ function MainPage() {
         <div className='TodaysTask'>
           <img src={Calendar} alt="Calendar" />
           <p>Today's Task</p>
-          
         </div>
         <div className='border-bottom-line'></div>
         <div className='TodaysTaskRow'>
-          <p className='hashp1'>#</p>
+          <p className='hashp1'>12</p>
           <p className='Tasknamep2'>Taskname</p>
           <p className='Priorityp3'>Priority</p>
           <p className='Statusp4'>Status</p>
