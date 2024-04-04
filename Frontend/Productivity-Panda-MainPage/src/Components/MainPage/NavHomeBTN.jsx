@@ -1,5 +1,5 @@
 import React from 'react'
-import RisingUpArrow from "../assets/images/Rising-up-arrow-BG.png"
+import RisingUpArrow from "../../assets/images/Rising-up-arrow-BG.png"
 
 function NavHomeBTN() {
   return (
