@@ -1,111 +1,139 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Inter", sans-serif;
 }
-body{
+
+body {
     background-color: #d4d4d4;
 }
-.Vertical-bar{
+
+.Vertical-bar {
     border: 2px solid black;
     height: 100%;
     position: absolute;
     left: 15%;
     top: 0;
 }
-hr{
+
+hr {
     border: 2px solid black;
     position: absolute;
     width: 85%;
     left: 15%;
     top: 8%;
 }
-.ProductivityPandaImage img{
+
+.ProductivityPandaImage img {
     width: 180px;
     height: 60px;
     position: relative;
     top: 2%;
     left: 5%;
 }
-.ProductivityPandaImage{
+
+.ProductivityPandaImage {
     width: 180px;
     height: 60px;
 }
-.addIcon, .homeIcon{
+
+.addIcon,
+.homeIcon {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     width: 75%;
 }
-.homeIcon{
+
+.homeIcon {
     width: 65%;
 }
-.homeIcon p,.addIcon p, .trashIcon p,.log-in p, .Go-back-to-home-page p{
+
+.homeIcon p,
+.addIcon p,
+.trashIcon p,
+.log-in p,
+.Go-back-to-home-page p {
     font-size: larger;
 }
-.homeIcon img{
+
+.homeIcon img {
     margin-left: 2%;
 }
-.top-most-of-sideNavigation-btn, .top-down-of-sideNavigation-bar{
+
+.top-most-of-sideNavigation-btn,
+.top-down-of-sideNavigation-bar {
     width: 15%;
-    height:80px;
+    height: 80px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: absolute;
     top: 18%;
 }
-.top-down-of-sideNavigation-bar{
+
+.top-down-of-sideNavigation-bar {
     top: 85%;
 }
-.trashIcon, .log-in{
+
+.trashIcon,
+.log-in {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     width: 65%;
 }
-.Go-back-to-home-page{
+
+.Go-back-to-home-page {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     width: 13%;
     height: 100%;
     left: 15.2%;
-} 
-.Go-back-to-home-page img{
+}
+
+.Go-back-to-home-page img {
     margin-left: -15%;
 }
-.nav-bar{
-    height:8%;
+
+.nav-bar {
+    height: 8%;
     border-bottom: 4px solid black;
-    width:84.8vw;
+    width: 84.8vw;
     position: absolute;
     left: 15.2%;
     top: 0;
 }
-.Switch-left, .Bell{
+
+.Switch-left,
+.Bell {
     height: 100%;
     width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.Profile{
+
+.Profile {
     height: 100%;
     width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.Profile-icon{
+
+.Profile-icon {
     height: 40px;
     width: 40px;
     border: 2px solid #FEFBF6;
     border-radius: 50%;
     background-color: #0F1035;
 }
+
 .cover-up-div-of-top-upper-right-icons {
     height: 100%;
     width: 18%;
@@ -115,7 +143,8 @@ hr{
     margin-left: 82%;
     margin-top: -4.2%;
 }
-.taskStatusContainer{
+
+.taskStatusContainer {
     border: 4px solid black;
     width: 80%;
     margin-left: 17.5%;
@@ -125,14 +154,19 @@ hr{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    height:120px;
+    height: 120px;
     background-color: #FFF7F1;
     color: black;
-    box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
--webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
 }
-.TotalTasksElement, .AssignedTasksElement,.CancelledTasksElement, .DueTasksElement, .InProgressTasks{
+
+.TotalTasksElement,
+.AssignedTasksElement,
+.CancelledTasksElement,
+.DueTasksElement,
+.InProgressTasks {
     height: 120px;
     width: 22%;
     display: flex;
@@ -141,30 +175,36 @@ hr{
     flex-direction: column;
     border-right: 3px solid black;
 }
-.CancelledTasksElement, .InProgressTasks{
+
+.CancelledTasksElement,
+.InProgressTasks {
     width: 26%;
 }
-.AssignedTasksElement{
+
+.AssignedTasksElement {
     border: none;
 }
-.placeholder-number{
+
+.placeholder-number {
     margin-top: 10%;
     font-size: 24px;
 }
-.UpcomingTasksContainer{
+
+.UpcomingTasksContainer {
     width: 80%;
     border: 4px solid black;
     margin-left: 17.5%;
     border-radius: 24px;
-    height:230px;
+    height: 230px;
     background-color: #0F1035;
     color: #FEFBF6;
     margin-top: 1%;
-    box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
--webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
 }
-.upComingTasks{
+
+.upComingTasks {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -172,17 +212,21 @@ hr{
     margin-top: 1%;
     margin-left: 1%;
 }
-.upComingTasks p, .TodaysTask p{
+
+.upComingTasks p,
+.TodaysTask p {
     font-size: larger;
 }
-.UpcomingTaskDisplayerContainer{
+
+.UpcomingTaskDisplayerContainer {
     width: 80%;
     height: 50px;
     background-color: #FEFBF6;
     margin-top: 1%;
     margin-left: 2%;
 }
-.ShowMoreLabel{
+
+.ShowMoreLabel {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -190,21 +234,24 @@ hr{
     margin-top: 1%;
     margin-left: 80%;
 }
-.ShowMoreLabel img{
+
+.ShowMoreLabel img {
     background-color: #FEFBF6;
 }
-.TodaysTaskContainer{
+
+.TodaysTaskContainer {
     width: 80%;
     border: 4px solid black;
     margin-left: 17.5%;
     border-radius: 24px;
     background-color: #FEFBF6;
     margin-top: 1%;
-    box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
--webkit-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
--moz-box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
 }
-.TodaysTask{
+
+.TodaysTask {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -212,40 +259,49 @@ hr{
     margin-top: 1%;
     margin-left: 1%;
 }
-.border-bottom-line{
+
+.border-bottom-line {
     margin-left: 1%;
     height: 2%;
     width: 98%;
     border: 1px solid black;
 }
-.TodaysTaskRow{
+
+.TodaysTaskRow {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 90%;
     margin-top: 0.5%;
 }
-.hashp1{
+
+.hashp1 {
     margin-left: -4%;
 }
-.Tasknamep2{
-    margin-left:8%;
+
+.Tasknamep2 {
+    margin-left: 8%;
 }
-.Priorityp3{
+
+.Priorityp3 {
     margin-left: 30%;
 }
-.Statusp4{
+
+.Statusp4 {
     margin-left: 15%;
 }
-.Deadlinep5{
+
+.Deadlinep5 {
     margin-left: 15%;
 }
-.vector{
+
+.vector {
     margin-left: 2%;
     margin-top: 1%;
-    
+
 }
-.NavBarContainer{
+
+.NavBarContainer {
     background-color: white;
     width: 100%;
     top: 0%;
@@ -255,23 +311,26 @@ hr{
     align-items: center;
     z-index: 1000;
 }
-.NavBarContainer ul{
-    width:60%;
+
+.NavBarContainer ul {
+    width: 60%;
     display: flex;
     justify-content: space-evenly;
-    align-items:center;
+    align-items: center;
     margin-left: 40%;
     height: 2%;
     list-style: none;
     font-size: larger;
     margin-top: 3px;
 }
-.Overall-div-of-get-started-page img{
+
+.Overall-div-of-get-started-page img {
     height: 800px;
     width: 1100px;
     margin-left: 22%;
 }
-.Slogan-and-tagline-of-get-started-page{
+
+.Slogan-and-tagline-of-get-started-page {
     height: 40%;
     width: 40%;
     position: absolute;
@@ -279,16 +338,19 @@ hr{
     top: 18%;
     left: 10%;
 }
-.slogan-para{
+
+.slogan-para {
     font-size: 50px;
     margin-bottom: 0.5%;
 }
-.tagline-of-the-landing-page{
+
+.tagline-of-the-landing-page {
     margin-top: 3%;
     font-size: 24px;
     font-weight: 300;
 }
-.Overall-div-of-get-started-page button{
+
+.Overall-div-of-get-started-page button {
     height: 60px;
     width: 230px;
     border: 4px solid black;
@@ -297,6 +359,66 @@ hr{
     color: white;
     font-size: 30px;
     position: absolute;
-    bottom:33%;
+    bottom: 33%;
     right: 74%;
+}
+
+.about-P-tag {
+    font-size: 50px;
+    text-align: center;
+    margin-top: 2%;
+}
+
+.Description-p-tag-of-about-me {
+    margin-top: 2%;
+    font-size: 25px;
+    text-align: center;
+}
+
+.Join-Now-btn {
+    width: 145px;
+    height: 35px;
+    border: 2px solid black;
+    background-color: #FD8A3A;
+    font-size: larger;
+    border-radius: 40px;
+    margin-left: 45%;
+    margin-top: 2%;
+}
+
+.features-p-tag-of-about-me {
+    font-size: 40px;
+    margin-left: 2%;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+.Authetication_container, .Reliable_Container, .Mail_container, .calendar_container, .Group-img_container, .extension_container{
+    height: 300px;
+    width: 330px;
+    border: 4px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+ }
+.Authetication_container img, .calendar_container img, .Group-img_container img, .extension_container img{
+    height: 235px;
+    width: 250px;
+    margin-bottom: 1%;
+}
+.Reliable_Container img{
+    height: 235px;
+    width: 250px;
+    margin-bottom: 1%;
+}
+.Mail_container img{
+    height: 235px;
+    width: 235px;
+    margin-bottom: 1%;
+}
+.Features-container-1, .Features-container-2{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 3%;
 }
