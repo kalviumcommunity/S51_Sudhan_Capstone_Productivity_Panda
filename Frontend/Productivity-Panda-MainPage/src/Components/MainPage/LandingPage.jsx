@@ -3,6 +3,8 @@ import '../../../src/index.css';
 import NavBar from './NavBar';
 import NavHomeBTN from './NavHomeBTN';
 import NavAboutPage from './NavAboutPage';
+import TechnologiesPage from './TechnologiesPage';
+import ContactPage from './contactPage';
 
 function LandingPage() {
   return (
@@ -10,6 +12,8 @@ function LandingPage() {
      <NavBar/>
     <NavHomeBTN/>
     <NavAboutPage/>
+    <TechnologiesPage/>
+    <ContactPage/>
     </>
   )
 }
