@@ -18,7 +18,17 @@ function NavAboutPage() {
         <p className='Description-p-tag-of-about-me'>
           Join us at Productive Panda, where productivity meets simplicity."
         </p>
-        <button className='Join-Now-btn'>Join Now!</button>
+        <button className='Join-Now-btn' alt="Join Now!">
+        <i>J</i>
+        <i>o</i>
+        <i>i</i>
+        <i>n</i>
+        <i>&nbsp;</i>
+        <i>N</i>
+        <i>o</i>
+        <i>w</i>
+        <i>!</i>
+  </button>
       <p className='features-p-tag-of-about-me'>
         Features
         </p>
