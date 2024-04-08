@@ -704,7 +704,7 @@ hr {
         left: 8%;
     }
     .get-started-btn {
-        bottom: 45%;
+        bottom: 35%;
         right: 70%;
     }
     .react-icon, .css-icon, .mongoDB-icon, .expressJS-icon, .nodeJS_icon, .websocket_icon {
@@ -747,5 +747,31 @@ hr {
     }
     .Technologies_div {
         font-size: 35px;
+    }
+    .footer-container{
+        font-size: 18px;
+    }
+    .mail_information {
+        height: 50px;
+        width: 265px;
+        margin-left: 0%;
+    }
+    .Additional-link_container {
+        margin-left: 0%;
+        height: 90px;
+        width: 150px;
+    }
+    .Quick-link_container {
+        height: 100px;
+        width: 110px;
+        margin-left: 0%;
+    }
+    .newsletter_container{
+        height: 180px;
+        width: 385px;
+    }
+    .input-field-container-for-newsletter-signup input {
+        width: 195px;
+        margin-right: 4%;
     }
 }
