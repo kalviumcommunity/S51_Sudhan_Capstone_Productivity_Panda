@@ -582,6 +582,11 @@ hr {
     height: 220px;
     width: 250px;
 }
+.footer-container{
+    background-color: black;
+    color: white;
+    font-size: 22px;
+}
 .about-newsletter-container{
     background-color: white;
     color: black;
@@ -621,11 +626,14 @@ hr {
 }
 .newsletter-container{
     margin-right: 50%;
+    color: red;
 }
 .newsletter_container{
     display: flex;
     align-items:flex-start;
     justify-content: center;
+    height: 200px;
+    width: 400px;
     flex-direction: column;
 }
 .first-line-divs{
@@ -634,12 +642,23 @@ hr {
     width: 100%;
 }
 .mail_information{
+    height: 70px;
+    width: 340px;
     margin-top: 4%;
     margin-left: -2%;
 }
 .Additional-link_container{
     margin-top: 4%;
     margin-left: -2%;
+    height: 130px;
+    width: 190px;
+}
+.Quick-link_container{
+    height: 130px;
+    width: 140px;
+}
+.heading-red{
+    color: red;
 }
 .Quick-link_container, .newsletter_container{
     margin-top: 4%;
@@ -651,12 +670,18 @@ hr {
 }
 .social-media-icon-container{
     display: flex;
-    margin-top: 2%;
     justify-content: space-evenly;
     align-items: center;
+    height: 60px;
+    width: 200px;
+}
+.social-media-icon-container img{
+    height: 40px;
 }
 .copyright_container{
     margin-left: 35%;
+    height: 70px;
+    width: 400px;
 }
 @media screen and (max-width: 1120px){
     .NavBarContainer ul{
@@ -685,6 +710,7 @@ hr {
     .react-icon, .css-icon, .mongoDB-icon, .expressJS-icon, .nodeJS_icon, .websocket_icon {
         height: 195px;
         width: 220px;
+        border-radius: 10px;
     }    .react-icon img, .css-icon img, .mongoDB-icon img, .expressJS-icon img, .nodeJS_icon img, .websocket_icon img {
         height: 185px;
         width: 205px;
@@ -696,5 +722,30 @@ hr {
     .Description-p-tag-of-about-me {
         margin-top: 2%;
         font-size: 17px;
+    }
+    .features-p-tag-of-about-me {
+        font-size: 35px;
+    }
+    .Authetication_container, .Reliable_Container, .Mail_container, .calendar_container, .Group-img_container, .extension_container {
+        height: 275px;
+        width: 300px;
+    }
+    .Authetication_container img, .calendar_container img, .Group-img_container img, .extension_container img {
+        height: 200px;
+        width: 225px;
+        margin-bottom: 4%;
+    }
+    .Reliable_Container img {
+        height: 200px;
+        width: 210px;
+        margin-bottom: 4%;
+    }
+    .Mail_container img {
+        height: 210px;
+        width: 210px;
+        margin-bottom: 1%;
+    }
+    .Technologies_div {
+        font-size: 35px;
     }
 }
