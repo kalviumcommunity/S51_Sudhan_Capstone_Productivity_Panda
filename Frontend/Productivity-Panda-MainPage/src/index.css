@@ -658,3 +658,43 @@ hr {
 .copyright_container{
     margin-left: 35%;
 }
+@media screen and (max-width: 1120px){
+    .NavBarContainer ul{
+        margin-left: 30%;
+    }
+    .Overall-div-of-get-started-page img {
+        height: 730px;
+        width: 942px;
+        margin-left: 8%;
+        margin-top: 5%;
+    }
+    .slogan-para{
+        font-size: 40px;
+        margin-bottom: 0.5%;
+    }
+    .Slogan-and-tagline-of-get-started-page {
+        height: 30%;
+        width: 50%;
+        top: 18%;
+        left: 8%;
+    }
+    .get-started-btn {
+        bottom: 45%;
+        right: 70%;
+    }
+    .react-icon, .css-icon, .mongoDB-icon, .expressJS-icon, .nodeJS_icon, .websocket_icon {
+        height: 195px;
+        width: 220px;
+    }    .react-icon img, .css-icon img, .mongoDB-icon img, .expressJS-icon img, .nodeJS_icon img, .websocket_icon img {
+        height: 185px;
+        width: 205px;
+    }
+    .about-P-tag {
+        font-size: 45px;
+        text-align: center;
+    }
+    .Description-p-tag-of-about-me {
+        margin-top: 2%;
+        font-size: 17px;
+    }
+}
