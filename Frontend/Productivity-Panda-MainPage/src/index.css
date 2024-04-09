@@ -836,4 +836,63 @@ hr {
     .technology-icon-div {
         grid-template-columns: repeat(3, 1fr);
     }
+    .footer-container {
+        font-size: 13px;
+    }
+    .mail_information {
+        height: 40px;
+        width: 192px;
+        margin-left: 0%;
+    }
+    .Additional-link_container {
+        margin-left: 0%;
+        height: 70px;
+        width: 108px;
+    }
+    .Quick-link_container {
+            height: 70px;
+            width: 80px;
+            margin-left: 0%;
+    }
+    .newsletter_container {
+        height: 150px;
+        width: 300px;
+    }
+    .input-field-container-for-newsletter-signup {
+        margin-top: 2%;
+        width: 100%;
+        margin-left: 0%;
+    }
+    .input-field-container-for-newsletter-signup input {
+        width: 180px;
+        margin-right: 3%;
+    }
+    .input-field-container-for-newsletter-signup button {
+        height: 25px;
+        width: 80px;
+        font-size: 13px;
+        border-radius: 2px;
+    }
+    .about-newsletter-container {
+        font-size: 12px;
+        height: 95px;
+        width: 297px;
+        border-radius: 5px;
+        margin-left: 0%;
+    }
+    .social-media-container {
+        margin-left: 3%;
+        height: auto;
+        width: 17%;
+    }
+    .social-media-icon-container{
+        justify-content: space-around;
+        width: 100%;
+        height: 50px;
+    }
+    .copyright_container {
+        margin-left: 32%;
+        height: 50px;
+        width: 32%;
+    }
 }
