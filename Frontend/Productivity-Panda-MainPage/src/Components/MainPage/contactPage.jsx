@@ -28,7 +28,7 @@ function ContactPage() {
         <input type="text" placeholder='Enter you email'/>
         <button>Subscribe</button>
         </div>
-        <p className='about-newsletter-container'>"Get the latest updates and exclusive offers by subscribing to our newsletter! Enter your email above and hit subscribe. We respect your privacy and promise not to spam.  <pre>Join us now!"</pre>
+        <p className='about-newsletter-container'>"Get the latest updates and exclusive offers by subscribing to our newsletter! Enter your email above and hit subscribe. We respect your privacy and promise not to spam. <pre>Join us now!"</pre>
 </p>
     </div>
     </div>
