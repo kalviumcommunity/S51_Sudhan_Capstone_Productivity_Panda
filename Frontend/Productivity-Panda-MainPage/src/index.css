@@ -981,10 +981,49 @@ hr {
         margin-left: 50%;
         border-left: 2px solid black;
     }
-    .NavBarContainer ul li:hover {
+}
+@media screen and (max-width: 320px){
+    .NavBarContainer ul.open {
         display: flex;
-        justify-content: center;
-        align-items: center;
         flex-direction: column;
-      }
+        height: 226vh;
+        width: 50%;
+        font-size: xxx-large;
+        background-color: #FFFFFF;
+        margin-left: 50%;
+        border-left: 2px solid black;
+    }
+    .Overall-div-of-get-started-page img {
+        height: 655px;
+        width: 740px;
+        margin-left: 4%;
+    }
+    .Slogan-and-tagline-of-get-started-page {
+        height: 30%;
+        width: 55%;
+        top: 23%;
+        left: 8%;
+    }
+    .slogan-para {
+        font-size: 30px;
+    }
+    .tagline-of-the-landing-page {
+        font-size: 20px;
+    }
+    .get-started-btn {
+        height: 50px;
+        width: 200px;
+        font-size: 30px;
+        bottom: 38%;
+        right: 66%;
+    }
+    .Authetication_container, .Reliable_Container, .Mail_container, .calendar_container, .Group-img_container, .extension_container {
+        height: 250px;
+        width: 230px;
+    }
+    .Authetication_container img, .calendar_container img, .Group-img_container img, .extension_container img {
+        height: 170px;
+        width: 200px;
+        margin-bottom: 2%;
+    }
 }
