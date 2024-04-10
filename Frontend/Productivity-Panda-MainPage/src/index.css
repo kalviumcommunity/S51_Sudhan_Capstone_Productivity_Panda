@@ -310,8 +310,7 @@ hr {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
-
+  }  
 .NavBarContainer ul {
     width: 60%;
     display: flex;
@@ -323,10 +322,36 @@ hr {
     font-size: larger;
     margin-top: 3px;
 }
+
 .NavBarContainer ul li {
     position: relative; /* Add position relative to the list item */
 }
 
+.HamburgerMenu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  
+  .HamburgerLine {
+    width: 34px;
+    height: 2px;
+    background-color: #000;
+    margin: 3px 0;
+    transition: all 0.3s ease-in-out;
+}
+.CrossSymbol .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  
+  .CrossSymbol .line2 {
+    opacity: 0;
+  }
+  
+  .CrossSymbol .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+  
 .NavBarContainer ul li::before {
     content: "";
     position: absolute;
@@ -776,9 +801,54 @@ hr {
     }
 }
 @media screen and (max-width: 769px){
-    .NavBarContainer ul {
-        margin-left: 17%;
-    }    
+    .ProductivityPandaImage img{
+        left: -150%;
+    }
+    .HamburgerMenu {
+        display: flex;
+        position: absolute;
+        left: 90%;
+        z-index: 1000;
+      }
+      
+      .NavBarContainer ul {
+        display: none;
+        flex-direction: row;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #f9f9f9;
+        width: 100%;
+        padding: 10px;
+        justify-content: space-evenly;
+        margin-top: 0;
+    }
+      
+      .NavBarContainer ul.open {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 90vh;
+        width: 50%;
+        font-size: x-large;
+        background-color: #FFFFFF;
+        margin-left: 50%; /* Initial position */
+        border-radius: 0px;
+        border-left: 2px solid black;
+      }
+      .NavBarContainer ul li {
+        margin: 10px 0;
+      }
+      .NavBarContainer ul li:hover {
+        width: 85%;
+        background-color: #D3C9C9;
+        text-align: center;
+        border-radius: 5px;
+        height: 10%;
+        border-top: 2px solid;
+      }
+      
     .Overall-div-of-get-started-page img {
         height: 655px;
         width: 740px;
@@ -896,3 +966,4 @@ hr {
         width: 32%;
     }
 }
+
