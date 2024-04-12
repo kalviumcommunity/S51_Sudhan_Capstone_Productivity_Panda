@@ -1025,17 +1025,47 @@ hr {
         margin-left: 0%;
     }
     .get-started-btn {
-        position: absolute;
-        bottom: 46%;
-        right: 50%;
+        height: 35px;
+        width: 160px;
+        font-size: 24px;
+        bottom: 48%;
+        right: 62%;
+    }    
+    .Authetication_container, .Reliable_Container, .Mail_container, .calendar_container, .Group-img_container, .extension_container {
+        height: 180px;
+        width: 180px;
+        padding: 5%;
+        font-size: 12px;
+        margin-left: 1%;
+    }
+    .Reliable_Container img {
+        height: 100px;
+        width: 93px;
+        margin-bottom: 7%;
+    }
+    .Mail_container img {
+        height: 180px;
+        width: 110px;
+    }
+    .react-icon, .css-icon, .mongoDB-icon, .expressJS-icon, .nodeJS_icon, .websocket_icon {
+        height: 160px;
+        width: 170px;
+    }    
+    .react-icon img, .css-icon img, .mongoDB-icon img, .expressJS-icon img, .nodeJS_icon img, .websocket_icon img {
+        height: 150px;
+        width: 160px;
+    }    
+    .Authetication_container img, .calendar_container img, .Group-img_container img, .extension_container img {
+        height: 100px;
+        width: 100px;
+        margin-bottom: 0%;
+    }
+    .footer-container{
+        font-size: 12px;
     }
     .technology-icon-div {
         overflow-x: auto;
         grid-column-gap: 2%;
-    }
-    .Authetication_container, .Reliable_Container, .Mail_container, .calendar_container, .Group-img_container, .extension_container {
-        padding: 5%;
-        margin-left: 1%;
     }
     .Features-container-1, .Features-container-2{
         overflow-x: auto;
@@ -1092,7 +1122,7 @@ hr {
         display: none;
     }
     .ProductivityPandaImage img {
-        left: -50%;
+        left: -40%;
     }
     .HamburgerMenu {
         left: 85%;
@@ -1103,6 +1133,22 @@ hr {
         height: 40px;
         width: 160px;
         font-size: 24px;
+    }
+    .Join-Now-btn {
+        width: 120px;
+        height: 30px;
+        font-size: large;
+    }
+    .get-started-btn {
+        bottom: 50%;
+        right: 54%;
+        height: 35px;
+        width: 140px;
+        font-size: 20px;
+    }
+    .NavBarContainer ul.open {
+        height: 90vh;
+        font-size: x-large;
     }
     .about-newsletter-container {
         width: 300px;
@@ -1116,5 +1162,8 @@ hr {
     .copyright_container {
         margin-left: 4%;
         width: 90%;
+    }
+    .Description-p-tag-of-about-me {
+        font-size: 10px;
     }
 }
