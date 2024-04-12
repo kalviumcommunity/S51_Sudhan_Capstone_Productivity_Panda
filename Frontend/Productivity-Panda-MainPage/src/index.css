@@ -1091,4 +1091,30 @@ hr {
     .Overall-div-of-get-started-page img{
         display: none;
     }
+    .ProductivityPandaImage img {
+        left: -50%;
+    }
+    .HamburgerMenu {
+        left: 85%;
+    }
+    .get-started-btn {
+        bottom: 50%;
+        right: 48%;
+        height: 40px;
+        width: 160px;
+        font-size: 24px;
+    }
+    .about-newsletter-container {
+        width: 300px;
+    }
+    .social-media-container {
+        width: 50%;
+    }
+    .newsletter_container {
+        width: 300px;
+    }
+    .copyright_container {
+        margin-left: 4%;
+        width: 90%;
+    }
 }
