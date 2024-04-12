@@ -408,7 +408,6 @@ hr {
     border: none;
     cursor: pointer;
     border-radius: 9px;
-    position: absolute;
     z-index: 1;
     overflow: hidden;
   }
@@ -974,12 +973,108 @@ hr {
     .NavBarContainer ul.open {
         display: flex;
         flex-direction: column;
-        height: 168vh;
+        height: 90vh;
         width: 50%;
-        font-size: xx-large;
+        font-size: x-large;
         background-color: #FFFFFF;
         margin-left: 50%;
         border-left: 2px solid black;
+    }
+    .ProductivityPandaImage img {
+        left: -65%;
+    }
+    .Overall-div-of-get-started-page img{
+        display: none;
+    }
+    .tagline-of-the-landing-page{
+        font-size: 16px;
+    }
+    .Slogan-and-tagline-of-get-started-page {
+        height: 2%;
+        width: 100%;
+        font-size: 25px;
+        position: unset;
+        margin-top: 25%;
+        margin-left: 3%;
+        padding: 1%;
+        border-radius: 12px;
+        margin-bottom: 20%;
+    }
+    .footer-container {
+        font-size: 16px;
+    }
+    .mail_information{
+        margin-left: 3%;
+    }
+    .Additional-link_container {
+        margin-left: 0%;
+        height: 80px;
+        width: 140px;
+        margin-left: 3%;
+    }
+    .Quick-link_container {
+        height: 80px;
+        width: 100px;
+        margin-left: 3%;
+    }
+    .about-newsletter-container {
+        font-size: 14px;
+        height: 95px;
+        width: 350px;
+        border-radius: 5px;
+        margin-left: 0%;
+    }
+    .get-started-btn {
+        position: absolute;
+        bottom: 46%;
+        right: 50%;
+    }
+    .technology-icon-div {
+        overflow-x: auto;
+        grid-column-gap: 2%;
+    }
+    .Authetication_container, .Reliable_Container, .Mail_container, .calendar_container, .Group-img_container, .extension_container {
+        padding: 5%;
+        margin-left: 1%;
+    }
+    .Features-container-1, .Features-container-2{
+        overflow-x: auto;
+        padding: 1%;
+    }
+    .first-line-divs{
+        flex-direction: column;
+    }
+    .about-P-tag {
+        font-size: 30px;
+    }
+    .Description-p-tag-of-about-me {
+        font-size: 12px;
+    }
+    .Slogan-and-tagline-of-get-started-page{
+        margin-left: 0%;
+    }
+    .Join-Now-btn{
+        margin-left: 30%;
+    }
+    .newsletter_container {
+        height: 170px;
+        width: 360px;
+        margin-left: 3%;
+    }
+    .social-media-container {
+        margin-left: 3%;
+        height: auto;
+        width: 35%;
+        margin-top: 2%;
+    }
+    .copyright_container {
+        margin-left: 15%;
+        height: 50px;
+        width: 75%;
+        margin-top: 3%;
+    }
+    body{
+        background-color: #6be5a8;
     }
 }
 @media screen and (max-width: 320px){
@@ -993,37 +1088,7 @@ hr {
         margin-left: 50%;
         border-left: 2px solid black;
     }
-    .Overall-div-of-get-started-page img {
-        height: 655px;
-        width: 740px;
-        margin-left: 4%;
-    }
-    .Slogan-and-tagline-of-get-started-page {
-        height: 30%;
-        width: 55%;
-        top: 23%;
-        left: 8%;
-    }
-    .slogan-para {
-        font-size: 30px;
-    }
-    .tagline-of-the-landing-page {
-        font-size: 20px;
-    }
-    .get-started-btn {
-        height: 50px;
-        width: 200px;
-        font-size: 30px;
-        bottom: 38%;
-        right: 66%;
-    }
-    .Authetication_container, .Reliable_Container, .Mail_container, .calendar_container, .Group-img_container, .extension_container {
-        height: 250px;
-        width: 230px;
-    }
-    .Authetication_container img, .calendar_container img, .Group-img_container img, .extension_container img {
-        height: 170px;
-        width: 200px;
-        margin-bottom: 2%;
+    .Overall-div-of-get-started-page img{
+        display: none;
     }
 }

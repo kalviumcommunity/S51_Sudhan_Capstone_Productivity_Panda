@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RisingUpArrow from "../../assets/images/Rising-up-arrow-BG.png";
 
 function NavHomeBTN() {
