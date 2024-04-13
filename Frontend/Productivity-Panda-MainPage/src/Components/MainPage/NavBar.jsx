@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ProductivityPandaImage from '../../assets/images/logo-productivity-panda-transparent.png';
 
 
@@ -21,10 +22,10 @@ function NavBar() {
         <div className={`HamburgerLine ${isMenuOpen ? 'line3' : ''}`}></div>
       </div>
       <ul className={`${isMenuOpen ? 'open' : ''}`}>
-        <li>Home</li>
-        <li>About</li>
-        <li>Features</li>
-        <li>Contact</li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/technologies">Features</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
         <li>Log-in</li>
         <li>Sign-Up</li>
       </ul>
