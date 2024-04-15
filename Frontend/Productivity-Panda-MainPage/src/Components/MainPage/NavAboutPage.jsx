@@ -9,7 +9,7 @@ import extension_img from "../../assets/images/Extension img BG.png"
 function NavAboutPage() {
   return (
     <>
-    <div className='About-page' style={{backgroundColor: "white"}}>
+    <div id='About_me' className='About-page' style={{backgroundColor: "white"}}>
         <p className='about-P-tag'>About me</p>
         <p className='Description-p-tag-of-about-me'> 
         "Welcome to Productive Panda, where we transform your day, one task at a time. Our platform streamlines your workflow, empowering you to achieve goals effortlessly. We prioritize seamless user experience, ensuring adaptability to your needs. From task creation to collaboration, our feature-rich app covers it all.

@@ -4,7 +4,7 @@ import instagram_icon from "../../assets/images/instagram icon.png"
 function ContactPage() {
   return (
     <>
-    <div className='footer-container'>
+    <div id='Contact_page' className='footer-container'>
         <div className="first-line-divs">
     <div className='mail_information'>
         <p className='heading-red'>Email Address:</p>
