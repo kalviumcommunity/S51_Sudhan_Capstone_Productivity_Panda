@@ -498,9 +498,12 @@ hr {
 }
 
 .NavBarContainer ul li {
-    position: relative; /* Add position relative to the list item */
+    position: relative;
 }
-
+.Linkage{
+    text-decoration:none;
+    color: black;
+}
 .HamburgerMenu {
     display: none;
     flex-direction: column;
@@ -882,6 +885,7 @@ hr {
     width: 400px;
 }
 @media screen and (max-width: 1120px){
+    
     .gearbox{
         margin-top: 25%;
         margin-left: 40%;

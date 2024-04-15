@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from '../src/Components/MainPage/LandingPage';
 import NavAboutPage from '../src/Components/MainPage/NavAboutPage';
 import ContactPage from '../src/Components/MainPage/contactPage';
+import Login from '../src/Components/MainPage/Log-in';
+import Signup from '../src/Components/MainPage/Sign-up';
 import TechnologiesPage from '../src/Components/MainPage/TechnologiesPage';
 
 function App() {
@@ -12,7 +14,7 @@ function App() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoaded(true);
-    }, 1000);
+    }, 2000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -62,9 +64,11 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/about" element={<NavAboutPage />} />
-          <Route path="/technologies" element={<TechnologiesPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path="#About_me" element={<NavAboutPage />} />
+          <Route path="#Technology_Page" element={<TechnologiesPage />} />
+          <Route path="#Contact_page" element={<ContactPage />} />
+          <Route path="/log-in" element={<Login/>} />
+          <Route path="/Sign-Up" element={<Signup />} />
         </Routes>
       </Router>
     </>

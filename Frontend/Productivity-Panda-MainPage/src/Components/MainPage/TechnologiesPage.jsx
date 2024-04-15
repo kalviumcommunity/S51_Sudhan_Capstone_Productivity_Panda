@@ -9,7 +9,7 @@ import websocket_icon from "../../assets/images/WebSocket img BG.png"
 function TechnologiesPage() {
   return (
     <>
-    <div className='overall-div-technology-page'>
+    <div id='Technology_Page'className='overall-div-technology-page'>
     <div className='Technologies_div'>Technologies</div>
     <div className='technology-icon-div'>
         <div className='react-icon'>
