@@ -884,8 +884,59 @@ hr {
     height: 70px;
     width: 400px;
 }
+.sign-up-container {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 30vw;
+    padding: 1%;
+    border: 2px solid black;
+  }
+  .details-paragraph-tag{
+    font-size:16px;
+    font-weight: 300;
+    margin-bottom: 5%;
+    text-align: center;
+  }
+  .sign-up-title {
+    font-size: 30px;
+    font-weight:500;
+    margin-bottom: 1%;
+    text-align: center;
+  }
+  .sign-up-form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+  }
+  .sign-up-label {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 0.5%;
+  }
+  
+  .sign-up-input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  .sign-up-button {
+    background-color: #0F1035;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 24px;
+    font-size: 20px;
+  }
+  
 @media screen and (max-width: 1120px){
-    
+
     .gearbox{
         margin-top: 25%;
         margin-left: 40%;
