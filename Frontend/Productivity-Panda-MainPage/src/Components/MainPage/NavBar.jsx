@@ -21,25 +21,25 @@ function NavBar() {
   const scrollToAbout = () => {
     if(window.innerWidth < 321 && window.innerHeight < 624){
       window.scrollTo({
-        top:window.innerHeight * 0.43,
+        top:270,
         behavior: 'smooth'
       })
      }
-    else if(window.innerWidth < 426 && window.innerHeight < 624){
+    else if(window.innerWidth <= 426 && window.innerHeight <= 624){
       window.scrollTo({
-        top:window.innerHeight * 0.3,
+        top:300,
         behavior: 'smooth'
       })
      }
-    else if(window.innerWidth < 769 && window.innerHeight < 624){
+    else if(window.innerWidth < 770 && window.innerHeight < 624){
      window.scrollTo({
-       top:window.innerHeight * 1,
+       top:300,
        behavior: 'smooth'
      })
     }
    else if(window.innerWidth < 1025){
     window.scrollTo({
-      top:window.innerHeight * 1.2,
+      top:300,
       behavior: 'smooth'
     })
    } 
@@ -66,13 +66,13 @@ function NavBar() {
      }
     else if(window.innerWidth < 768 && window.innerHeight < 624){
      window.scrollTo({
-       top:window.innerHeight * 3,
+       top:window.innerHeight * 2,
        behavior: 'smooth'
      })
     }
    else if(window.innerWidth < 1025){
     window.scrollTo({
-      top:window.innerHeight * 1.62,
+      top:window.innerHeight * 2.7,
       behavior: 'smooth'
     })
    } 
@@ -85,12 +85,36 @@ function NavBar() {
   }
 
   const scrollToContact = () => {
-    if(window.innerWidth < 1025){
+    if(window.innerWidth < 321 && window.innerHeight < 624){
       window.scrollTo({
-        top:window.innerHeight * 3.1,
+        top:window.innerHeight * 3,
         behavior: 'smooth'
       })
      }
+    else if(window.innerWidth < 426 && window.innerHeight < 624){
+      window.scrollTo({
+        top:window.innerHeight * 3,
+        behavior: 'smooth'
+      })
+     }
+    else if(window.innerWidth < 768 && window.innerHeight < 624){
+     window.scrollTo({
+       top:window.innerHeight * 3,
+       behavior: 'smooth'
+     })
+    }
+   else if(window.innerWidth < 1025){
+    window.scrollTo({
+      top:window.innerHeight * 3.2,
+      behavior: 'smooth'
+    })
+   } 
+   else if(window.innerHeight < 1440){
+    window.scrollTo({
+      top:window.innerHeight * 3.2,
+      behavior: 'smooth'
+    })
+   }
   }
 
 
