@@ -9,7 +9,7 @@ const SignUp = () => {
       <p className="sign-up-title">Welcome Maverick!</p>
       <p className='details-paragraph-tag'>Please enter your details</p>
       <form className="sign-up-form">
-        <label className="sign-up-label" htmlFor="name">Name</label>
+        <label className="sign-up-label" htmlFor="name">Username</label>
         <input className="sign-up-input" type="text" id="name" />
         <label className="sign-up-label" htmlFor="email">Email</label>
         <input className="sign-up-input" type="email" id="email" />
