@@ -22,7 +22,7 @@ const SignUp = () => {
         <p className='sign-in-link'>Already have an accound_sign-in</p>
       </form>
     </div>
-    <div>
+    <div className='task-management-sign-in-image'>
       <img src={sign_in_and_log_in_image} alt="TASK-MANAGEMENT-IMAGE" />
       </div>
     </div>

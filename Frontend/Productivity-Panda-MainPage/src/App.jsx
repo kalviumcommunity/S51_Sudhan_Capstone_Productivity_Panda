@@ -19,6 +19,15 @@ function App() {
     return () => clearTimeout(timeout);
   }, []);
 
+  useEffect(() => {
+    const body = document.querySelector('body');
+    if(window.location.pathname === '/Sign-Up'){
+      body.classList.add('white-background');
+    } else {
+      body.classList.remove('white-background');
+    }
+  }, [window.location.pathname]);
+
   if (!loaded) {
     return (
       <div className="gearbox" style={{backgroundColor:"black"}}>
