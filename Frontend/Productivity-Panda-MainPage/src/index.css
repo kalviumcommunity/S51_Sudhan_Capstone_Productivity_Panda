@@ -11,7 +11,7 @@ body {
     background-color: #d4d4d4;
 }
 .white-background {
-    background: #fff;
+    background: #ffffff;
 }
 @keyframes clockwise {
     0% {
@@ -900,37 +900,49 @@ hr {
     border: 2px solid black;
     margin-top: 5%;
   }
-  .details-paragraph-tag{
+  .log-in-container{
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 70vh;
+    width: 30vw;
+    padding: 1%;
+    border: 2px solid black;
+    margin-top: 5%;
+  }
+  .details-paragraph-tag, .details-paragraph-tag1{
     font-size:16px;
     font-weight: 300;
     margin-bottom: 5%;
     text-align: center;
   }
-  .sign-up-title {
+  .sign-up-title, .log-in-title{
     font-size: 30px;
     font-weight:500;
     margin-bottom: 2%;
     text-align: center;
   }
-  .sign-up-form {
+  .sign-up-form, .log-in-form{
     display: flex;
     flex-direction: column;
     width: 80%;
     margin-top: 5%;
   }
-  .sign-up-label {
+  .sign-up-label, .log-in-label {
     font-size: 16px;
     font-weight: 400;
     margin-bottom: 0.5%;
   }
-  .sign-up-input {
+  .sign-up-input,.log-in-input {
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 0.5rem;
     margin-bottom: 1rem;
     width: 100%;
   }
-  .sign-up-button {
+  .sign-up-button, .log-in-button {
     background-color: #0F1035;
     color: white;
     padding: 10px 20px;
@@ -948,7 +960,7 @@ hr {
     padding: 2%;
     margin-bottom: 2%;
 }
-.sign-in-link {
+.sign-in-link, .log-in-link {
     font-size: 12px;
     text-align: center;
     font-weight: 300;
@@ -966,12 +978,15 @@ hr {
     height: 18%;
     width: 40vw;
 }
-.sign-in-page{
+.sign-in-page, .log-in-page{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 @media screen and (max-width: 1120px){ 
+    .log-in-page{
+        margin-top: 3%;
+    }
     .sign-up-container{
         width: 35vw;
     }
@@ -1074,6 +1089,12 @@ hr {
     .sign-up-container{
         width: 40vw;
         height: 70vh;
+    }
+    .log-in-container {
+        height: 70vh;
+        width: 52vw;
+        margin-top: 12%;
+        margin-left: 3%;
     }
     .task-management-sign-in-image img {
         width: 50vw;
@@ -1271,6 +1292,11 @@ hr {
     }
 }
 @media screen and (max-width: 464px){
+    .log-in-container{
+        height: 70vh;
+        width: 80vw;
+        margin-top: 25%;
+    }
     .task-management-sign-in-image{
         display: none;
     }
@@ -1420,6 +1446,11 @@ hr {
     }
 }
 @media screen and (max-width: 320px){
+    .log-in-container{
+        height: 70vh;
+        width: 90vw;
+        margin-top: 25%;
+    }
     .sign-up-container {
         width: 90vw;
         height: 70vh;

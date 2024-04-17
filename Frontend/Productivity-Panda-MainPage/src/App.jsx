@@ -10,6 +10,7 @@ import TechnologiesPage from '../src/Components/MainPage/TechnologiesPage';
 
 function App() {
   const[loaded, setLoaded] = useState(false);
+  const [whiteBackground, setWhiteBackground] = useState(true);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -21,12 +22,24 @@ function App() {
 
   useEffect(() => {
     const body = document.querySelector('body');
-    if(window.location.pathname === '/Sign-Up'){
-      body.classList.add('white-background');
+    const whiteBackGroundRoute = ['/Sign-Up', '/log-in'];
+
+    if (whiteBackGroundRoute.includes(window.location.pathname)) {
+      setWhiteBackground(false); 
     } else {
-      body.classList.remove('white-background');
+      setWhiteBackground(true);
     }
   }, [window.location.pathname]);
+
+  useEffect(() => {
+    if (!whiteBackground) {
+      const body = document.querySelector('body');
+      body.classList.add('white-background');
+    }  else {
+      const body = document.querySelector('body');
+      body.classList.remove('white-background');
+    }
+  }, [!whiteBackground]);
 
   if (!loaded) {
     return (
