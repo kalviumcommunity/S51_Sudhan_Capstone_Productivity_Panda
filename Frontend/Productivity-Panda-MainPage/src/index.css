@@ -13,6 +13,12 @@ body {
 .white-background {
     background-color: white;
   }
+.error-message{
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 3%;
+    color: red;
+}
 @keyframes clockwise {
     0% {
       transform: rotate(0deg);
