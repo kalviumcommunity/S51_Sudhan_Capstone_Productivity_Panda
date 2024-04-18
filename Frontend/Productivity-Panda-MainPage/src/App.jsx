@@ -13,7 +13,6 @@ function App() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    console.log("hwllo")
     const timeout = setTimeout(() => {
       setLoaded(true);
     }, 1000);
