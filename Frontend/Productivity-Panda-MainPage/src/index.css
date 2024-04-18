@@ -11,8 +11,8 @@ body {
     background-color: #d4d4d4;
 }
 .white-background {
-    background: #ffffff;
-}
+    background-color: white;
+  }
 @keyframes clockwise {
     0% {
       transform: rotate(0deg);
@@ -975,18 +975,15 @@ hr {
     margin-left: 5%;
 }
 .task-management-sign-in-image img{
-    height: 18%;
     width: 40vw;
 }
 .sign-in-page, .log-in-page{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 @media screen and (max-width: 1120px){ 
-    .log-in-page{
-        margin-top: 3%;
-    }
     .sign-up-container{
         width: 35vw;
     }
@@ -1093,14 +1090,13 @@ hr {
     .log-in-container {
         height: 70vh;
         width: 52vw;
-        margin-top: 12%;
         margin-left: 3%;
+    }
+    .log-in-page{
+        height: 100vh;
     }
     .task-management-sign-in-image img {
         width: 50vw;
-    }
-    .sign-in-page {
-        margin-top: 7%;
     }
     .sign-up-title {
         font-size: 24px;
@@ -1295,7 +1291,9 @@ hr {
     .log-in-container{
         height: 70vh;
         width: 80vw;
-        margin-top: 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .task-management-sign-in-image{
         display: none;
@@ -1449,12 +1447,10 @@ hr {
     .log-in-container{
         height: 70vh;
         width: 90vw;
-        margin-top: 25%;
     }
     .sign-up-container {
         width: 90vw;
         height: 70vh;
-        margin-top: 20%;
     }
     .gearbox{
         margin-top: 65%;
