@@ -4,7 +4,7 @@ import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in i
 
 const SignUp = () => {
   return (
-    <div className='sign-in-page'>
+    <div className='sign-in-page white-background'>
     <div className="sign-up-container">
       <p className="sign-up-title">Welcome Maverick!</p>
       <p className='details-paragraph-tag'>Please enter your details</p>
