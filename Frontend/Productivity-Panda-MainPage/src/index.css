@@ -985,7 +985,6 @@ hr {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 80vh;
     width: 30vw;
     padding: 1%;
     border: 2px solid black;
@@ -1239,7 +1238,6 @@ hr {
 @media screen and (max-width: 769px) {
     .sign-up-container {
         width: 40vw;
-        height: 70vh;
     }
 
     .log-in-container {
@@ -1703,7 +1701,6 @@ hr {
 
     .sign-up-container {
         width: 90vw;
-        height: 70vh;
     }
 
     .gearbox {
