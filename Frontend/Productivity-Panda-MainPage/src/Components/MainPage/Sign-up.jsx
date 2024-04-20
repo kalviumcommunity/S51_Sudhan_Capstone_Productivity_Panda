@@ -17,8 +17,8 @@ const SignUp = () => {
     const userNameValue = event.target.value;
     const usernameRegex = /^$|^[a-zA-Z0-9._-]{0,12}$/;
     if (usernameRegex.test(userNameValue)) {
-    setUserName(event.target.value)
-    setUserNameError("");
+      setUserName(event.target.value)
+      setUserNameError("");
     } else {
       setUserNameError("Please enter a valid username")
     }
@@ -38,7 +38,7 @@ const SignUp = () => {
   const handlePasswordChange = (event) => {
     const passwordValue = event.target.value;
     const passwordRegex = /^\d{6,}$/;
-    if(passwordRegex.test(passwordValue)){
+    if (passwordRegex.test(passwordValue)) {
       setPassword(passwordValue);
       setPasswordError("");
     } else {
@@ -49,9 +49,9 @@ const SignUp = () => {
 
   const handleConfirmPasswordChange = (event) => {
     const confirmPasswordValue = event.target.value;
-    if(confirmPasswordValue !== Password){
+    if (confirmPasswordValue !== Password) {
       setConfirmPasswordError("Confirm Password doesn't match with the password")
-    }else{
+    } else {
       setConfirmPasswordError("");
       setConfirmPassword(confirmPasswordValue)
     }
@@ -59,18 +59,18 @@ const SignUp = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(Username === ''){
+    if (Username === '') {
       setUserNameError('Name is required');
     }
-    if(Email === ''){
+    if (Email === '') {
       setEmailError('Email is required');
     }
-    if(Password === ''){
+    if (Password === '') {
       setPasswordError('Password is required');
     }
-    if(ConfirmPassword !== Password){
+    if (ConfirmPassword !== Password) {
       setConfirmPasswordError("Passwords do not match")
-    }else if(ConfirmPassword === ""){
+    } else if (ConfirmPassword === "") {
       setConfirmPasswordError('confirm Password is required')
     }
   }
@@ -82,20 +82,20 @@ const SignUp = () => {
         <p className='details-paragraph-tag'>Please enter your details</p>
         <form className="sign-up-form" onSubmit={handleSubmit}>
           <label className="sign-up-label" htmlFor="Username">Username</label>
-          <input className="sign-up-input" type="text" id="name" value={Username} onChange={handleUserNameChange}/>
+          <input className="sign-up-input" type="text" id="name" value={Username} onChange={handleUserNameChange} />
           {UsernameError && <p className="error-message">{UsernameError}</p>}
           <label className="sign-up-label" htmlFor="Email">Email</label>
-          <input className="sign-up-input" type="email" id="email" value={Email} onChange={handleEmailChange}/>
-          {EmailError && <p className="error-message">{EmailError}</p>} 
+          <input className="sign-up-input" type="email" id="email" value={Email} onChange={handleEmailChange} />
+          {EmailError && <p className="error-message">{EmailError}</p>}
           <label className="sign-up-label" htmlFor="Password">Password</label>
-          <input className="sign-up-input" type="password" id="password" value={Password} onChange={handlePasswordChange}/>
-          {PasswordError && <p className="error-message">{PasswordError}</p>} 
+          <input className="sign-up-input" type="password" id="password" value={Password} onChange={handlePasswordChange} />
+          {PasswordError && <p className="error-message">{PasswordError}</p>}
           <label className="sign-up-label" htmlFor="ConfirmPassword">Confirm Password</label>
-          <input className="sign-up-input" type="password" id="ConfirmPassword" value={ConfirmPassword} onChange={handleConfirmPasswordChange}/>
-          {ConfirmPasswordError && <p className="error-message">{ConfirmPasswordError}</p>} 
+          <input className="sign-up-input" type="password" id="ConfirmPassword" value={ConfirmPassword} onChange={handleConfirmPasswordChange} />
+          {ConfirmPasswordError && <p className="error-message">{ConfirmPasswordError}</p>}
           <button className="sign-up-button" type="submit">Sign Up</button>
           <button className='Google-container' type="submit">Sign-in with Google</button>
-          <p className='sign-in-link'>Already have an account? Sign in</p>
+          <p className='sign-in-link'>Already have an account?<a href="/log-in">Log-in here</a></p>
         </form>
       </div>
       <div className='task-management-sign-in-image'>
@@ -103,7 +103,7 @@ const SignUp = () => {
       </div>
     </div>
   );
-  
+
 };
 
 export default SignUp;
