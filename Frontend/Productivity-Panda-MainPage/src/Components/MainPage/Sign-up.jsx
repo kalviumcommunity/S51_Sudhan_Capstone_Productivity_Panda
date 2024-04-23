@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import "../../index.css";
+import { LoginSocialGoogle } from 'reactjs-social-login';
 import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in image.png"
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [Username, setUserName] = useState("")
@@ -13,11 +15,13 @@ const SignUp = () => {
   const [PasswordError, setPasswordError] = useState("")
   const [ConfirmPasswordError, setConfirmPasswordError] = useState("")
 
+  const navigate = useNavigate()
+
   const handleUserNameChange = (event) => {
     const userNameValue = event.target.value;
-    const usernameRegex = /^$|^[a-zA-Z0-9._-]{0,12}$/;
+    setUserName(event.target.value)
+    const usernameRegex = /^$|^[a-zA-Z0-9._-]{4,12}$/;
     if (usernameRegex.test(userNameValue)) {
-      setUserName(event.target.value)
       setUserNameError("");
     } else {
       setUserNameError("Please enter a valid username")
@@ -26,9 +30,9 @@ const SignUp = () => {
 
   const handleEmailChange = (event) => {
     const emailValue = event.target.value;
+    setEmail(emailValue)
     const emailRegex = /^$|^[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     if (emailRegex.test(emailValue)) {
-      setEmail(emailValue)
       setEmailError("")
     } else {
       setEmailError("Please enter a valid email")
@@ -37,9 +41,9 @@ const SignUp = () => {
 
   const handlePasswordChange = (event) => {
     const passwordValue = event.target.value;
-    const passwordRegex = /^\d{6,}$/;
+    setPassword(passwordValue);
+    const passwordRegex = /^\d{0,6}$/;
     if (passwordRegex.test(passwordValue)) {
-      setPassword(passwordValue);
       setPasswordError("");
     } else {
       setPasswordError("Please enter a valid password (at least 6 characters)")
@@ -49,6 +53,7 @@ const SignUp = () => {
 
   const handleConfirmPasswordChange = (event) => {
     const confirmPasswordValue = event.target.value;
+    setConfirmPassword(confirmPasswordValue);
     if (confirmPasswordValue !== Password) {
       setConfirmPasswordError("Confirm Password doesn't match with the password")
     } else {
@@ -58,28 +63,36 @@ const SignUp = () => {
   }
 
   const handleSubmit = (event) => {
+    let isError = false
     event.preventDefault();
     if (Username === '') {
       setUserNameError('Name is required');
+      isError = true
     }
     if (Email === '') {
       setEmailError('Email is required');
+      isError = true
     }
     if (Password === '') {
       setPasswordError('Password is required');
+      isError = true
     }
     if (ConfirmPassword !== Password) {
       setConfirmPasswordError("Passwords do not match")
+      isError = true
     } else if (ConfirmPassword === "") {
       setConfirmPasswordError('confirm Password is required')
-    }
+      isError = true
+    }if ( !(isError)) {
+      navigate("/MainPage")
   }
-
+}
+  
   return (
     <div className='sign-in-page white-background'>
       <div className="sign-up-container">
         <p className="sign-up-title">Welcome Maverick!</p>
-        <p className='details-paragraph-tag'>Please enter your details</p>
+        <p className='details-paragr aph-tag'>Please enter your details</p>
         <form className="sign-up-form" onSubmit={handleSubmit}>
           <label className="sign-up-label" htmlFor="Username">Username</label>
           <input className="sign-up-input" type="text" id="name" value={Username} onChange={handleUserNameChange} />
@@ -94,7 +107,20 @@ const SignUp = () => {
           <input className="sign-up-input" type="password" id="ConfirmPassword" value={ConfirmPassword} onChange={handleConfirmPasswordChange} />
           {ConfirmPasswordError && <p className="error-message">{ConfirmPasswordError}</p>}
           <button className="sign-up-button" type="submit">Sign Up</button>
-          <button className='Google-container' type="submit">Sign-in with Google</button>
+          <button className='Google-container' type="button">
+            <LoginSocialGoogle
+              client_id='763400746152-usfqfej22honfo6vfi7gv957egp3pfgj.apps.googleusercontent.com'
+              access_type='offline'
+              onResolve={({ provider, data }) => {
+                console.log(provider, data)
+                navigate("/MainPage");
+              }}
+              onReject={(error) => {
+                console.log(error)
+              }}>
+              Sign-in with Google
+            </LoginSocialGoogle>
+          </button>
           <p className='sign-in-link'>Already have an account?<a href="/log-in">Log-in here</a></p>
         </form>
       </div>
