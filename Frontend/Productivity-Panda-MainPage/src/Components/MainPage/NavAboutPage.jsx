@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 import Authentication_img_BG from "../../assets/images/Authentication img transparent.png"
 import Trusted_and_secure_img_BG from "../../assets/images/Secure and trusted browsing transparent.png"
 import Mail_img_BG from "../../assets/images/Mail img BG.png";
@@ -19,7 +20,8 @@ function NavAboutPage() {
           Join us at Productive Panda, where productivity meets simplicity."
         </p>
         <button className='Join-Now-btn' alt="Join Now!">
-        <i>J</i>
+          <Link className="Linkage" to="/">
+          <i>J</i>
         <i>o</i>
         <i>i</i>
         <i>n</i>
@@ -28,6 +30,7 @@ function NavAboutPage() {
         <i>o</i>
         <i>w</i>
         <i>!</i>
+          </Link>
   </button>
       <p className='features-p-tag-of-about-me'>
         Features

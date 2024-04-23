@@ -8,6 +8,7 @@ import ContactPage from '../src/Components/MainPage/contactPage';
 import Login from '../src/Components/MainPage/Log-in';
 import Signup from '../src/Components/MainPage/Sign-up';
 import TechnologiesPage from '../src/Components/MainPage/TechnologiesPage';
+import MainPage from '../src/Components/MainPage/MainPage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -69,6 +70,7 @@ function App() {
           <Route path="#Contact_page" element={<ContactPage />} />
           <Route path="/log-in" element={<Login />} />
           <Route path="/Sign-Up" element={<Signup />} />
+          <Route path='/MainPage' element={<MainPage/>}></Route>
         </Routes>
       </Router>
     </>
