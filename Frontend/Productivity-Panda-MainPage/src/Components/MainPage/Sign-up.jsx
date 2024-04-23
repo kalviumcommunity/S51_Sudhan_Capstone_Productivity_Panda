@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from "axios";
 import "../../index.css";
 import { LoginSocialGoogle } from 'reactjs-social-login';
 import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in image.png"
@@ -84,7 +85,10 @@ const SignUp = () => {
       setConfirmPasswordError('confirm Password is required')
       isError = true
     }if ( !(isError)) {
-      navigate("/MainPage")
+      axios.post("http://localhost:3000/Sign-Up", {Username, Email, Password})
+      .then(result => console.log(result))
+      .catch(err => console.log(err))
+      navigate("/log-in")
   }
 }
   
