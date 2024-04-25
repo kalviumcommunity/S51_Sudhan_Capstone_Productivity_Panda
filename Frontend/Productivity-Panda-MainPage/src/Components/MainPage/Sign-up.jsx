@@ -87,16 +87,16 @@ const SignUp = () => {
     } if (!(isError)) {
       try {
         const response = await axios.post("http://localhost:3000/Sign-Up", { Username, Email, Password })
-        const {token} = await response.data
+        const { token } = await response.data
         console.log(response)
 
-        if(response.status === 201){
+        if (response.status === 201) {
           navigate("/MainPage")
           localStorage.setItem("TokenizedValue", token)
         } else {
-          console.error("error:" , response.statusText)
+          console.error("error:", response.statusText)
         }
-      } catch{
+      } catch {
         console.error("An issue is rised in the resgiration form")
       }
     }

@@ -47,62 +47,62 @@ const Login = () => {
       isError = true;
       setPasswordError("Password is required");
     }
-    if(!(isError)){
+    if (!(isError)) {
       try {
         const response = await axios.post("http://localhost:3000/log-in", { Email, Password })
-        const {token} = await response.data
+        const { token } = await response.data
         console.log(response)
 
-        if(response.status == 201){
+        if (response.status == 201) {
           navigate("/MainPage")
           localStorage.setItem("TokenizedValue", token)
         } else {
-          console.error("error:" , response.statusText)
+          console.error("error:", response.statusText)
         }
-      } catch{
+      } catch {
         console.error("An issue is raised in the log-in")
       }
     }
-    }
   }
+}
 
-  return (
-    <div className='log-in-page white-background'>
-      <div className="log-in-container">
-        <p className="log-in-title">Welcome Back Maverick!</p>
-        <p className='details-paragraph-tag1'>Please enter your details</p>
-        <form className="log-in-form" onSubmit={handleSubmit}>
-          <label className="log-in-label" htmlFor="email">Email</label>
-          <input className="log-in-input" type="email" id="email" value={Email} onChange={handleEmailChange} placeholder='Enter your email' />
-          {EmailError && <p className="error-message">{EmailError}</p>}
+return (
+  <div className='log-in-page white-background'>
+    <div className="log-in-container">
+      <p className="log-in-title">Welcome Back Maverick!</p>
+      <p className='details-paragraph-tag1'>Please enter your details</p>
+      <form className="log-in-form" onSubmit={handleSubmit}>
+        <label className="log-in-label" htmlFor="email">Email</label>
+        <input className="log-in-input" type="email" id="email" value={Email} onChange={handleEmailChange} placeholder='Enter your email' />
+        {EmailError && <p className="error-message">{EmailError}</p>}
 
-          <label className="log-in-label" htmlFor="password">Password</label>
-          <input className="log-in-input" type="password" id="password" value={Password} onChange={handlePasswordChange} placeholder='Enter your password' />
-          {PasswordError && <p className="error-message">{PasswordError}</p>}
+        <label className="log-in-label" htmlFor="password">Password</label>
+        <input className="log-in-input" type="password" id="password" value={Password} onChange={handlePasswordChange} placeholder='Enter your password' />
+        {PasswordError && <p className="error-message">{PasswordError}</p>}
 
-          <button className="log-in-button" type="submit">Log in</button>
-          <button className='Google-container' type="button">
-            <LoginSocialGoogle
-              client_id='763400746152-usfqfej22honfo6vfi7gv957egp3pfgj.apps.googleusercontent.com'
-              access_type='offline'
-              onResolve={({ provider, data }) => {
-                console.log(provider, data)
-                navigate("/MainPage");
-              }}
-              onReject={(error) => {
-                console.log(error)
-              }}>
-              Sign-in with Google
-            </LoginSocialGoogle>
-          </button>
-          <p className='log-in-link'>Don't you have an account? <a href="/Sign-Up">Sign up here</a></p>
-        </form>
-      </div>
-      <div className='task-management-sign-in-image'>
-        <img src={sign_in_and_log_in_image} alt="TASK-MANAGEMENT-IMAGE" />
-      </div>
+        <button className="log-in-button" type="submit">Log in</button>
+        <button className='Google-container' type="button">
+          <LoginSocialGoogle
+            client_id='763400746152-usfqfej22honfo6vfi7gv957egp3pfgj.apps.googleusercontent.com'
+            access_type='offline'
+            onResolve={({ provider, data }) => {
+              console.log(provider, data)
+              navigate("/MainPage");
+            }}
+            onReject={(error) => {
+              console.log(error)
+            }}>
+            Sign-in with Google
+          </LoginSocialGoogle>
+        </button>
+        <p className='log-in-link'>Don't you have an account? <a href="/Sign-Up">Sign up here</a></p>
+      </form>
     </div>
-  );
+    <div className='task-management-sign-in-image'>
+      <img src={sign_in_and_log_in_image} alt="TASK-MANAGEMENT-IMAGE" />
+    </div>
+  </div>
+);
 
 
 export default Login;
