@@ -5,8 +5,6 @@ import { LoginSocialGoogle } from 'reactjs-social-login';
 import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in image.png"
 import { useNavigate } from 'react-router-dom';
 
-
-
 const SignUp = () => {
   const [Username, setUserName] = useState("")
   const [Email, setEmail] = useState("")
@@ -45,7 +43,7 @@ const SignUp = () => {
   const handlePasswordChange = (event) => {
     const passwordValue = event.target.value;
     setPassword(passwordValue);
-    const passwordRegex = /^\d{6,12}$/;
+    const passwordRegex = /^.{6,12}$/;
     if (passwordRegex.test(passwordValue)) {
       setPasswordError("");
     } else {
@@ -92,7 +90,7 @@ const SignUp = () => {
         const {token} = await response.data
         console.log(response)
 
-        if(response.status == 201){
+        if(response.status === 201){
           navigate("/MainPage")
           localStorage.setItem("TokenizedValue", token)
         } else {
@@ -145,7 +143,6 @@ const SignUp = () => {
       </div>
     </div>
   );
-
 };
 
 export default SignUp;

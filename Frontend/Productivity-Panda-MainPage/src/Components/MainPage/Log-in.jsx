@@ -3,6 +3,7 @@ import "../../index.css";
 import { LoginSocialGoogle } from "reactjs-social-login";
 import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in image.png";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
   const [Email, setEmail] = useState("");
@@ -35,7 +36,7 @@ const Login = () => {
     setPassword(event.target.value)
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     let isError = false;
     event.preventDefault();
     if (Email === "") {
@@ -47,7 +48,21 @@ const Login = () => {
       setPasswordError("Password is required");
     }
     if(!(isError)){
-      navigate("/MainPage")
+      try {
+        const response = await axios.post("http://localhost:3000/log-in", { Email, Password })
+        const {token} = await response.data
+        console.log(response)
+
+        if(response.status == 201){
+          navigate("/MainPage")
+          localStorage.setItem("TokenizedValue", token)
+        } else {
+          console.error("error:" , response.statusText)
+        }
+      } catch{
+        console.error("An issue is raised in the log-in")
+      }
+    }
     }
   }
 
@@ -88,6 +103,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+
 
 export default Login;
