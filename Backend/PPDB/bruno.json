@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "PPDB",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

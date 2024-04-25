@@ -5,6 +5,8 @@ import { LoginSocialGoogle } from 'reactjs-social-login';
 import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in image.png"
 import { useNavigate } from 'react-router-dom';
 
+
+
 const SignUp = () => {
   const [Username, setUserName] = useState("")
   const [Email, setEmail] = useState("")
@@ -43,7 +45,7 @@ const SignUp = () => {
   const handlePasswordChange = (event) => {
     const passwordValue = event.target.value;
     setPassword(passwordValue);
-    const passwordRegex = /^\d{0,6}$/;
+    const passwordRegex = /^\d{6,12}$/;
     if (passwordRegex.test(passwordValue)) {
       setPasswordError("");
     } else {
@@ -63,7 +65,7 @@ const SignUp = () => {
     }
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     let isError = false
     event.preventDefault();
     if (Username === '') {
@@ -84,14 +86,24 @@ const SignUp = () => {
     } else if (ConfirmPassword === "") {
       setConfirmPasswordError('confirm Password is required')
       isError = true
-    }if ( !(isError)) {
-      axios.post("http://localhost:3000/Sign-Up", {Username, Email, Password})
-      .then(result => console.log(result))
-      .catch(err => console.log(err))
-      navigate("/log-in")
+    } if (!(isError)) {
+      try {
+        const response = await axios.post("http://localhost:3000/Sign-Up", { Username, Email, Password })
+        const {token} = await response.data
+        console.log(response)
+
+        if(response.status == 201){
+          navigate("/MainPage")
+          localStorage.setItem("TokenizedValue", token)
+        } else {
+          console.error("error:" , response.statusText)
+        }
+      } catch{
+        console.error("An issue is rised in the resgiration form")
+      }
+    }
   }
-}
-  
+
   return (
     <div className='sign-in-page white-background'>
       <div className="sign-up-container">
