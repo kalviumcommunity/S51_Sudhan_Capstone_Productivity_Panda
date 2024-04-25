@@ -7,6 +7,7 @@ const bodyParser = require("body-parser"); // Body parsing middleware
 require('dotenv').config(); // dotenv for environment variables
 const ValidatingSignUp = require("../Backend/Validators/SignUpValidator"); // Custom validation function
 const userDetailsModel = require("../Backend/models/userDetails"); // Model for user details
+const LoginInRoute = require("./Routes/LoginRoute");
 
 // Create an instance of the Express application
 const RegisterRoute = express();
@@ -15,6 +16,7 @@ const RegisterRoute = express();
 RegisterRoute.use(express.json()); // JSON parsing
 RegisterRoute.use(cors()); // Enable CORS
 RegisterRoute.use(bodyParser.json()); // JSON body parsing
+RegisterRoute.use(LoginInRoute)
 
 // Set the port for the server to listen on
 const port = process.env.PORT || 3000;

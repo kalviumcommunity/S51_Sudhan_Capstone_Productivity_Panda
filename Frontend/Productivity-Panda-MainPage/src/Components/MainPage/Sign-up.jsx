@@ -5,8 +5,6 @@ import { LoginSocialGoogle } from 'reactjs-social-login';
 import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in image.png"
 import { useNavigate } from 'react-router-dom';
 
-
-
 const SignUp = () => {
   const [Username, setUserName] = useState("")
   const [Email, setEmail] = useState("")
@@ -45,7 +43,7 @@ const SignUp = () => {
   const handlePasswordChange = (event) => {
     const passwordValue = event.target.value;
     setPassword(passwordValue);
-    const passwordRegex = /^\d{6,12}$/;
+    const passwordRegex = /^.{6,12}$/;
     if (passwordRegex.test(passwordValue)) {
       setPasswordError("");
     } else {
@@ -89,16 +87,16 @@ const SignUp = () => {
     } if (!(isError)) {
       try {
         const response = await axios.post("http://localhost:3000/Sign-Up", { Username, Email, Password })
-        const {token} = await response.data
+        const { token } = await response.data
         console.log(response)
 
-        if(response.status == 201){
+        if (response.status === 201) {
           navigate("/MainPage")
           localStorage.setItem("TokenizedValue", token)
         } else {
-          console.error("error:" , response.statusText)
+          console.error("error:", response.statusText)
         }
-      } catch{
+      } catch {
         console.error("An issue is rised in the resgiration form")
       }
     }
@@ -145,7 +143,6 @@ const SignUp = () => {
       </div>
     </div>
   );
-
 };
 
 export default SignUp;
