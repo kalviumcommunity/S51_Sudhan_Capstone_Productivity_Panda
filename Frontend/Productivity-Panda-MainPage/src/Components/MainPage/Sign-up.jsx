@@ -6,6 +6,7 @@ import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in i
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
+  // State variables to manage username, email, password, and their respective errors
   const [Username, setUserName] = useState("")
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
@@ -16,8 +17,10 @@ const SignUp = () => {
   const [PasswordError, setPasswordError] = useState("")
   const [ConfirmPasswordError, setConfirmPasswordError] = useState("")
 
+  // Hook from react-router-dom to navigate between pages
   const navigate = useNavigate()
 
+  // Function to handle changes in the username input field
   const handleUserNameChange = (event) => {
     const userNameValue = event.target.value;
     setUserName(event.target.value)
@@ -29,6 +32,7 @@ const SignUp = () => {
     }
   }
 
+  // Function to handle changes in the email input field
   const handleEmailChange = (event) => {
     const emailValue = event.target.value;
     setEmail(emailValue)
@@ -40,6 +44,7 @@ const SignUp = () => {
     }
   }
 
+  // Function to handle changes in the password input field
   const handlePasswordChange = (event) => {
     const passwordValue = event.target.value;
     setPassword(passwordValue);
@@ -52,6 +57,7 @@ const SignUp = () => {
     setPassword(event.target.value)
   }
 
+  // Function to handle changes in the confirm password input field
   const handleConfirmPasswordChange = (event) => {
     const confirmPasswordValue = event.target.value;
     setConfirmPassword(confirmPasswordValue);
@@ -63,6 +69,7 @@ const SignUp = () => {
     }
   }
 
+  // Function to handle form submission
   const handleSubmit = async (event) => {
     let isError = false
     event.preventDefault();
@@ -102,6 +109,7 @@ const SignUp = () => {
     }
   }
 
+  // JSX code for the sign-up form
   return (
     <div className='sign-in-page white-background'>
       <div className="sign-up-container">

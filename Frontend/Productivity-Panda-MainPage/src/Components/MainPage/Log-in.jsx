@@ -6,13 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
+  // State variables to manage email, password, and their respective errors
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [EmailError, setEmailError] = useState("");
   const [PasswordError, setPasswordError] = useState("");
 
-  const navigate = useNavigate()
+  // Hook from react-router-dom to navigate between pages
+  const navigate = useNavigate();
 
+  // Function to handle changes in the email input field
   const handleEmailChange = (event) => {
     const emailValue = event.target.value;
     setEmail(emailValue)
@@ -24,6 +27,7 @@ const Login = () => {
     }
   }
 
+  // Function to handle changes in the password input field
   const handlePasswordChange = (event) => {
     const passwordValue = event.target.value;
     setPassword(passwordValue);
@@ -36,6 +40,7 @@ const Login = () => {
     setPassword(event.target.value)
   }
 
+  // Function to handle form submission
   const handleSubmit = async (event) => {
     let isError = false;
     event.preventDefault();
@@ -53,7 +58,7 @@ const Login = () => {
         const { token } = await response.data
         console.log(response)
 
-        if (response.status == 201) {
+        if (response.status == 200) {
           navigate("/MainPage")
           localStorage.setItem("TokenizedValue", token)
         } else {
@@ -64,45 +69,45 @@ const Login = () => {
       }
     }
   }
-}
+ 
+  // JSX code for the login form
+  return (
+    <div className='log-in-page white-background'>
+      <div className="log-in-container">
+        <p className="log-in-title">Welcome Back Maverick!</p>
+        <p className='details-paragraph-tag1'>Please enter your details</p>
+        <form className="log-in-form" onSubmit={handleSubmit}>
+          <label className="log-in-label" htmlFor="email">Email</label>
+          <input className="log-in-input" type="email" id="email" value={Email} onChange={handleEmailChange} placeholder='Enter your email' />
+          {EmailError && <p className="error-message">{EmailError}</p>}
 
-return (
-  <div className='log-in-page white-background'>
-    <div className="log-in-container">
-      <p className="log-in-title">Welcome Back Maverick!</p>
-      <p className='details-paragraph-tag1'>Please enter your details</p>
-      <form className="log-in-form" onSubmit={handleSubmit}>
-        <label className="log-in-label" htmlFor="email">Email</label>
-        <input className="log-in-input" type="email" id="email" value={Email} onChange={handleEmailChange} placeholder='Enter your email' />
-        {EmailError && <p className="error-message">{EmailError}</p>}
+          <label className="log-in-label" htmlFor="password">Password</label>
+          <input className="log-in-input" type="password" id="password" value={Password} onChange={handlePasswordChange} placeholder='Enter your password' />
+          {PasswordError && <p className="error-message">{PasswordError}</p>}
 
-        <label className="log-in-label" htmlFor="password">Password</label>
-        <input className="log-in-input" type="password" id="password" value={Password} onChange={handlePasswordChange} placeholder='Enter your password' />
-        {PasswordError && <p className="error-message">{PasswordError}</p>}
-
-        <button className="log-in-button" type="submit">Log in</button>
-        <button className='Google-container' type="button">
-          <LoginSocialGoogle
-            client_id='763400746152-usfqfej22honfo6vfi7gv957egp3pfgj.apps.googleusercontent.com'
-            access_type='offline'
-            onResolve={({ provider, data }) => {
-              console.log(provider, data)
-              navigate("/MainPage");
-            }}
-            onReject={(error) => {
-              console.log(error)
-            }}>
-            Sign-in with Google
-          </LoginSocialGoogle>
-        </button>
-        <p className='log-in-link'>Don't you have an account? <a href="/Sign-Up">Sign up here</a></p>
-      </form>
+          <button className="log-in-button" type="submit">Log in</button>
+          <button className='Google-container' type="button">
+            <LoginSocialGoogle
+              client_id='763400746152-usfqfej22honfo6vfi7gv957egp3pfgj.apps.googleusercontent.com'
+              access_type='offline'
+              onResolve={({ provider, data }) => {
+                console.log(provider, data)
+                navigate("/MainPage");
+              }}
+              onReject={(error) => {
+                console.log(error)
+              }}>
+              Sign-in with Google
+            </LoginSocialGoogle>
+          </button>
+          <p className='log-in-link'>Don't you have an account? <a href="/Sign-Up">Sign up here</a></p>
+        </form>
+      </div>
+      <div className='task-management-sign-in-image'>
+        <img src={sign_in_and_log_in_image} alt="TASK-MANAGEMENT-IMAGE" />
+      </div>
     </div>
-    <div className='task-management-sign-in-image'>
-      <img src={sign_in_and_log_in_image} alt="TASK-MANAGEMENT-IMAGE" />
-    </div>
-  </div>
-);
-
+  );
+};
 
 export default Login;
