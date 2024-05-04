@@ -8,6 +8,7 @@ require('dotenv').config(); // dotenv for environment variables
 // Importing routes for handling user authentication
 const LoginInRoute = require("../Backend/Routes/LoginRoute");
 const SignUpRegisteringRoute = require("../Backend//Routes/SignUpRegisteredRoute");
+const router = require("./Routes/googleSigninRoutes");
 
 // Create an instance of the Express application
 const app = express();
@@ -18,7 +19,7 @@ app.use(cors()); // Enable CORS
 app.use(bodyParser.json()); // JSON body parsing
 app.use(SignUpRegisteringRoute); // Using sign-up/register route
 app.use(LoginInRoute); // Using login route
-
+app.use(router)
 // Set the port for the server to listen on
 const port = process.env.PORT || 3000;
 

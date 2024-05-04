@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import "../../index.css";
-import { LoginSocialGoogle } from 'reactjs-social-login';
+import {jwtDecode} from "jwt-decode"; // Corrected import
 import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in image.png"
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ const SignUp = () => {
   const [Email, setEmail] = useState("")
   const [Password, setPassword] = useState("")
   const [ConfirmPassword, setConfirmPassword] = useState("")
+  const [userLogin, setUserLogin] = useState({})
 
   const [UsernameError, setUserNameError] = useState("")
   const [EmailError, setEmailError] = useState("")
@@ -54,7 +55,6 @@ const SignUp = () => {
     } else {
       setPasswordError("Please enter a valid password (at least 6 characters)")
     }
-    setPassword(event.target.value)
   }
 
   // Function to handle changes in the confirm password input field
@@ -65,92 +65,144 @@ const SignUp = () => {
       setConfirmPasswordError("Confirm Password doesn't match with the password")
     } else {
       setConfirmPasswordError("");
-      setConfirmPassword(confirmPasswordValue)
     }
   }
 
   // Function to handle form submission
   const handleSubmit = async (event) => {
-    let isError = false
     event.preventDefault();
-    if (Username === '') {
+    let isError = false;
+
+    // Check if any field is empty
+    if (!Username) {
       setUserNameError('Name is required');
-      isError = true
+      isError = true;
     }
-    if (Email === '') {
+    if (!Email) {
       setEmailError('Email is required');
-      isError = true
+      isError = true;
     }
-    if (Password === '') {
+    if (!Password) {
       setPasswordError('Password is required');
-      isError = true
+      isError = true;
     }
-    if (ConfirmPassword !== Password) {
-      setConfirmPasswordError("Passwords do not match")
-      isError = true
-    } else if (ConfirmPassword === "") {
-      setConfirmPasswordError('confirm Password is required')
-      isError = true
-    } if (!(isError)) {
+    if (!ConfirmPassword) {
+      setConfirmPasswordError('Confirm Password is required');
+      isError = true;
+    } else if (ConfirmPassword !== Password) {
+      setConfirmPasswordError("Passwords do not match");
+      isError = true;
+    }
+
+    // If no error, proceed with form submission
+    if (!isError) {
       try {
-        const response = await axios.post("http://localhost:3000/Sign-Up", { Username, Email, Password })
-        const { token } = await response.data
-        console.log(response)
+        const response = await axios.post("http://localhost:3000/Sign-Up", { Username, Email, Password });
+        const { token } = response.data;
 
         if (response.status === 201) {
-          navigate("/MainPage")
-          localStorage.setItem("TokenizedValue", token)
+          // If successful, navigate to MainPage and store token in localStorage
+          navigate("/MainPage");
+          localStorage.setItem("TokenizedValue", token);
+          console.log("UserName: ", Username);
+    console.log("Email: ", Email);
+    console.log("Password: ", Password);
         } else {
-          console.error("error:", response.statusText)
+          console.error("Error:", response.statusText);
         }
-      } catch {
-        console.error("An issue is rised in the resgiration form")
+      } catch (error) {
+        console.error("An issue occurred during registration:", error);
       }
     }
   }
+
+  function handleCallBackResponseOfGoogleButton(response) {
+    let decoded_Credential = jwtDecode(response.credential);
+    console.log(decoded_Credential)
+    setUserLogin(decoded_Credential)
+    // navigate("/MainPage",  { state: { userLogin: decoded_Credential } })
+    // document.getElementById("Google-container").style.hidden = true;
+  }
+
+  useEffect(() => {
+    google.accounts.id.initialize({
+      client_id: "763400746152-usfqfej22honfo6vfi7gv957egp3pfgj.apps.googleusercontent.com",
+      callback: handleCallBackResponseOfGoogleButton
+    })
+
+    google.accounts.id.renderButton(
+      document.getElementById("Google-container"),
+      {
+        theme: "Outline",
+        size: "xx-larger"
+      }
+    )
+  }, [])
+
+  useEffect(() => {
+    const sendGoogleSignInData = async () => {
+      try {
+        const response = await axios.post("http://localhost:3000/GoogleSignupRoutes", {
+          name: userLogin.given_name,
+          email: userLogin.email,
+          profile: userLogin.picture,
+        });
+        localStorage.setItem("Profile", userLogin.picture)
+        navigate("/MainPage")
+        console.log("Google sign-in response:", response.data);
+      } catch (error) {
+        console.error("Error in the google sign-in:", error);
+      }
+    };
+  
+    if (userLogin.given_name && userLogin.email && userLogin.picture) {
+      sendGoogleSignInData();
+    }
+  }, [userLogin]);
 
   // JSX code for the sign-up form
   return (
     <div className='sign-in-page white-background'>
       <div className="sign-up-container">
         <p className="sign-up-title">Welcome Maverick!</p>
-        <p className='details-paragr aph-tag'>Please enter your details</p>
+        <p className='details-paragraph-tag'>Please enter your details</p>
         <form className="sign-up-form" onSubmit={handleSubmit}>
+          {/* Username input */}
           <label className="sign-up-label" htmlFor="Username">Username</label>
           <input className="sign-up-input" type="text" id="name" value={Username} onChange={handleUserNameChange} />
           {UsernameError && <p className="error-message">{UsernameError}</p>}
+
+          {/* Email input */}
           <label className="sign-up-label" htmlFor="Email">Email</label>
           <input className="sign-up-input" type="email" id="email" value={Email} onChange={handleEmailChange} />
           {EmailError && <p className="error-message">{EmailError}</p>}
+
+          {/* Password input */}
           <label className="sign-up-label" htmlFor="Password">Password</label>
           <input className="sign-up-input" type="password" id="password" value={Password} onChange={handlePasswordChange} />
           {PasswordError && <p className="error-message">{PasswordError}</p>}
+
+          {/* Confirm Password input */}
           <label className="sign-up-label" htmlFor="ConfirmPassword">Confirm Password</label>
           <input className="sign-up-input" type="password" id="ConfirmPassword" value={ConfirmPassword} onChange={handleConfirmPasswordChange} />
           {ConfirmPasswordError && <p className="error-message">{ConfirmPasswordError}</p>}
+
+          {/* Sign Up button */}
           <button className="sign-up-button" type="submit">Sign Up</button>
-          <button className='Google-container' type="button">
-            <LoginSocialGoogle
-              client_id='763400746152-usfqfej22honfo6vfi7gv957egp3pfgj.apps.googleusercontent.com'
-              access_type='offline'
-              onResolve={({ provider, data }) => {
-                console.log(provider, data)
-                navigate("/MainPage");
-              }}
-              onReject={(error) => {
-                console.log(error)
-              }}>
-              Sign-in with Google
-            </LoginSocialGoogle>
-          </button>
+
+          <button id="Google-container" className='Google-container' type="button" style={{ border: "none", display: "flex", justifyContent: "center", alignItems: "center", background: "white", marginTop: "2%", marginBottom: "2%" }}></button>
+
+          {/* Link to Log-in page */}
           <p className='sign-in-link'>Already have an account?<a href="/log-in">Log-in here</a></p>
         </form>
       </div>
+      {/* Image */}
+      {/* {userLogin && <div><img src={userLogin.picture} style={{borderRadius:"50px", height:"40%", width:"40%"}}/></div>} */}
       <div className='task-management-sign-in-image'>
         <img src={sign_in_and_log_in_image} alt="TASK-MANAGEMENT-IMAGE" />
       </div>
     </div>
   );
-};
+}
 
 export default SignUp;

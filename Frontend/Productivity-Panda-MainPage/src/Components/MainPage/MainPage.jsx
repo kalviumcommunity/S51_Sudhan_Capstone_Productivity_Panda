@@ -12,39 +12,32 @@ import Arrow_Down from "../../assets/images/Arrow Down 2.png"; // Importing arro
 import calendar_Days from "../../assets/images/Calendar_Days.png"; // Importing calendar days icon image
 import Vector from "../../assets/images/Vector.png"; // Importing vector icon image
 import Calendar from "../../assets/images/Calendar.png"; // Importing calendar icon image
+import logo_icon from "../../assets/images/Logo-Icon.png" //Importing Logo icon image
 
 // Functional component for the Main Page
-function MainPage() {
+function MainPage(props) {
+  const userLogin = props.location && props.location.state && props.location.state.userLogin;
+
   return (
     <>
       {/* Productivity Panda logo */}
       <div className='ProductivityPandaImage'>
-        <img src={ProductivityPandaImage} alt="Logo" />
+        <img src={logo_icon} alt="Logo" />
       </div>
       {/* Side navigation bar */}
       <div className='sideNavigationBar'>
-        <div className='top-most-of-sideNavigation-btn'>
-          {/* Add task button */}
-          <div className='addIcon'>
-            <img src={AddIcon} alt="addIcon" />
-            <p>Add Task</p>
-          </div>
-          {/* Home icon */}
-          <div className='homeIcon'>
-            <img src={HomeIcons} alt="homeIcon" />
-            <p>Home</p>
-          </div>
-        </div>
         <div className="top-down-of-sideNavigation-bar">
           {/* Trash icon */}
           <div className="trashIcon">
-            <img src={TrashIcon} alt="DeleteIcon" />
-            <p>Trash</p>
+            <lord-icon
+              src="https://cdn.lordicon.com/skkahier.json"
+              trigger="hover"
+              style={{ width: '40px', height: '40px' }}>
+            </lord-icon>
           </div>
           {/* Login icon */}
           <div className="log-in">
-            <img src={Log_in} alt="Log-inIcon" />
-            <p>Log-in</p>
+            <img src={Log_in} alt="Log-inIcon" style={{ width: "35px", height: "35px" }} />
           </div>
         </div>
       </div>
@@ -60,15 +53,29 @@ function MainPage() {
         </div>
         <div className='cover-up-div-of-top-upper-right-icons'>
           {/* Switch left icon */}
-          <div className='Switch-left'>
+          {/* <div className='Switch-left'>
             <img src={Switch_Left} alt="Switch-left-icon" />
-          </div>
+          </div> */}
           {/* Bell icon */}
-          <div className='Bell'>
+          {/* <div className='Bell' >
             <img src={Bell} alt="Bell-icon" />
+          </div> */}
+          {/* <div className='Profile'> */}
+          {/* Conditional rendering to check if userLogin and userLogin.picture are defined */}
+          {/* {userLogin && userLogin.picture && (
+              <div className='Profile-icon'>
+                <img src={userLogin.picture} alt='User-profile-picture' />
           </div>
-          <div className='Profile'>
-            <div className='Profile-icon'></div>
+  )} */}
+
+          {/* </div> */}
+          <div className='Add-task-Container'>
+            <lord-icon
+              src="https://cdn.lordicon.com/jgnvfzqg.json"
+              trigger="hover"
+              style={{ width: '40px', height: '40px' }}>
+            </lord-icon>
+            <span class="tooltiptext">Add task</span>
           </div>
         </div>
       </div>
@@ -106,7 +113,7 @@ function MainPage() {
         <div className='UpcomingTasksContainer'>
           <div className='upComingTasks'>
             {/* Calendar icon */}
-            <img src={calendar_Days} alt="Calendar-icon" style={{backgroundColor: 'white', borderColor:"#0F1035",borderWidth:"2px", borderStyle:"solid", borderRadius:"8px" }} />
+            <img src={calendar_Days} alt="Calendar-icon" style={{ backgroundColor: 'white', borderColor: "#0F1035", borderWidth: "2px", borderStyle: "solid", borderRadius: "8px" }} />
             <p>Upcoming Tasks</p>
           </div>
           <div className='UpcomingTaskDisplayerContainer'></div>
@@ -134,15 +141,15 @@ function MainPage() {
           </div>
           <div className='border-bottom-line'></div>
           <div className='TodaysTaskRow2'>
-            <img src={Vector} alt="checker-dot" className='vector'/>
+            <img src={Vector} alt="checker-dot" className='vector' />
           </div>
           <div className='border-bottom-line'></div>
           <div className='TodaysTaskRow3'>
-            <img src={Vector} alt="checker-dot" className='vector'/>
+            <img src={Vector} alt="checker-dot" className='vector' />
           </div>
           <div className='border-bottom-line'></div>
           <div className='TodaysTaskRow4'>
-            <img src={Vector} alt="checker-dot" className='vector'/>
+            <img src={Vector} alt="checker-dot" className='vector' />
           </div>
           <div className='border-bottom-line'></div>
         </div>
