@@ -10,7 +10,9 @@
 body {
     background-color: #d4d4d4;
 }
-
+.mainPage-content{
+    margin-top: 15%;
+}
 .white-background {
     background-color: white;
 }
@@ -201,7 +203,7 @@ body {
     border: 2px solid black;
     height: 100%;
     position: absolute;
-    left: 15%;
+    left: 5%;
     top: 0;
 }
 
@@ -214,43 +216,18 @@ hr {
 }
 
 .ProductivityPandaImage img {
-    width: 180px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     position: relative;
     top: 2%;
     left: 5%;
 }
 
 .ProductivityPandaImage {
-    width: 180px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
 }
 
-.addIcon,
-.homeIcon {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 75%;
-}
-
-.homeIcon {
-    width: 65%;
-}
-
-.homeIcon p,
-.addIcon p,
-.trashIcon p,
-.log-in p,
-.Go-back-to-home-page p {
-    font-size: larger;
-}
-
-.homeIcon img {
-    margin-left: 2%;
-}
-
-.top-most-of-sideNavigation-btn,
 .top-down-of-sideNavigation-bar {
     width: 15%;
     height: 80px;
@@ -258,21 +235,22 @@ hr {
     flex-direction: column;
     justify-content: space-between;
     position: absolute;
-    top: 18%;
-}
-
-.top-down-of-sideNavigation-bar {
     top: 85%;
 }
-
 .trashIcon,
 .log-in {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 65%;
+    width: 33%;
 }
-
+.log-in{
+    margin-top: 8%;
+}
+.log-in img{
+    width: 100%;
+    height: 100%;
+}
 .Go-back-to-home-page {
     display: flex;
     align-items: center;
@@ -289,12 +267,52 @@ hr {
 .nav-bar {
     height: 8%;
     border-bottom: 4px solid black;
-    width: 84.8vw;
+    width: 95%;
     position: absolute;
-    left: 15.2%;
+    left: 5%;
     top: 0;
 }
-
+.Add-task-Container{
+    margin-top: 4%;
+    margin-left: 60%;
+    position: relative;
+    display: inline-block;
+} 
+  .Add-task-Container .tooltiptext {
+    visibility: hidden;
+    width: 100px;
+    font-weight: 500;
+    font-size: larger;
+    background-color: #ffffff;
+    color: #000000;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 100%; /* changed from bottom to top */
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .Add-task-Container .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%; /* changed from top to bottom */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #ffffff transparent; 
+  }
+  
+  .Add-task-Container:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  
 .Switch-left,
 .Bell {
     height: 100%;
@@ -305,19 +323,19 @@ hr {
 }
 
 .Profile {
-    height: 100%;
-    width: 50px;
+    height: 70%;
+    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.Profile-icon {
-    height: 40px;
-    width: 40px;
-    border: 2px solid #FEFBF6;
-    border-radius: 50%;
-    background-color: #0F1035;
+.Profile-icon img{
+    height: 20%;
+    width: 20%;
+    /* border: 2px solid #FEFBF6; */
+    border-radius: 100%;
+    /* background-color: #0F1035; */
 }
 
 .cover-up-div-of-top-upper-right-icons {
@@ -1057,12 +1075,10 @@ hr {
     margin-bottom: 2%;
     margin-top: 2%;
 }
-
-.Google-container {
-    font-size: 20px;
-    border-radius: 4px;
-    padding: 2%;
-    margin-bottom: 2%;
+#Google-container button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sign-in-link,
@@ -1270,13 +1286,13 @@ hr {
         margin-top: 1%;
     }
 
-    .Google-container {
+    /* .Google-container {
         font-size: 18px;
         border-radius: 6px;
         padding: 1%;
         margin-bottom: 1%;
         margin-top: 1%;
-    }
+    } */
 
     .ProductivityPandaImage img {
         left: -150%;

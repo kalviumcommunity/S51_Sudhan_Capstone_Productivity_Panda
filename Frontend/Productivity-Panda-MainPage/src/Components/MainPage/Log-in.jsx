@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Import useEffect
 import "../../index.css";
-import { LoginSocialGoogle } from "reactjs-social-login";
 import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in image.png";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {jwtDecode} from "jwt-decode"; 
 
 const Login = () => {
   // State variables to manage email, password, and their respective errors
@@ -11,6 +11,7 @@ const Login = () => {
   const [Password, setPassword] = useState("");
   const [EmailError, setEmailError] = useState("");
   const [PasswordError, setPasswordError] = useState("");
+  const [userLogin, setUserLogin] = useState({})
 
   // Hook from react-router-dom to navigate between pages
   const navigate = useNavigate();
@@ -70,6 +71,50 @@ const Login = () => {
     }
   }
  
+  function handleCallBackResponseOfGoogleButton(response) {
+    let decoded_Credential = jwtDecode(response.credential);
+    console.log(decoded_Credential)
+    setUserLogin(decoded_Credential)
+    // navigate("/MainPage",  { state: { userLogin: decoded_Credential } })
+    // document.getElementById("Google-container").style.hidden = true;
+  }
+
+  useEffect(() => {
+    google.accounts.id.initialize({
+      client_id: "763400746152-usfqfej22honfo6vfi7gv957egp3pfgj.apps.googleusercontent.com",
+      callback: handleCallBackResponseOfGoogleButton
+    })
+
+    google.accounts.id.renderButton(
+      document.getElementById("Google-container"),
+      {
+        theme: "Outline",
+        size: "xx-larger"
+      }
+    )
+  }, [])
+
+  useEffect(() => {
+    const sendGoogleSignInData = async () => {
+      try {
+        const response = await axios.post("http://localhost:3000/GoogleSignupRoutes", {
+          name: userLogin.given_name,
+          email: userLogin.email,
+          profile: userLogin.picture,
+        });
+        localStorage.setItem("Profile", userLogin.picture)
+        navigate("/MainPage")
+        console.log("Google sign-in response:", response.data);
+      } catch (error) {
+        console.error("Error in the google sign-in:", error);
+      }
+    };
+  
+    if (userLogin.given_name && userLogin.email && userLogin.picture) {
+      sendGoogleSignInData();
+    }
+  }, [userLogin]);
+
   // JSX code for the login form
   return (
     <div className='log-in-page white-background'>
@@ -86,20 +131,8 @@ const Login = () => {
           {PasswordError && <p className="error-message">{PasswordError}</p>}
 
           <button className="log-in-button" type="submit">Log in</button>
-          <button className='Google-container' type="button">
-            <LoginSocialGoogle
-              client_id='763400746152-usfqfej22honfo6vfi7gv957egp3pfgj.apps.googleusercontent.com'
-              access_type='offline'
-              onResolve={({ provider, data }) => {
-                console.log(provider, data)
-                navigate("/MainPage");
-              }}
-              onReject={(error) => {
-                console.log(error)
-              }}>
-              Sign-in with Google
-            </LoginSocialGoogle>
-          </button>
+          
+          <button id="Google-container" className='Google-container' type="button" style={{ border: "none", display: "flex", justifyContent: "center", alignItems: "center", background: "white", marginTop: "2%", marginBottom: "2%" }}></button>
           <p className='log-in-link'>Don't you have an account? <a href="/Sign-Up">Sign up here</a></p>
         </form>
       </div>
