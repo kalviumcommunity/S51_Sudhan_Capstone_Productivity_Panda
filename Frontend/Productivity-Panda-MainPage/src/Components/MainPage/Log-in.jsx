@@ -3,7 +3,7 @@ import "../../index.css";
 import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in image.png";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {jwtDecode} from "jwt-decode"; 
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
   // State variables to manage email, password, and their respective errors
@@ -70,7 +70,7 @@ const Login = () => {
       }
     }
   }
- 
+
   function handleCallBackResponseOfGoogleButton(response) {
     let decoded_Credential = jwtDecode(response.credential);
     console.log(decoded_Credential)
@@ -109,7 +109,7 @@ const Login = () => {
         console.error("Error in the google sign-in:", error);
       }
     };
-  
+
     if (userLogin.given_name && userLogin.email && userLogin.picture) {
       sendGoogleSignInData();
     }
@@ -131,7 +131,7 @@ const Login = () => {
           {PasswordError && <p className="error-message">{PasswordError}</p>}
 
           <button className="log-in-button" type="submit">Log in</button>
-          
+
           <button id="Google-container" className='Google-container' type="button" style={{ border: "none", display: "flex", justifyContent: "center", alignItems: "center", background: "white", marginTop: "2%", marginBottom: "2%" }}></button>
           <p className='log-in-link'>Don't you have an account? <a href="/Sign-Up">Sign up here</a></p>
         </form>

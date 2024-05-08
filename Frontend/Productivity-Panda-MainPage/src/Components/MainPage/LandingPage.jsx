@@ -10,16 +10,16 @@ import ContactPage from './contactPage'; // Importing ContactPage component
 function LandingPage() {
   return (
     <>
-     {/* Navbar component */}
-     <NavBar/>
-     {/* Navigation button for home */}
-    <NavHomeBTN/>
-    {/* Navigation button for about page */}
-    <NavAboutPage/>
-    {/* Component for displaying technologies */}
-    <TechnologiesPage/>
-    {/* Component for displaying contact information */}
-    <ContactPage/>
+      {/* Navbar component */}
+      <NavBar />
+      {/* Navigation button for home */}
+      <NavHomeBTN />
+      {/* Navigation button for about page */}
+      <NavAboutPage />
+      {/* Component for displaying technologies */}
+      <TechnologiesPage />
+      {/* Component for displaying contact information */}
+      <ContactPage />
     </>
   )
 }
