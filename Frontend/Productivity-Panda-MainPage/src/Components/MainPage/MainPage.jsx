@@ -1,34 +1,40 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import logo_icon from '../../assets/images/Logo-Icon.png';
-import Log_in from '../../assets/images/log-in-03.png';
-import Arrow_Left from '../../assets/images/Arrow Left 1.png';
-import calendar_Days from '../../assets/images/Calendar_Days.png';
-import Arrow_Down from '../../assets/images/Arrow Down 2.png';
-import Vector from '../../assets/images/Vector.png';
-import Calendar from '../../assets/images/Calendar.png';
+import { useForm } from 'react-hook-form'; // Importing react-hook-form for form handling
+import logo_icon from '../../assets/images/Logo-Icon.png'; // Importing logo icon image
+import Log_in from '../../assets/images/log-in-03.png'; // Importing login icon image
+import Arrow_Left from '../../assets/images/Arrow Left 1.png'; // Importing arrow left icon image
+import calendar_Days from '../../assets/images/Calendar_Days.png'; // Importing calendar days icon image
+import Arrow_Down from '../../assets/images/Arrow Down 2.png'; // Importing arrow down icon image
+import Vector from '../../assets/images/Vector.png'; // Importing vector icon image
+import Calendar from '../../assets/images/Calendar.png'; // Importing calendar icon image
 
 function MainPage(props) {
-  const [showAddTaskForm, setShowAddTaskForm] = useState(false);
-  const { resetField, register, handleSubmit, formState: { errors } } = useForm();
-
   // Checking if userLogin exists in props and setting it to userLogin, otherwise setting it to undefined
   const userLogin = props.location && props.location.state && props.location.state.userLogin;
 
+  // State for controlling the visibility of the add task form
+  const [showAddTaskForm, setShowAddTaskForm] = useState(false);
+
+  // useForm hook for form handling
+  const { resetField, register, handleSubmit, formState: { errors } } = useForm();
+
+  // Function to handle form submission
   const onSubmit = (data) => {
     // Handle form submission here
     console.log(data);
   };
 
+  // Function to toggle the visibility of the add task form
   const toggleAddTaskForm = () => {
     setShowAddTaskForm(!showAddTaskForm);
   };
 
+  // Function to reset form fields
   const handleCancelChange = () => {
-    resetField("event")
-    resetField("description")
-    resetField("date")
-    resetField("time")
+    resetField("event");
+    resetField("description");
+    resetField("date");
+    resetField("time");
   };
 
   return (
