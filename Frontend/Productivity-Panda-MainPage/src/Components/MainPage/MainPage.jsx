@@ -1,30 +1,34 @@
-import React, { useState } from 'react'; // Importing React library for building UI components
-import ProductivityPandaImage from '../../assets/images/logo-productivity-panda-transparent.png'; // Importing Productivity Panda logo image
-import HomeIcons from '../../assets/images/Home 1.png'; // Importing home icon image
-import AddIcon from "../../assets/images/plus-square.png"; // Importing add icon image
-import TrashIcon from '../../assets/images/delete.png'; // Importing trash icon image
-import Log_in from '../../assets/images/log-in-03.png'; // Importing login icon image
-import Arrow_Left from '../../assets/images/Arrow Left 1.png'; // Importing arrow left icon image
-import Switch_Left from '../../assets/images/Swicht_Left.png'; // Importing switch left icon image
-import Bell from '../../assets/images/Bell.png'; // Importing bell icon image
-import Arrow_Down from "../../assets/images/Arrow Down 2.png"; // Importing arrow down icon image
-import calendar_Days from "../../assets/images/Calendar_Days.png"; // Importing calendar days icon image
-import Vector from "../../assets/images/Vector.png"; // Importing vector icon image
-import Calendar from "../../assets/images/Calendar.png"; // Importing calendar icon image
-import logo_icon from "../../assets/images/Logo-Icon.png"; // Importing Logo icon image
-import High_Priority from "../../assets/images/Group_1-removebg-preview.png"; // Importing high priority icon image
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import logo_icon from '../../assets/images/Logo-Icon.png';
+import Log_in from '../../assets/images/log-in-03.png';
+import Arrow_Left from '../../assets/images/Arrow Left 1.png';
+import calendar_Days from '../../assets/images/Calendar_Days.png';
+import Arrow_Down from '../../assets/images/Arrow Down 2.png';
+import Vector from '../../assets/images/Vector.png';
+import Calendar from '../../assets/images/Calendar.png';
 
-// Functional component for the Main Page
 function MainPage(props) {
+  const [showAddTaskForm, setShowAddTaskForm] = useState(false);
+  const { resetField, register, handleSubmit, formState: { errors } } = useForm();
+
   // Checking if userLogin exists in props and setting it to userLogin, otherwise setting it to undefined
   const userLogin = props.location && props.location.state && props.location.state.userLogin;
 
-  // Using state to manage the visibility of the add task form
-  const [showAddTaskForm, setShowAddTaskForm] = useState(false);
+  const onSubmit = (data) => {
+    // Handle form submission here
+    console.log(data);
+  };
 
-  // Function to toggle the visibility of the add task form
   const toggleAddTaskForm = () => {
     setShowAddTaskForm(!showAddTaskForm);
+  };
+
+  const handleCancelChange = () => {
+    resetField("event")
+    resetField("description")
+    resetField("date")
+    resetField("time")
   };
 
   return (
@@ -150,53 +154,73 @@ function MainPage(props) {
         </div>
       </div>
       {/* Add task form */}
-      {showAddTaskForm && (
-        <div className="add-task-form-container">
-          <div className='Cross-lordIcon-and-Heading-of-Add-Task-Form-Container'>
-            <div className='headin-of-add-task-container'><h1>Add task form</h1></div>
-            <div className='Cross-lordIcon' onClick={toggleAddTaskForm}>
-              {/* Lord icon for cross */}
-              <lord-icon
-                src="https://cdn.lordicon.com/nqtddedc.json"
-                trigger="hover"
-                style={{ width: "40px", height: "40px" }}>
-              </lord-icon>
-            </div>
+      {showAddTaskForm && (<form className='add-task-form-container' onSubmit={handleSubmit(onSubmit)}>
+        <div className='Cross-lordIcon-and-Heading-of-Add-Task-Form-Container'>
+          <div className='headin-of-add-task-container'><p>Add task form</p></div>
+          <div className='Cross-lordIcon' onClick={toggleAddTaskForm}>
+            {/* Lord icon for cross */}
+            <lord-icon
+              src="https://cdn.lordicon.com/nqtddedc.json"
+              trigger="hover"
+              style={{ width: "40px", height: "40px" }}>
+            </lord-icon>
           </div>
-          <form>
-            <label className="Event-adding-task-label" htmlFor="event">Event:</label>
-            <input className="Event-adding-task-input" type="text" />
-
-            <label className="Event-adding-task-Description-label" htmlFor="description">Description:</label>
-            <input className="Event-adding-task-Description-input" type="text" />
-
-            <label className="Event-adding-task-Date-label" htmlFor="date">Date: </label>
-            <input className="Event-adding-task-Date-input" type="date" />
-
-            <label className="Event-adding-task-time-label" htmlFor="time">Time: </label>
-            <input className="Event-adding-task-time-input" type="date" />
-
-            <label className="Event-adding-task-status-label" for="status">Status:</label>
+        </div>
+        <div className='Event-adding-Event-input-field'>
+          <label className="Event-adding-task-label" htmlFor="event">Event Name</label>
+          <input
+            className="Event-adding-task-input"
+            type="text"
+            {...register("event", { required: "Event name is required", maxLength: { value: 30, message: "Event should be less than 30 characters" } })}
+          />
+          {errors.event && <p className='error-message'>{errors.event.message}</p>}
+        </div>
+        <div className='Event-adding-Event-description-input-field'>
+          <label className="Event-adding-task-Description-label" htmlFor="description">Description</label>
+          <textarea
+            className="Event-adding-task-Description-input"
+            type="text"
+            {...register("description", { required: "Description field is required", maxLength: { value: 60, message: "Description should be less than 60 characters" } })}
+          />
+          {errors.description && <p className='error-message'>{errors.description.message}</p>}
+        </div>
+        <div className='Event-adding-Event-date-and-time-field'>
+          <div className='Event-adding-Event-date-input-field'>
+            <label className="Event-adding-task-Date-label" htmlFor="date">Date </label>
+            <input className="Event-adding-task-Date-input" type="date" {...register("date", { required: "Date is required" })} />
+            {errors.date && <p className='error-message'>{errors.date.message}</p>}
+          </div>
+          <div className='Event-adding-Event-time-input-field'>
+            <label className="Event-adding-task-time-label" htmlFor="time">Time </label>
+            <input className="Event-adding-task-time-input" type="time" {...register("time", { required: "Time is required" })} />
+            {errors.time && <p className='error-message'>{errors.time.message}</p>}
+          </div>
+        </div>
+        <div className='Event-adding-status-and-priority-field'>
+          <div className='Event-adding-task-status-field'>
+            <label className="Event-adding-task-status-label" htmlFor="status">Status</label>
             <select name="Intial status" id="status">
               <option value="To-do">To-do</option>
               <option value="Paused">Paused</option>
               <option value="In-Progress">In-Progress</option>
             </select>
-
-            <label className='Event-adding-task-priority-label' for="Priority">Priority: </label>
+          </div>
+          <div className='Event-adding-task-priority-field'>
+            <label className='Event-adding-task-priority-label' for="Priority">Priority</label>
             <select name="priority" id="Priority">
               <option value="High">High</option>
               <option value="Medium">Medium</option>
               <option value="Low">Low</option>
             </select>
-
-            <button>Cancel</button>
-            <button>Add Event</button>
-          </form>
+          </div>
         </div>
-      )}
+        <div className='Cancel-Button-and-Add-event-Button'>
+          <button type="button" className='Cancel-Button' onClick={handleCancelChange}>Erase</button>
+          <button type="submit" className='Add-event-Ok-button'>Add Event</button>
+        </div>
+      </form>)}
     </>
   );
 }
 
-export default MainPage; // Exporting the MainPage component
+export default MainPage;
