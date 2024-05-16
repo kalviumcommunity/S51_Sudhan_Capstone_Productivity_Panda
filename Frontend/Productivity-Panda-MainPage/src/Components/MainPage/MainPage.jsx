@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form'; // Importing react-hook-form for form handling
 import logo_icon from '../../assets/images/Logo-Icon.png'; // Importing logo icon image
-import Log_in from '../../assets/images/log-in-03.png'; // Importing login icon image
+import Log_in from '../../assets/images/Log-out.png'; // Importing login icon image
 import Arrow_Left from '../../assets/images/Arrow Left 1.png'; // Importing arrow left icon image
 import calendar_Days from '../../assets/images/Calendar_Days.png'; // Importing calendar days icon image
 import Arrow_Down from '../../assets/images/Arrow Down 2.png'; // Importing arrow down icon image
 import Vector from '../../assets/images/Vector.png'; // Importing vector icon image
 import Calendar from '../../assets/images/Calendar.png'; // Importing calendar icon image
+import { ParentComponent } from '../ParentComponent';
 
 function MainPage(props) {
+
+  const {setIsLoggedIn} = useContext(ParentComponent)
+  const navigate = useNavigate()
   // Checking if userLogin exists in props and setting it to userLogin, otherwise setting it to undefined
   const userLogin = props.location && props.location.state && props.location.state.userLogin;
 
@@ -37,6 +42,11 @@ function MainPage(props) {
     resetField("time");
   };
 
+  const handleLogoutButton = () => {
+    localStorage.removeItem("TokenizedValue");
+    navigate("/")
+    setIsLoggedIn(false)
+  }
   return (
     <>
       {/* Productivity Panda logo */}
@@ -56,8 +66,8 @@ function MainPage(props) {
             </lord-icon>
           </div>
           {/* Login icon */}
-          <div className="log-in">
-            <img src={Log_in} alt="Log-inIcon" style={{ width: "35px", height: "35px" }} />
+          <div className="log-in" onClick={handleLogoutButton}>
+            <img src={Log_in} alt="Log-inIcon" style={{ width: "35px", height: "35px", cursor: "pointer" }} />
           </div>
         </div>
       </div>
@@ -216,7 +226,7 @@ function MainPage(props) {
             <select name="priority" id="Priority">
               <option value="High">High</option>
               <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
+              <option value="Low">Low</option> 
             </select>
           </div>
         </div>
