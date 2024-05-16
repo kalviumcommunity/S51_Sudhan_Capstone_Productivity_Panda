@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from "axios";
 import "../../index.css";
 import {jwtDecode} from "jwt-decode"; // Corrected import
 import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in image.png"
 import { useNavigate } from 'react-router-dom';
+import {ParentComponent} from "../ParentComponent"
 
 const SignUp = () => {
   // State variables to manage username, email, password, and their respective errors
@@ -12,6 +13,7 @@ const SignUp = () => {
   const [Password, setPassword] = useState("")
   const [ConfirmPassword, setConfirmPassword] = useState("")
   const [userLogin, setUserLogin] = useState({})
+  const {setIsLoggedIn} = useContext(ParentComponent)
 
   const [UsernameError, setUserNameError] = useState("")
   const [EmailError, setEmailError] = useState("")
@@ -104,6 +106,7 @@ const SignUp = () => {
           // If successful, navigate to MainPage and store token in localStorage
           navigate("/MainPage");
           localStorage.setItem("TokenizedValue", token);
+          setIsLoggedIn(true)
           console.log("UserName: ", Username);
     console.log("Email: ", Email);
     console.log("Password: ", Password);
@@ -149,6 +152,7 @@ const SignUp = () => {
         });
         localStorage.setItem("Profile", userLogin.picture)
         navigate("/MainPage")
+        setIsLoggedIn(true)
         console.log("Google sign-in response:", response.data);
       } catch (error) {
         console.error("Error in the google sign-in:", error);

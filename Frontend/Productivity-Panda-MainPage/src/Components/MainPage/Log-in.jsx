@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'; // Import useEffect
+import React, { useState, useEffect, useContext } from 'react'; // Import useEffect
 import "../../index.css";
 import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in image.png";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
+import {ParentComponent} from "../ParentComponent"
 
 const Login = () => {
   // State variables to manage email, password, and their respective errors
@@ -12,7 +13,7 @@ const Login = () => {
   const [EmailError, setEmailError] = useState("");
   const [PasswordError, setPasswordError] = useState("");
   const [userLogin, setUserLogin] = useState({})
-
+  const { setIsLoggedIn } = useContext(ParentComponent)
   // Hook from react-router-dom to navigate between pages
   const navigate = useNavigate();
 
@@ -62,6 +63,7 @@ const Login = () => {
         if (response.status == 200) {
           navigate("/MainPage")
           localStorage.setItem("TokenizedValue", token)
+          setIsLoggedIn(true)
         } else {
           console.error("error:", response.statusText)
         }
@@ -103,6 +105,7 @@ const Login = () => {
           profile: userLogin.picture,
         });
         localStorage.setItem("Profile", userLogin.picture)
+        setIsLoggedIn(true)
         navigate("/MainPage")
         console.log("Google sign-in response:", response.data);
       } catch (error) {

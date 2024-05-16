@@ -1,7 +1,7 @@
 // App.jsx
 import './App.css';
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LandingPage from '../src/Components/MainPage/LandingPage';
 import NavAboutPage from '../src/Components/MainPage/NavAboutPage';
 import ContactPage from '../src/Components/MainPage/contactPage';
@@ -9,6 +9,7 @@ import Login from '../src/Components/MainPage/Log-in';
 import Signup from '../src/Components/MainPage/Sign-up';
 import TechnologiesPage from '../src/Components/MainPage/TechnologiesPage';
 import MainPage from '../src/Components/MainPage/MainPage';
+import { ParentComponentProvider, ParentComponent } from "./Components/ParentComponent"
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -60,18 +61,21 @@ function App() {
     );
   }
 
+  const { isLoggedIn } = useContext(ParentComponent);
   return (
     <>
       <Router>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="#About_me" element={<NavAboutPage />} />
-          <Route path="#Technology_Page" element={<TechnologiesPage />} />
-          <Route path="#Contact_page" element={<ContactPage />} />
-          <Route path="/log-in" element={<Login />} />
-          <Route path="/Sign-Up" element={<Signup />} />
-          <Route path='/MainPage' element={<MainPage/>}></Route>
-        </Routes>
+        <ParentComponentProvider>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="#About_me" element={<NavAboutPage />} />
+            <Route path="#Technology_Page" element={<TechnologiesPage />} />
+            <Route path="#Contact_page" element={<ContactPage />} />
+            <Route path="/log-in" element={isLoggedIn ? <Navigate to="/MainPage" /> : <Login />} />
+            <Route path="/Sign-Up" element={isLoggedIn ? <Navigate to="/MainPage" /> : <Signup />} />
+            <Route path='/MainPage' element={<MainPage />}></Route>
+          </Routes>
+        </ParentComponentProvider>
       </Router>
     </>
   );
