@@ -37,4 +37,8 @@ router.post("/GoogleSignupRoutes", async (req, res) => {
   }
 });
 
+// router.get('/', (req, res) => {
+//   res.json({ message: "Your port is damaged" });
+// });
+
 module.exports = router;
