@@ -6,6 +6,7 @@ const bodyParser = require("body-parser"); // Body parsing middleware
 require('dotenv').config(); // dotenv for environment variables
 
 // Importing routes for handling user authentication
+const GoogleSignupRoutes =require("../Backend/Routes/googleSigninRoutes")
 const LoginInRoute = require("../Backend/Routes/LoginRoute");
 const SignUpRegisteringRoute = require("../Backend//Routes/SignUpRegisteredRoute");
 const router = require("./Routes/googleSigninRoutes");
@@ -19,9 +20,14 @@ app.use(cors()); // Enable CORS
 app.use(bodyParser.json()); // JSON body parsing
 app.use(SignUpRegisteringRoute); // Using sign-up/register route
 app.use(LoginInRoute); // Using login route
-app.use(router)
+app.use('/', router);
+app.use(GoogleSignupRoutes);
+
+// app.get('/get', (req, res)=>{
+//     res.send({dfvd : "sfss"})
+// })
 // Set the port for the server to listen on
-const port = process.env.PORT || 3000;
+const port =  process.env.PORT || 3000;
 
 // Connect to MongoDB using the provided URL
 monogoose.connect(process.env.MongoURL);
