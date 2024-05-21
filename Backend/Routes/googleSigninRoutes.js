@@ -1,44 +1,53 @@
-const express = require("express");
-const router = express.Router();
-const jwt = require("jsonwebtoken");
-const UserSchemaModelChecking = require("../models/userDetails");
-require("dotenv").config();
+const express = require("express"); // Import the express module
+const router = express.Router(); // Create a new router object
+const jwt = require("jsonwebtoken"); // Import the jsonwebtoken module
+const UserSchemaModelChecking = require("../models/userDetails"); // Import the User schema for checking user details
+require("dotenv").config(); // Load environment variables from .env file
 
+// Define a POST route for Google signup
 router.post("/GoogleSignupRoutes", async (req, res) => {
   try {
+    // Destructure the request body to get user details
     const { name, email, profile } = req.body;
 
+    // Check if a user with the provided email already exists
     let existingUser = await UserSchemaModelChecking.findOne({ Email: email });
-    let token;
+    let token; // Variable to hold the JWT token
 
     if (!existingUser) {
+      // Create a new user if no existing user is found
       const newUser = new UserSchemaModelChecking({
         Username: name,
         Email: email,
-        Password: null,
+        Password: null, // No password since it's a Google signup
         Profile: profile,
       });
 
-      await newUser.save();
-      console.log(newUser);
+      await newUser.save(); // Save the new user to the database
+      console.log(newUser); // Log the new user
 
+      // Generate a JWT token for the new user
       token = jwt.sign({ userId: newUser._id }, process.env.SECRET_KEY);
 
+      // Send a success response with the token
       res.status(201).json({ message: "User registered successfully", token });
     } else {
-      token = jwt.sign({ userId: existingUser._id }, process.env.
-        SECRET_KEY);
+      // Generate a JWT token for the existing user
+      token = jwt.sign({ userId: existingUser._id }, process.env.SECRET_KEY);
 
+      // Send a response indicating the user already exists, with the token
       res.status(200).json({ message: "User already exists", token });
     }
   } catch (error) {
-    console.error("Error signing up or logging in:", error);
-    res.status(500).json({ error: "Internal server error" });
+    // Handle any errors that occur during the process
+    console.error("Error signing up or logging in:", error); // Log the error
+    res.status(500).json({ error: "Internal server error" }); // Send an error response
   }
 });
 
+// The following code is commented out but kept for reference
 // router.get('/', (req, res) => {
 //   res.json({ message: "Your port is damaged" });
 // });
 
-module.exports = router;
+module.exports = router; // Export the router object to be used in other parts of the application

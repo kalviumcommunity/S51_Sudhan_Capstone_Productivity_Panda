@@ -7,48 +7,50 @@ function ContactPage() {
     return (
         <>
             <div id='Contact_page' className='footer-container'>
-                {/* Div containing information and links */}
+                {/* Container for email information, additional links, quick links, and newsletter signup */}
                 <div className="first-line-divs">
-                    {/* Email information */}
+                    {/* Email information section */}
                     <div className='mail_information'>
                         <p className='heading-red'>Email Address:</p>
                         <p>sudhanssudhan83@gmail.com</p>
                     </div>
-                    {/* Additional links */}
+                    {/* Additional links section */}
                     <div className='Additional-link_container'>
                         <p className='heading-red'>Additional Links:</p>
                         <p>Terms of Service</p>
                         <p>Privacy Policy</p>
                         <p>FAQ</p>
                     </div>
-                    {/* Quick links */}
+                    {/* Quick links section */}
                     <div className='Quick-link_container'>
                         <p className='heading-red'>Quick Links:</p>
                         <p>Home</p>
                         <p>About</p>
                         <p>Features</p>
                     </div>
-                    {/* Newsletter signup */}
+                    {/* Newsletter signup section */}
                     <div className='newsletter_container'>
-                        <p className='newsletter-container'>Newsletter Signup:</p>
+                        <p className='heading-red'>Newsletter Signup:</p>
                         <div className='input-field-container-for-newsletter-signup'>
-                            <input type="text" placeholder='Enter you email' />
+                            <input type="text" placeholder='Enter your email' />
                             <button>Subscribe</button>
                         </div>
                         {/* Information about newsletter */}
-                        <p className='about-newsletter-container'>"Get the latest updates and exclusive offers by subscribing to our newsletter! Enter your email above and hit subscribe. We respect your privacy and promise not to spam. <pre>Join us now!"</pre>
+                        <p className='about-newsletter-container'>
+                            "Get the latest updates and exclusive offers by subscribing to our newsletter! Enter your email above and hit subscribe. We respect your privacy and promise not to spam.
+                            <pre>Join us now!</pre>
                         </p>
                     </div>
                 </div>
-                {/* Social media links */}
+                {/* Social media links section */}
                 <div className='social-media-container'>
                     <p className="heading-red">Social Media Links:</p>
                     <div className='social-media-icon-container'>
-                        <img src={linkedIN} alt="linkedIN_icon" />
-                        <img src={instagram_icon} alt="instagram_icon" />
+                        <img src={linkedIN} alt="linkedIN_icon" /> {/* LinkedIn icon */}
+                        <img src={instagram_icon} alt="instagram_icon" /> {/* Instagram icon */}
                     </div>
                 </div>
-                {/* Copyright information */}
+                {/* Copyright information section */}
                 <div className='copyright_container'>
                     <p className="heading-red">Copyright Information:</p>
                     <p>Copyright © 2024 Productivity Panda</p>

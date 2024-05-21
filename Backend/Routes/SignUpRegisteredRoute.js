@@ -1,32 +1,32 @@
-const express = require("express")
-const bcrypt = require("bcrypt")
-const JWT = require("jsonwebtoken");
-const userDetailsModel = require("../models/userDetails");
-const ValidatingSignUp = require("../Validators/SignUpValidator"); // Custom validation function
-require('dotenv').config();
+const express = require("express"); // Importing the express module
+const bcrypt = require("bcrypt"); // Importing bcrypt for password hashing
+const JWT = require("jsonwebtoken"); // Importing jsonwebtoken for creating JWT tokens
+const userDetailsModel = require("../models/userDetails"); // Importing the user details model
+const ValidatingSignUp = require("../Validators/SignUpValidator"); // Importing the custom validation function
+require('dotenv').config(); // Loading environment variables from .env file
 
-
-const SignUpRegisteringRoute = express.Router()
+const SignUpRegisteringRoute = express.Router(); // Creating a router for sign-up route
 
 // Route for user registration
 SignUpRegisteringRoute.post("/Sign-Up", async (req, res) => {
     try {
         // Validate the request body using a custom validator
         const { error } = ValidatingSignUp(req.body);
-          if (error) {
+        if (error) {
+            // If validation fails, return a 400 error with details
             return res.status(400).json({ error: error.details.map(detail => detail.message) });
         }
 
         // Check if the email already exists in the database
         const existingEmail = await userDetailsModel.findOne({ Email: req.body.Email });
         if (existingEmail) {
-            return res.status(400).json({ error: "Email is already exist" });
+            return res.status(400).json({ error: "Email already exists" });
         }
 
         // Check if the username already exists in the database
         const existingUsername = await userDetailsModel.findOne({ Username: req.body.Username });
         if (existingUsername) {
-            return res.status(400).json({ error: "Username is already exist" });
+            return res.status(400).json({ error: "Username already exists" });
         }
 
         // Hash the password using bcrypt
