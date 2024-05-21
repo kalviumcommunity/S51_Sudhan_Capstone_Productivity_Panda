@@ -10,9 +10,10 @@ const GoogleSignupRoutes =require("../Backend/Routes/googleSigninRoutes")
 const LoginInRoute = require("../Backend/Routes/LoginRoute");
 const SignUpRegisteringRoute = require("../Backend//Routes/SignUpRegisteredRoute");
 const router = require("./Routes/googleSigninRoutes");
+const addTaskForm = require("./Routes/addUserTaskFormRoutes")
 
 // Create an instance of the Express application
-const app = express();
+const app = express();  
 
 // Set up middleware
 app.use(express.json()); // JSON parsing
@@ -22,6 +23,7 @@ app.use(SignUpRegisteringRoute); // Using sign-up/register route
 app.use(LoginInRoute); // Using login route
 app.use('/', router);
 app.use(GoogleSignupRoutes);
+app.use("/",addTaskForm)
 
 // app.get('/get', (req, res)=>{
 //     res.send({dfvd : "sfss"})

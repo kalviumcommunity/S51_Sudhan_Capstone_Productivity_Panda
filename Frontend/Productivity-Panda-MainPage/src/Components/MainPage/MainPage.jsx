@@ -9,10 +9,11 @@ import Arrow_Down from '../../assets/images/Arrow Down 2.png'; // Importing arro
 import Vector from '../../assets/images/Vector.png'; // Importing vector icon image
 import Calendar from '../../assets/images/Calendar.png'; // Importing calendar icon image
 import { ParentComponent } from '../ParentComponent';
+import axios from "axios"
 
 function MainPage(props) {
 
-  const {setIsLoggedIn} = useContext(ParentComponent)
+  const { setIsLoggedIn } = useContext(ParentComponent)
   const navigate = useNavigate()
   // Checking if userLogin exists in props and setting it to userLogin, otherwise setting it to undefined
   const userLogin = props.location && props.location.state && props.location.state.userLogin;
@@ -24,9 +25,16 @@ function MainPage(props) {
   const { resetField, register, handleSubmit, formState: { errors } } = useForm();
 
   // Function to handle form submission
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // Handle form submission here
     console.log(data);
+    try {
+      const res = await axios.post("/addTaskForm", data)
+      console.log(res.data)
+
+    } catch (error) {
+      console.log(error.message)
+    }
   };
 
   // Function to toggle the visibility of the add task form
@@ -47,6 +55,7 @@ function MainPage(props) {
     navigate("/")
     setIsLoggedIn(false)
   }
+
   return (
     <>
       {/* Productivity Panda logo */}
@@ -226,7 +235,7 @@ function MainPage(props) {
             <select name="priority" id="Priority">
               <option value="High">High</option>
               <option value="Medium">Medium</option>
-              <option value="Low">Low</option> 
+              <option value="Low">Low</option>
             </select>
           </div>
         </div>

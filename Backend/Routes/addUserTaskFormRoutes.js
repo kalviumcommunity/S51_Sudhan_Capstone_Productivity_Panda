@@ -1,21 +1,21 @@
 const express = require("express");
-const router = express.Router(); // Corrected the capitalization of Router
+const Router = express.Router(); // Corrected the capitalization of addTaskForm
 const UserTaskFormSchemaValidating = require("../models/userAddTaskDetails");
 require("dotenv").config();
 
-router.post("/addTaskForm", async (req, res) => {
+Router.post("/addTaskForm", async (req, res) => {
     try {
-        const { Eventname, Description, Date, Time, Status, Priority } = req.body;
+        const { EventName, Description, Date, Time, Status, Priority } = req.body;
 
         // Find if there is an existing task with the same Eventname and Time
-        let existingAddTaskFormDetails = await UserTaskFormSchemaValidating.findOne({ Eventname: Eventname, Time: Time });
+        let existingAddTaskFormDetails = await UserTaskFormSchemaValidating.findOne({ EventName: EventName, Time: Time });
 
         if (!existingAddTaskFormDetails) {
             // Create a new task if no existing task is found
             const newTask = new UserTaskFormSchemaValidating({
-                Eventname: Eventname,
+                EventName: EventName,
                 Description: Description,
-                Date: Date,
+                Date: Date, 
                 Time: Time,
                 Status: Status,
                 Priority: Priority,
@@ -35,4 +35,4 @@ router.post("/addTaskForm", async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = Router;
