@@ -99,7 +99,7 @@ const SignUp = () => {
     // If no error, proceed with form submission
     if (!isError) {
       try {
-        const response = await axios.post("http://localhost:3000/Sign-Up", { Username, Email, Password });
+        const response = await axios.post("http://localhost:8000/Sign-Up", { Username, Email, Password });
         const { token } = response.data;
 
         if (response.status === 201) {
@@ -123,8 +123,6 @@ const SignUp = () => {
     let decoded_Credential = jwtDecode(response.credential);
     console.log(decoded_Credential)
     setUserLogin(decoded_Credential)
-    // navigate("/MainPage",  { state: { userLogin: decoded_Credential } })
-    // document.getElementById("Google-container").style.hidden = true;
   }
 
   useEffect(() => {
@@ -145,7 +143,7 @@ const SignUp = () => {
   useEffect(() => {
     const sendGoogleSignInData = async () => {
       try {
-        const response = await axios.post("http://localhost:3000/GoogleSignupRoutes", {
+        const response = await axios.post("http://localhost:8000/GoogleSignupRoutes", {
           name: userLogin.given_name,
           email: userLogin.email,
           profile: userLogin.picture,

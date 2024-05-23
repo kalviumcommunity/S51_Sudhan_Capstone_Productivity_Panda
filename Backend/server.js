@@ -29,7 +29,7 @@ app.use("/", addTaskForm); // Using add task form route
 const port = process.env.PORT || 3000; // Default to port 3000 if PORT is not set in environment variables
 
 // Connect to MongoDB using the provided URL
-mongoose.connect(process.env.MongoURL, { useNewUrlParser: true, useUnifiedTopology: true }) // Added options to avoid deprecation warnings
+mongoose.connect(process.env.MongoURL) // Added options to avoid deprecation warnings
     .then(() => console.log('MongoDB connected...')) // Log success message on successful connection
     .catch(err => console.error('MongoDB connection error:', err)); // Log error message on connection failure
 

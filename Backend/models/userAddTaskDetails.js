@@ -7,9 +7,9 @@ const ppDBUserTaskDetails = new mongoose.Schema({
     // Field to store the description of the event/task.
     Description: { type: String, required: true },
     // Field to store the date of the event/task in YYYY-MM-DD format.
-    Date: { type: String, required: true, match: /^\d{2}-\d{2}-\d{4}$/ },
+    Date: { type: String, required: true, match: /^\d{4}-\d{2}-\d{2}$/ },
     // Field to store the time of the event/task in HHMM format.
-    Time: { type: Number, required: true, min: 0, max: 2359 },
+    Time: { type: Number, required: true, min: 0, max: 1440 },
     // Field to store the status of the event/task (e.g., completed, pending).
     Status: { type: String, required: true },
     // Field to store the priority of the event/task (e.g., high, medium, low).

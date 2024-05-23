@@ -10,6 +10,8 @@ import Signup from '../src/Components/MainPage/Sign-up';
 import TechnologiesPage from '../src/Components/MainPage/TechnologiesPage';
 import MainPage from '../src/Components/MainPage/MainPage';
 import { ParentComponentProvider, ParentComponent } from "./Components/ParentComponent"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import CSS for react-toastify
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -66,6 +68,7 @@ function App() {
     <>
       <Router>
         <ParentComponentProvider>
+          <ToastContainer/>
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="#About_me" element={<NavAboutPage />} />
