@@ -9,6 +9,8 @@ import Arrow_Down from '../../assets/images/Arrow Down 2.png'; // Importing arro
 import Vector from '../../assets/images/Vector.png'; // Importing vector icon image
 import Calendar from '../../assets/images/Calendar.png'; // Importing calendar icon image
 import { ParentComponent } from '../ParentComponent';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios"
 
 function MainPage(props) {
@@ -22,18 +24,21 @@ function MainPage(props) {
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
 
   // useForm hook for form handling
-  const { resetField, register, handleSubmit, formState: { errors } } = useForm();
+  const { reset, register, handleSubmit, formState: { errors } } = useForm();
 
   // Function to handle form submission
   const onSubmit = async (data) => {
     // Handle form submission here
+    let temp = data.Time.split(":")
+    let time = Number(temp[0])*60 + Number(temp[1])
+    data.Time = time
     console.log(data);
     try {
-      const res = await axios.post("/addTaskForm", data)
+      const res = await axios.post("http://localhost:8000/addTaskForm", data)
       console.log(res.data)
-
+      toast.success("Task Added successfully")
     } catch (error) {
-      console.log(error.message)
+      toast.error(`Some error occured in the form: ${error.message}`)
     }
   };
 
@@ -44,10 +49,7 @@ function MainPage(props) {
 
   // Function to reset form fields
   const handleCancelChange = () => {
-    resetField("event");
-    resetField("description");
-    resetField("date");
-    resetField("time");
+    reset();
   };
 
   const handleLogoutButton = () => {
@@ -58,6 +60,7 @@ function MainPage(props) {
 
   return (
     <>
+    <ToastContainer/>
       {/* Productivity Panda logo */}
       <div className='ProductivityPandaImage'>
         <img src={logo_icon} alt="Logo" />
@@ -179,71 +182,79 @@ function MainPage(props) {
         </div>
       </div>
       {/* Add task form */}
-      {showAddTaskForm && (<form className='add-task-form-container' onSubmit={handleSubmit(onSubmit)}>
-        <div className='Cross-lordIcon-and-Heading-of-Add-Task-Form-Container'>
-          <div className='headin-of-add-task-container'><p>Add task form</p></div>
-          <div className='Cross-lordIcon' onClick={toggleAddTaskForm}>
-            {/* Lord icon for cross */}
-            <lord-icon
-              src="https://cdn.lordicon.com/nqtddedc.json"
-              trigger="hover"
-              style={{ width: "40px", height: "40px" }}>
-            </lord-icon>
+      {showAddTaskForm && (
+        <form className='add-task-form-container' onSubmit={handleSubmit(onSubmit)}>
+          <div className='Cross-lordIcon-and-Heading-of-Add-Task-Form-Container'>
+            <div className='headin-of-add-task-container'><p>Add task form</p></div>
+            <div className='Cross-lordIcon' onClick={toggleAddTaskForm}>
+              {/* Lord icon for cross */}
+              <lord-icon
+                src="https://cdn.lordicon.com/nqtddedc.json"
+                trigger="hover"
+                style={{ width: "40px", height: "40px" }}>
+              </lord-icon>
+            </div>
           </div>
-        </div>
-        <div className='Event-adding-Event-input-field'>
-          <label className="Event-adding-task-label" htmlFor="event">Event Name</label>
-          <input
-            className="Event-adding-task-input"
-            type="text"
-            {...register("event", { required: "Event name is required", maxLength: { value: 30, message: "Event should be less than 30 characters" } })}
-          />
-          {errors.event && <p className='error-message'>{errors.event.message}</p>}
-        </div>
-        <div className='Event-adding-Event-description-input-field'>
-          <label className="Event-adding-task-Description-label" htmlFor="description">Description</label>
-          <textarea
-            className="Event-adding-task-Description-input"
-            type="text"
-            {...register("description", { required: "Description field is required", maxLength: { value: 60, message: "Description should be less than 60 characters" } })}
-          />
-          {errors.description && <p className='error-message'>{errors.description.message}</p>}
-        </div>
-        <div className='Event-adding-Event-date-and-time-field'>
-          <div className='Event-adding-Event-date-input-field'>
-            <label className="Event-adding-task-Date-label" htmlFor="date">Date </label>
-            <input className="Event-adding-task-Date-input" type="date" {...register("date", { required: "Date is required" })} />
-            {errors.date && <p className='error-message'>{errors.date.message}</p>}
+          <div className='Event-adding-Event-input-field'>
+            <label className="Event-adding-task-label" htmlFor="EventName">Event Name</label>
+            <input
+              className="Event-adding-task-input"
+              type="text"
+              {...register("EventName", {
+                required: "Event name is required",
+                maxLength: { value: 30, message: "Event should be less than 30 characters" }
+              })}
+            />
+            {errors.event && <p className='error-message'>{errors.event.message}</p>}
           </div>
-          <div className='Event-adding-Event-time-input-field'>
-            <label className="Event-adding-task-time-label" htmlFor="time">Time </label>
-            <input className="Event-adding-task-time-input" type="time" {...register("time", { required: "Time is required" })} />
-            {errors.time && <p className='error-message'>{errors.time.message}</p>}
+          <div className='Event-adding-Event-description-input-field'>
+            <label className="Event-adding-task-Description-label" htmlFor="description">Description</label>
+            <textarea
+              className="Event-adding-task-Description-input"
+              {...register("Description", {
+                required: "Description field is required",
+                maxLength: { value: 60, message: "Description should be less than 60 characters" }
+              })}
+            />
+            {errors.description && <p className='error-message'>{errors.description.message}</p>}
           </div>
-        </div>
-        <div className='Event-adding-status-and-priority-field'>
-          <div className='Event-adding-task-status-field'>
-            <label className="Event-adding-task-status-label" htmlFor="status">Status</label>
-            <select name="Intial status" id="status">
-              <option value="To-do">To-do</option>
-              <option value="Paused">Paused</option>
-              <option value="In-Progress">In-Progress</option>
-            </select>
+          <div className='Event-adding-Event-date-and-time-field'>
+            <div className='Event-adding-Event-date-input-field'>
+              <label className="Event-adding-task-Date-label" htmlFor="date">Date </label>
+              <input className="Event-adding-task-Date-input" type="date" {...register("Date", { required: "Date is required" })} />
+              {errors.date && <p className='error-message'>{errors.date.message}</p>}
+            </div>
+            <div className='Event-adding-Event-time-input-field'>
+              <label className="Event-adding-task-time-label" htmlFor="time">Time </label>
+              <input className="Event-adding-task-time-input" type="time" {...register("Time", { required: "Time is required" })} />
+              {errors.time && <p className='error-message'>{errors.time.message}</p>}
+            </div>
           </div>
-          <div className='Event-adding-task-priority-field'>
-            <label className='Event-adding-task-priority-label' for="Priority">Priority</label>
-            <select name="priority" id="Priority">
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
-            </select>
+          <div className='Event-adding-status-and-priority-field'>
+            <div className='Event-adding-task-status-field'>
+              <label className="Event-adding-task-status-label" htmlFor="status">Status</label>
+              <select {...register("Status", { required: "Status is required" })}>
+                <option value="To-do">To-do</option>
+                <option value="Paused">Paused</option>
+                <option value="In-Progress">In-Progress</option>
+              </select>
+              {errors.status && <p className='error-message'>{errors.status.message}</p>}
+            </div>
+            <div className='Event-adding-task-priority-field'>
+              <label className='Event-adding-task-priority-label' htmlFor="priority">Priority</label>
+              <select {...register("Priority", { required: "Priority is required" })}>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+              {errors.priority && <p className='error-message'>{errors.priority.message}</p>}
+            </div>
           </div>
-        </div>
-        <div className='Cancel-Button-and-Add-event-Button'>
-          <button type="button" className='Cancel-Button' onClick={handleCancelChange}>Erase</button>
-          <button type="submit" className='Add-event-Ok-button'>Add Event</button>
-        </div>
-      </form>)}
+          <div className='Cancel-Button-and-Add-event-Button'>
+            <button type="button" className='Cancel-Button' onClick={handleCancelChange}>Erase</button>
+            <button type="submit" className='Add-event-Ok-button'>Add Event</button>
+          </div>
+        </form>)}
     </>
   );
 }

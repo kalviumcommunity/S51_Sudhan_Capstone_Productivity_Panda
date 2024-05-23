@@ -56,7 +56,7 @@ const Login = () => {
     }
     if (!(isError)) {
       try {
-        const response = await axios.post("http://localhost:3000/log-in", { Email, Password })
+        const response = await axios.post("http://localhost:8000/log-in", { Email, Password })
         const { token } = await response.data
         console.log(response)
 
@@ -99,7 +99,7 @@ const Login = () => {
   useEffect(() => {
     const sendGoogleSignInData = async () => {
       try {
-        const response = await axios.post("http://localhost:3000/GoogleSignupRoutes", {
+        const response = await axios.post("http://localhost:8000/GoogleSignupRoutes", {
           name: userLogin.given_name,
           email: userLogin.email,
           profile: userLogin.picture,
