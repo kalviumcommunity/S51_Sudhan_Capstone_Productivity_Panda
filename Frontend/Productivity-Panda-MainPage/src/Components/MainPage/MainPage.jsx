@@ -9,8 +9,8 @@ import Arrow_Down from '../../assets/images/Arrow Down 2.png'; // Importing arro
 import Vector from '../../assets/images/Vector.png'; // Importing vector icon image
 import Calendar from '../../assets/images/Calendar.png'; // Importing calendar icon image
 import { ParentComponent } from '../ParentComponent';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer here
+import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
 import axios from "axios"
 
 function MainPage(props) {
@@ -40,6 +40,17 @@ function MainPage(props) {
     } catch (error) {
       toast.error(`Some error occured in the form: ${error.message}`)
     }
+  };
+
+   // Custom validation to ensure date and time are greater than current date and time
+   const validateDateTime = (value, { Date: date, Time: time }) => {
+    const currentDate = new Date();
+    const selectedDate = new Date(date + 'T' + time);
+    if (selectedDate <= currentDate) {
+      toast.error("Date and time must be in the future");
+      return "Date and time must be in the future";
+    }
+    return true;
   };
 
   // Function to toggle the visibility of the add task form
@@ -221,7 +232,11 @@ function MainPage(props) {
           <div className='Event-adding-Event-date-and-time-field'>
             <div className='Event-adding-Event-date-input-field'>
               <label className="Event-adding-task-Date-label" htmlFor="date">Date </label>
-              <input className="Event-adding-task-Date-input" type="date" {...register("Date", { required: "Date is required" })} />
+                <input
+                className="Event-adding-task-Date-input"
+                type="date"
+                {...register("Date", { required: "Date is required", validate: (value, context) => validateDateTime(value, context) })}
+              />
               {errors.date && <p className='error-message'>{errors.date.message}</p>}
             </div>
             <div className='Event-adding-Event-time-input-field'>
