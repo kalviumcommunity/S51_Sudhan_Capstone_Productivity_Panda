@@ -320,7 +320,13 @@ hr {
     left: 15%;
     top: 8%;
 }
+.ProductivityPandaImageLandingLogo{
+    width: 180px;
+}
+.ProductivityPandaImageLandingLogo img{
+    width: 180px;
 
+}
 .ProductivityPandaImage img {
     width: 70px;
     height: 70px;
@@ -1400,17 +1406,8 @@ hr {
         margin-bottom: 1%;
         margin-top: 1%;
     }
-
-    /* .Google-container {
-        font-size: 18px;
-        border-radius: 6px;
-        padding: 1%;
-        margin-bottom: 1%;
-        margin-top: 1%;
-    } */
-
-    .ProductivityPandaImage img {
-        left: -150%;
+    .ProductivityPandaImageLandingLogo{
+        margin-left: -70%;
     }
 
     .HamburgerMenu {
@@ -1644,14 +1641,18 @@ hr {
         flex-direction: column;
         height: 90vh;
         width: 50%;
-        font-size: x-large;
+        font-size: large;
         background-color: #FFFFFF;
         margin-left: 50%;
         border-left: 2px solid black;
     }
 
-    .ProductivityPandaImage img {
-        left: -65%;
+    .ProductivityPandaImageLandingLogo{
+        margin-left: -55%;
+    }
+
+    .ProductivityPandaImageLandingLogo img{
+        width: 150px;
     }
 
     .Overall-div-of-get-started-page img {
@@ -1659,7 +1660,7 @@ hr {
     }
 
     .tagline-of-the-landing-page {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .Slogan-and-tagline-of-get-started-page {
@@ -1708,7 +1709,7 @@ hr {
         width: 160px;
         font-size: 24px;
         bottom: 48%;
-        right: 62%;
+        right: 60%;
     }
 
     .Authetication_container,
@@ -1820,10 +1821,47 @@ hr {
     }
 
     body {
-        background-color: #6be5a8;
+        background-color: #FFFF80;
+    }
+
+    .HamburgerMenu {
+        left: 88%;
+    }
+    .copyright_container {
+        margin-left: 3%;
     }
 }
-
+@media screen and (max-width: 376px){
+    .HamburgerMenu {
+        margin-left: 2%;
+    }
+    .ProductivityPandaImageLandingLogo{
+        margin-left: -50%;
+    }
+    .get-started-btn{
+        bottom: 50%;
+        right: 60%;
+        height: 30px;
+        width: 140px;
+        font-size: 20px;
+    }
+    .about-P-tag {
+        font-size: 26px;
+    }
+    .Description-p-tag-of-about-me {
+        font-size: 10px;
+    }
+    .Join-Now-btn:before {
+        font-size: 16px;
+    }
+    .Join-Now-btn{
+        width: 120px;
+        height: 30px;
+    }
+    .copyright_container {
+        margin-left: 3%;
+    }
+}
 @media screen and (max-width: 320px) {
     .log-in-container {
         height: 70vh;
@@ -1854,10 +1892,13 @@ hr {
         display: none;
     }
 
-    .ProductivityPandaImage img {
-        left: -40%;
+    .ProductivityPandaImageLandingLogo{
+        margin-left: -40%;
     }
 
+    .ProductivityPandaImageLandingLogo img{
+        width: 140px;
+    }
     .HamburgerMenu {
         left: 85%;
     }
@@ -1886,7 +1927,7 @@ hr {
 
     .NavBarContainer ul.open {
         height: 90vh;
-        font-size: x-large;
+        font-size:large;
     }
 
     .about-newsletter-container {

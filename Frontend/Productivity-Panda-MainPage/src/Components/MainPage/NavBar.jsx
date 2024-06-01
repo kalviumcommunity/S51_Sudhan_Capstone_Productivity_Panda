@@ -116,7 +116,7 @@ function NavBar() {
     // Navbar container
     <nav className={`NavBarContainer ${isMenuOpen ? 'CrossSymbol' : 'open'}`}>
       {/* Productivity Panda logo */}
-      <div className='ProductivityPandaImage'>
+      <div className='ProductivityPandaImageLandingLogo'>
         <img src={ProductivityPandaImage} alt="Logo" />
       </div>
       {/* Hamburger menu icon */}
