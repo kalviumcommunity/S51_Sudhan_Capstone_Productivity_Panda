@@ -30,7 +30,7 @@ function MainPage(props) {
   const onSubmit = async (data) => {
     // Handle form submission here
     let temp = data.Time.split(":")
-    let time = Number(temp[0])*60 + Number(temp[1])
+    let time = Number(temp[0]) * 60 + Number(temp[1])
     data.Time = time
     console.log(data);
     try {
@@ -42,8 +42,8 @@ function MainPage(props) {
     }
   };
 
-   // Custom validation to ensure date and time are greater than current date and time
-   const validateDateTime = (value, { Date: date, Time: time }) => {
+  // Custom validation to ensure date and time are greater than current date and time
+  const validateDateTime = (value, { Date: date, Time: time }) => {
     const currentDate = new Date();
     const selectedDate = new Date(date + 'T' + time);
     if (selectedDate <= currentDate) {
@@ -71,7 +71,7 @@ function MainPage(props) {
 
   return (
     <>
-    <ToastContainer/>
+      <ToastContainer />
       {/* Productivity Panda logo */}
       <div className='ProductivityPandaImage'>
         <img src={logo_icon} alt="Logo" />
@@ -81,7 +81,7 @@ function MainPage(props) {
         <div className="top-down-of-sideNavigation-bar">
           {/* Trash icon */}
           <div className="trashIcon">
-            {/* Lord icon for trash */}
+            {/* Lord icon for trash */} 
             <lord-icon
               src="https://cdn.lordicon.com/skkahier.json"
               trigger="hover"
@@ -232,7 +232,7 @@ function MainPage(props) {
           <div className='Event-adding-Event-date-and-time-field'>
             <div className='Event-adding-Event-date-input-field'>
               <label className="Event-adding-task-Date-label" htmlFor="date">Date </label>
-                <input
+              <input
                 className="Event-adding-task-Date-input"
                 type="date"
                 {...register("Date", { required: "Date is required", validate: (value, context) => validateDateTime(value, context) })}
