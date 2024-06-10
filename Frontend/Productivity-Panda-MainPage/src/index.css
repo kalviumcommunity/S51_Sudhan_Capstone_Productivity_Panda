@@ -110,19 +110,22 @@ body {
     width: 20%;
     border-radius: 5px;
 }
-.Add-event-Ok-button{
-    width:max-content;
+
+.Add-event-Ok-button {
+    width: max-content;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 2%;
 }
-.Cancel-Button-and-Add-event-Button{
+
+.Cancel-Button-and-Add-event-Button {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     margin-top: 5%;
 }
+
 .error-message {
     font-size: 14px;
     font-weight: 300;
@@ -320,13 +323,16 @@ hr {
     left: 15%;
     top: 8%;
 }
-.ProductivityPandaImageLandingLogo{
+
+.ProductivityPandaImageLandingLogo {
     width: 180px;
 }
-.ProductivityPandaImageLandingLogo img{
+
+.ProductivityPandaImageLandingLogo img {
     width: 180px;
 
 }
+
 .ProductivityPandaImage img {
     width: 70px;
     height: 70px;
@@ -1406,7 +1412,8 @@ hr {
         margin-bottom: 1%;
         margin-top: 1%;
     }
-    .ProductivityPandaImageLandingLogo{
+
+    .ProductivityPandaImageLandingLogo {
         margin-left: -70%;
     }
 
@@ -1647,11 +1654,11 @@ hr {
         border-left: 2px solid black;
     }
 
-    .ProductivityPandaImageLandingLogo{
+    .ProductivityPandaImageLandingLogo {
         margin-left: -55%;
     }
 
-    .ProductivityPandaImageLandingLogo img{
+    .ProductivityPandaImageLandingLogo img {
         width: 150px;
     }
 
@@ -1827,41 +1834,51 @@ hr {
     .HamburgerMenu {
         left: 88%;
     }
+
     .copyright_container {
         margin-left: 3%;
     }
 }
-@media screen and (max-width: 376px){
+
+@media screen and (max-width: 376px) {
     .HamburgerMenu {
         margin-left: 2%;
     }
-    .ProductivityPandaImageLandingLogo{
+
+    .ProductivityPandaImageLandingLogo {
         margin-left: -50%;
     }
-    .get-started-btn{
+
+    .get-started-btn {
         bottom: 50%;
         right: 60%;
         height: 30px;
         width: 140px;
         font-size: 20px;
     }
+
     .about-P-tag {
         font-size: 26px;
     }
+
     .Description-p-tag-of-about-me {
         font-size: 10px;
     }
+
     .Join-Now-btn:before {
         font-size: 16px;
     }
-    .Join-Now-btn{
+
+    .Join-Now-btn {
         width: 120px;
         height: 30px;
     }
+
     .copyright_container {
         margin-left: 3%;
     }
 }
+
 @media screen and (max-width: 320px) {
     .log-in-container {
         height: 70vh;
@@ -1892,13 +1909,14 @@ hr {
         display: none;
     }
 
-    .ProductivityPandaImageLandingLogo{
+    .ProductivityPandaImageLandingLogo {
         margin-left: -40%;
     }
 
-    .ProductivityPandaImageLandingLogo img{
+    .ProductivityPandaImageLandingLogo img {
         width: 140px;
     }
+
     .HamburgerMenu {
         left: 85%;
     }
@@ -1927,7 +1945,7 @@ hr {
 
     .NavBarContainer ul.open {
         height: 90vh;
-        font-size:large;
+        font-size: large;
     }
 
     .about-newsletter-container {

@@ -10,6 +10,15 @@ import group_img from "../../assets/images/Group img BG.png";
 import extension_img from "../../assets/images/Extension img BG.png";
 
 function NavAboutPage() {
+
+  const scrollToGetStarted = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+
   return (
     <>
       {/* About section */}
@@ -25,7 +34,7 @@ function NavAboutPage() {
         </p>
         {/* Join Now button */}
         <button className='Join-Now-btn' alt="Join Now!">
-          <Link className="Linkage" to="/">
+          <Link className="Linkage" to="/" onClick={scrollToGetStarted}>
             {/* Join Now text */}
             <i>J</i>
             <i>o</i>
