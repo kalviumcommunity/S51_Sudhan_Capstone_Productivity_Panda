@@ -71,9 +71,14 @@ function App() {
           <ToastContainer/>
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="#About_me" element={<NavAboutPage />} />
+
+
+            {/* comment this until project gets over */}
+            {/* <Route path="#About_me" element={<NavAboutPage />} />
             <Route path="#Technology_Page" element={<TechnologiesPage />} />
-            <Route path="#Contact_page" element={<ContactPage />} />
+            <Route path="#Contact_page" element={<ContactPage />} /> */}
+
+            
             <Route path="/log-in" element={isLoggedIn ? <Navigate to="/MainPage" /> : <Login />} />
             <Route path="/Sign-Up" element={isLoggedIn ? <Navigate to="/MainPage" /> : <Signup />} />
             <Route path='/MainPage' element={<MainPage />}></Route>

@@ -46,8 +46,8 @@ function ContactPage() {
                 <div className='social-media-container'>
                     <p className="heading-red">Social Media Links:</p>
                     <div className='social-media-icon-container'>
-                        <img src={linkedIN} alt="linkedIN_icon" /> {/* LinkedIn icon */}
-                        <img src={instagram_icon} alt="instagram_icon" /> {/* Instagram icon */}
+                        <a href="https://www.instagram.com/_.alone____lover._/" target="_blank"><img src={linkedIN} alt="linkedIN_icon" /></a> {/* LinkedIn icon */}
+                        <a href="https://www.linkedin.com/feed/" target="_blank"><img src={instagram_icon} alt="instagram_icon" /></a> {/* Instagram icon */}
                     </div>
                 </div>
                 {/* Copyright information section */}

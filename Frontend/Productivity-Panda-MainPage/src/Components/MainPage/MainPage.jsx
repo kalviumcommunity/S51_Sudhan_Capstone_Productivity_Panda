@@ -81,7 +81,7 @@ function MainPage(props) {
         <div className="top-down-of-sideNavigation-bar">
           {/* Trash icon */}
           <div className="trashIcon">
-            {/* Lord icon for trash */} 
+            {/* Lord icon for trash */}
             <lord-icon
               src="https://cdn.lordicon.com/skkahier.json"
               trigger="hover"
