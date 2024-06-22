@@ -21,6 +21,8 @@ git clone https://github.com/kalviumcommunity/S51_Sudhan_Capstone_Productivity_P
 ## Usage
 Users can utilize Productivity Panda to manage tasks, prioritize plans, set reminders, and collaborate with team members effectively. Simply log in using Google authentication, create and prioritize tasks based on deadlines, and utilize the integrated chatbot for seamless communication. Stay focused on goals and enhance productivity with Productivity Panda!
 
+## Backend Server Deployment 
+https://s51-sudhan-capstone-productivity-panda-3.onrender.com
 ## License
 This project is licensed under the [MIT License](LICENSE).
 
