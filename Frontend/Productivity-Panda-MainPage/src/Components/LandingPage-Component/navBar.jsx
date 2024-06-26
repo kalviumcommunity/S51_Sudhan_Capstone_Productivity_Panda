@@ -20,9 +20,9 @@ function NavBar() {
                         <p>About</p>
                         <p>Features</p>
                         <p>Contacts</p>
-                    </div>
                     <div className='sign-up-button'>
                         <button>Sign-Up</button>
+                    </div>
                     </div>
                     <div className={`hamburger ${isOpen ? 'open' : ''}`} onClick={toggleMenu}>
                         <div className="bar1"></div>
