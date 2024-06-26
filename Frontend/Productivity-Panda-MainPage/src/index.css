@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 * {
     margin: 0;
@@ -416,25 +416,25 @@ hr {
     z-index: 1;
     top: 100%;
     /* changed from bottom to top */
-    /* left: 50%;
+    left: 50%;
     margin-left: -60px;
     opacity: 0;
     transition: opacity 0.3s;
-} */
+}
 
-/* .Add-task-Container .tooltiptext::after {
+.Add-task-Container .tooltiptext::after {
     content: "";
     position: absolute;
-    bottom: 100%; */
+    bottom: 100%;
     /* changed from top to bottom */
-    /* left: 50%;
+    left: 50%;
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent #ffffff transparent;
-} */
+}
 
-/* .Add-task-Container:hover .tooltiptext {
+.Add-task-Container:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
 }
@@ -458,13 +458,13 @@ hr {
 
 .Profile-icon img {
     height: 20%;
-    width: 20%; */
+    width: 20%;
     /* border: 2px solid #FEFBF6; */
-    /* border-radius: 100%; */
+    border-radius: 100%;
     /* background-color: #0F1035; */
-/* } */
+}
 
-/* .cover-up-div-of-top-upper-right-icons {
+.cover-up-div-of-top-upper-right-icons {
     height: 100%;
     width: 18%;
     display: flex;
@@ -472,9 +472,9 @@ hr {
     align-items: center;
     margin-left: 82%;
     margin-top: -4.2%;
-} */
+}
 
-/* .taskStatusContainer {
+.taskStatusContainer {
     border: 4px solid black;
     width: 80%;
     margin-left: 17.5%;
@@ -490,9 +490,9 @@ hr {
     box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
-} */
+}
 
-/* .TotalTasksElement,
+.TotalTasksElement,
 .AssignedTasksElement,
 .CancelledTasksElement,
 .DueTasksElement,
@@ -504,9 +504,9 @@ hr {
     justify-content: center;
     flex-direction: column;
     border-right: 3px solid black;
-} */
+}
 
-/* .CancelledTasksElement,
+.CancelledTasksElement,
 .InProgressTasks {
     width: 26%;
 }
@@ -532,9 +532,9 @@ hr {
     box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.75);
-} */
+}
 
-/* .upComingTasks {
+.upComingTasks {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -1235,9 +1235,9 @@ hr {
     justify-content: center;
     align-items: center;
     height: 100vh;
-} */
+}
 
-/* @media screen and (max-width: 1120px) {
+@media screen and (max-width: 1120px) {
     .sign-up-container {
         width: 35vw;
     }
@@ -1376,9 +1376,9 @@ hr {
         width: 195px;
         margin-right: 4%;
     }
-} */
+}
 
-/* @media screen and (max-width: 769px) {
+@media screen and (max-width: 769px) {
     .sign-up-container {
         width: 40vw;
     }
@@ -1838,9 +1838,9 @@ hr {
     .copyright_container {
         margin-left: 3%;
     }
-} */
+}
 
-/* @media screen and (max-width: 376px) {
+@media screen and (max-width: 376px) {
     .HamburgerMenu {
         margin-left: 2%;
     }
@@ -1877,9 +1877,9 @@ hr {
     .copyright_container {
         margin-left: 3%;
     }
-} */
+}
 
-/* @media screen and (max-width: 320px) {
+@media screen and (max-width: 320px) {
     .log-in-container {
         height: 70vh;
         width: 90vw;
@@ -1968,4 +1968,4 @@ hr {
     .Description-p-tag-of-about-me {
         font-size: 10px;
     }
-} */
+}
