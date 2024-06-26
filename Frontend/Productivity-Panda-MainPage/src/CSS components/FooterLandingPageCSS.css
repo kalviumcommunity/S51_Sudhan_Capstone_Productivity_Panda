@@ -1,0 +1,29 @@
+.Footer_Container img{
+    height: 100%;
+    width:100%;
+    object-fit: cover;
+    position: relative;
+}
+.Footer_Container{
+    position: relative;
+    width: 100%;
+}
+
+.contact_list_container{
+    display: flex;
+    flex-direction: row;
+    width: 25%;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 60%;
+    left: 65%;
+}
+.contact{
+    height: 10%;
+    width: 10%;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.contact:hover{
+    transform: scale(1.2);
+}

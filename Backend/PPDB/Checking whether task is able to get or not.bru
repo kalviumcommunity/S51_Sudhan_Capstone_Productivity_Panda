@@ -1,0 +1,22 @@
+meta {
+  name: Checking whether task is able to get or not
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:8000/addTaskForm/
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "EventName": "Enhanced Error Handling:",
+    "Description": "Don't consider this has a main Event",
+    "Date": "22-12-2025",
+    "Time": 2222,
+    "Status": "To-Do",
+    "Priority": "Low"
+  }
+}
