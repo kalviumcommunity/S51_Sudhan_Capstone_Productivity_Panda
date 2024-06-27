@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 import { ParentComponent } from "../ParentComponent"
+import "../CSS components/Log-inCSS.css"
 
 const Login = () => {
   // State variables to manage email, password, and their respective errors
@@ -77,8 +78,6 @@ const Login = () => {
     let decoded_Credential = jwtDecode(response.credential);
     console.log(decoded_Credential)
     setUserLogin(decoded_Credential)
-    // navigate("/MainPage",  { state: { userLogin: decoded_Credential } })
-    // document.getElementById("Google-container").style.hidden = true;
   }
 
   useEffect(() => {

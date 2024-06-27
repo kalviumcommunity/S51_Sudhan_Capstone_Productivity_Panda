@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from "axios";
 import "../../index.css";
-import {jwtDecode} from "jwt-decode"; // Corrected import
+import { jwtDecode } from "jwt-decode"; // Corrected import
 import sign_in_and_log_in_image from "../../assets/images/Sign-up and login-in image.png"
 import { useNavigate } from 'react-router-dom';
-import {ParentComponent} from "../ParentComponent"
+import { ParentComponent } from "../ParentComponent"
+import "../CSS components/Sign-upCSS.css"
 
 const SignUp = () => {
   // State variables to manage username, email, password, and their respective errors
@@ -13,7 +14,7 @@ const SignUp = () => {
   const [Password, setPassword] = useState("")
   const [ConfirmPassword, setConfirmPassword] = useState("")
   const [userLogin, setUserLogin] = useState({})
-  const {setIsLoggedIn} = useContext(ParentComponent)
+  const { setIsLoggedIn } = useContext(ParentComponent)
 
   const [UsernameError, setUserNameError] = useState("")
   const [EmailError, setEmailError] = useState("")
@@ -108,8 +109,8 @@ const SignUp = () => {
           localStorage.setItem("TokenizedValue", token);
           setIsLoggedIn(true)
           console.log("UserName: ", Username);
-    console.log("Email: ", Email);
-    console.log("Password: ", Password);
+          console.log("Email: ", Email);
+          console.log("Password: ", Password);
         } else {
           console.error("Error:", response.statusText);
         }
@@ -156,7 +157,7 @@ const SignUp = () => {
         console.error("Error in the google sign-in:", error);
       }
     };
-  
+
     if (userLogin.given_name && userLogin.email && userLogin.picture) {
       sendGoogleSignInData();
     }
