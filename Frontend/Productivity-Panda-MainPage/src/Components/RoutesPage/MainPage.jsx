@@ -12,13 +12,12 @@ import { ParentComponent } from '../ParentComponent';
 import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer here
 import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
 import axios from "axios"
+import "../CSS components/MainPageCSS.css"
 
-function MainPage(props) {
+function MainPage() {
 
   const { setIsLoggedIn } = useContext(ParentComponent)
   const navigate = useNavigate()
-  // Checking if userLogin exists in props and setting it to userLogin, otherwise setting it to undefined
-  const userLogin = props.location && props.location.state && props.location.state.userLogin;
 
   // State for controlling the visibility of the add task form
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);

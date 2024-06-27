@@ -1,0 +1,102 @@
+.blur-background {
+    filter: blur(4px);
+}
+
+.headin-of-add-task-container p {
+    font-size: 26px;
+}
+
+.add-task-form-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 30vw;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1000;
+    border: 2px solid black;
+}
+
+.Cross-lordIcon-and-Heading-of-Add-Task-Form-Container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Cross-lordIcon {
+    margin-left: 40%;
+}
+
+.Event-adding-task-input {
+    height: 25px;
+}
+
+.Event-adding-task-Description-input {
+    resize: vertical;
+}
+
+.Event-add-task-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 1%;
+}
+
+.Event-add-task-container label {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.Event-adding-Event-input-field,
+.Event-adding-Event-description-input-field,
+.Event-adding-Event-date-input-field,
+.Event-adding-Event-time-input-field,
+.Event-adding-task-status-field,
+.Event-adding-task-priority-field {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+}
+
+.Event-adding-Event-date-and-time-field,
+.Event-adding-status-and-priority-field {
+    display: flex;
+    flex-direction: row;
+}
+
+.Event-adding-Event-time-input-field,
+.Event-adding-task-priority-field {
+    margin-left: 10%;
+}
+
+.Cancel-Button,
+.Add-event-Ok-button {
+    height: 30px;
+    font-size: 18px;
+    width: 20%;
+    border-radius: 5px;
+}
+
+.Add-event-Ok-button {
+    width: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+}
+
+.Cancel-Button-and-Add-event-Button {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.error-message {
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 3%;
+    color: red;
+}

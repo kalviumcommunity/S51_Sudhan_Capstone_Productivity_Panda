@@ -1,6 +1,6 @@
 import React from 'react'
 import AboutPage_image from "../../assets/images/About Page.png"
-import "../../CSS components/aboutPageCSS.css"
+import "../CSS components/aboutPageCSS.css"
 import Task_Management_Image from "../../assets/images/Task Management container.png"
 import Workshop_and_Task_boards_image from "../../assets/images/Workspace and Task Boards container.png"
 import Track_with_our_checklist_image from "../../assets/images/Track with our checklist.png"

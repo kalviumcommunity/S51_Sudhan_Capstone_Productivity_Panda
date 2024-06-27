@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../CSS components/FeaturesPageCSS.css"
+import "../CSS components/FeaturesPageCSS.css"
 import FeaturesPage1_Image from "../../assets/images/FeaturesPage.png"
 import quick_task_creation_Image from "../../assets/images/Quick Task Addition container.png"
 import The_Key_benefits_of_mesiter_Image from "../../assets/images/The Key benefit of Meister Task Container.png"

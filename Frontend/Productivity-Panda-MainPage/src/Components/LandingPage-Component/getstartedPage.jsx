@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../CSS components/getstartedPageCSS.css"
+import "../CSS components/getstartedPageCSS.css"
 import landingPage_GetStarted_Page_Image from "../../assets/images/Frame 1.png"
 
 function GetstartedPage() {
