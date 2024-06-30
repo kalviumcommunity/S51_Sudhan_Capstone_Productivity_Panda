@@ -6,6 +6,11 @@
     font-size: 26px;
 }
 
+.MainPage-Heading-Logout {
+    height: 20%;
+    width: 20%;
+}
+
 .add-task-form-container {
     position: fixed;
     top: 50%;
@@ -99,4 +104,73 @@
     font-weight: 300;
     margin-bottom: 3%;
     color: red;
+}
+
+.task-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-column {
+    width: 23%;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+}
+.task-column h3{
+    margin-bottom: 5%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.task-card {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-left: 4px solid #FFA500;
+    border-radius: 12px;
+}
+
+.taskContainer_eventname{
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.task_description_container p , .task_description_container input{
+    margin: 3% 0;
+}
+
+.duration_paragraph_tag{
+    font-size: 16px;
+    font-weight: 600;
+}
+.Event-adding-task-duration-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.duration-inputs {
+    display: flex;
+    gap: 10px;
+}
+
+.Event-adding-task-duration-hours,
+.Event-adding-task-duration-minutes {
+    width: 80px;
+    padding: 5px;
+}
+
+.task_eventname_container, .task_description_container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.task_eventname_container div{
+    border-radius: 100%;
+    height: 1%;
+    width: 1%;
+    padding: 2%;
+    background-color: #FFA500;
 }
