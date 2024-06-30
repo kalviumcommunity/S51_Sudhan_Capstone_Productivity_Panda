@@ -1,42 +1,60 @@
 const express = require("express"); // Import the express module
 const Router = express.Router(); // Create a new router object
 const UserTaskFormSchemaValidating = require("../models/userAddTaskDetails"); // Import the UserTaskForm schema for validation
+const userAddTaskDetailsModel = require("../models/userAddTaskDetails");
 require("dotenv").config(); // Load environment variables from .env file
 
 // Define a POST route for adding a task form
-Router.post("/addTaskForm", async (req, res) => {
+Router.post('/addTaskForm', async (req, res) => {
     try {
-        // Destructure the request body to get task details
-        const { EventName, Description, Date, Time, Status, Priority } = req.body;
-        console.log(req.body)
-        
-        // Check if a task with the same EventName and Time already exists
-        let existingAddTaskFormDetails = await UserTaskFormSchemaValidating.findOne({ EventName: EventName, Time: Time });
-
-        if (!existingAddTaskFormDetails) {
-            // Create a new task if no existing task is found
-            const newTask = new UserTaskFormSchemaValidating({
-                EventName: EventName,
-                Description: Description,
-                Date: Date,
-                Time: Time,
-                Status: Status,
-                Priority: Priority,
-            });
-            await newTask.save(); // Save the new task to the database
-            console.log(newTask); // Log the new task
-
-            // Send a success response
-            res.status(201).json({ message: "User Added Task Successfully" });
-        } else {
-            // Send a response indicating the task already exists
-            res.status(200).json({ message: "User EventName already exists and can't add the task when another task is in progress" });
-        }
+      const { EventName, Description, Date, Status, DurationHours, DurationMinutes } = req.body;
+  
+      // Validate input data
+      if (!EventName || !Description || !Date || !Status) {
+        return res.status(400).json({ error: 'EventName, Description, Date, and Status are required' });
+      }
+  
+      // Create a new task
+      const newTask = new UserTaskFormSchemaValidating({
+        EventName,
+        Description,
+        Date,
+        Status,
+        DurationHours,
+        DurationMinutes
+      });
+  
+      // Save the task to the database
+      const savedTask = await newTask.save();
+  
+      // Respond with the saved task
+      res.status(201).json({ task: savedTask });
     } catch (error) {
-        // Handle any errors that occur during the process
-        console.error("Error in EventName and Timing", error); // Log the error
+      console.error('Error adding task:', error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
+
+Router.get("/tasks", async (req, res) => {
+    try {
+        const tasks = await UserTaskFormSchemaValidating.find({});
+        console.log("Good to go cheif");
+        res.status(200).json(tasks);
+    } catch (error) {
+        console.error("Error fetching tasks", error); // Log the error
         res.status(500).json({ error: "Internal Server Error" }); // Send an error response
     }
 });
+
+Router.delete("/deleteTask/:id", async(req, res)=> {
+    try{
+        const taskID  = req.params.id;
+        await userAddTaskDetailsModel.findByIdAndDelete(taskID);
+        res.status(200).json({ message: 'Task deleted successfully'});
+    }
+    catch (error){
+        res.status(500).json({message: 'Error deleting task', error})
+    }
+})
 
 module.exports = Router; // Export the router object to be used in other parts of the application
