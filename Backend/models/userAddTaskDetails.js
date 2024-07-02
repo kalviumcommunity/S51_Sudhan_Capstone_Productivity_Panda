@@ -12,7 +12,9 @@ const ppDBUserTaskDetails = new mongoose.Schema({
     Status: { type: String, enum: ['Must do', 'Awaiting', 'Pending'], required: true },
     // Fields to store the duration of the event/task in hours and minutes.
     DurationHours: { type: Number, default: 0, min: 0 },
-    DurationMinutes: { type: Number, default: 0, min: 0 }
+    DurationMinutes: { type: Number, default: 0, min: 0 },
+     // Adding a reference to the user
+     User: { type: mongoose.Schema.Types.ObjectId, ref: 'userDetails' }
 });
 
 // Create a Mongoose model using the defined schema.
