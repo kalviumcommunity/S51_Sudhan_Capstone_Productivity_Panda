@@ -10,6 +10,7 @@ const GoogleSignupRoutes = require("../Backend/Routes/googleSigninRoutes");
 const LoginInRoute = require("../Backend/Routes/LoginRoute");
 const SignUpRegisteringRoute = require("../Backend/Routes/SignUpRegisteredRoute");
 const addTaskForm = require("./Routes/addUserTaskFormRoutes");
+const taskRoutes = require("./Routes/taskRoutes")
 
 // Create an instance of the Express application
 const app = express();  
@@ -23,6 +24,7 @@ app.use(bodyParser.json()); // Middleware for parsing JSON bodies
 app.use(SignUpRegisteringRoute); // Using sign-up/register route
 app.use(LoginInRoute); // Using login route
 app.use(GoogleSignupRoutes); // Using Google sign-up route
+app.use("/taskroute", taskRoutes)
 app.use("/", addTaskForm); // Using add task form route
 
 // Set the port for the server to listen on

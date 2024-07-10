@@ -1,67 +1,110 @@
 const express = require("express"); // Import the express module
 const Router = express.Router(); // Create a new router object
-const taskService = require('../services/TaskService')
 const addTaskFormValidator = require("../Validators/AddTaskFormValidator")
 require("dotenv").config(); // Load environment variables from .env file
-
+const authenticateToken = require("../middleware/authMiddleware")
+const Task = require("../models/userAddTaskDetails")
 
 // Define a POST route for adding a task form
-Router.post('/create-task/:userId', async (req, res) => {
-  const { userId } = req.params;
-  const { error } = addTaskFormValidator.validate(req.body)
-  if (error) {
-    return res.status(400).json({ error: error.details[0].message })
-  }
-  const taskData = req.body;
+Router.post('/api/addtask', authenticateToken, async (req, res) => {
+    const { error, value } = addTaskFormValidator.validate(req.body, { abortEarly: false });
+  
+    if (error) {
+      return res.status(400).send({
+        message: `Bad request, error:${error}`
+      });
+    }
+  
+    try {
+      let { EventName, Description, Date, Status, DurationHours, DurationMinutes } = req.body;
+      const {userID} = req.body;  // Get userID from the request object set by authMiddleware
+      console.log('userID:', userID);  // Log userID to check if it's correctly set
+  
+      const addTask = await Task.create({ EventName, Description, Date, Status, DurationHours, DurationMinutes, userID: userID });
+      res.status(201).json(addTask);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).send({
+        message: "Internal server error"
+      });
+    }
+  });
 
-  try {
-    const task = await taskService.createTaskForUser(userId, taskData);
-    res.status(201).json(task);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
-Router.get("/user-with-task/:userId", async (req, res) => {
-  const { userId } = req.params;
-  try {
-    const user = await taskService.getUserWithTask(userId);
-    console.log("Able to get the task:", user);
-    res.status(200).json(user);
-  } catch (error) {
-    console.error("Error fetching tasks", error); // Log the error
-    res.status(500).json({ error: error.message }); // Send an error response
-  }
-});
-
-Router.patch('/update-task/:userId/:taskId', async (req, res) => {
-  const { userId, taskId } = req.params;
-  const { error } = addTaskFormValidator.validate(req.body);  // Validate request body
-  if (error) return res.status(400).json({ error: error.details[0].message });
-  const taskData = req.body;
-
-  try {
-    const task = await taskService.updateTaskForUser(userId, taskId, taskData);
-    console.log("Able to update the task:", task);
-    res.status(200).json(task);
-  } catch (error) {
-    console.error("There is a error in updating the task", error);
-    res.status(500).json({ error: error.message });
-  }
+Router.get('/api/getalltask', authenticateToken, async (req, res) => {
+    try {
+        let { userID } = req.body;
+        // console.log("userID", userID)
+        const getTask = await Task.find();
+        const filteredTask = getTask.filter((taskcontainer) => {
+            if(taskcontainer.userID == userID) {
+                return taskcontainer
+            }
+        })
+        console.log("printedTask", filteredTask)
+        res.status(200).json(filteredTask);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({
+            message: `Internal server error ${err}` 
+        })
+    }
 })
 
-Router.delete("/delete-Task/:userId/:taskId", async (req, res) => {
-  const { userId, taskId } = req.params;
+Router.get('/api/gettask/:id', authenticateToken, async (req, res) => {
+    try {
+        const getTaskbyId = await Task.findOne({ _id: req.params.id });
+        if (!getTaskbyId) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+        res.status(200).json(getTaskbyId);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({
+            message: "Internal server error"
+        })
+    }
+})
 
 
-  try {
-    const task = await taskService.deleteTaskForUser(userId, taskId);
-    res.status(200).json({ message: 'Task deleted successfully' });
-    console.log("Task is deleted successfully:", task)
-  }
-  catch (error) {
-    res.status(500).json({ message: 'Error deleting task', error })
-  }
+Router.patch('/api/updatetask/:id', authenticateToken, async (req, res) => {
+    const { error, value } = addTaskFormValidator.validate(req.body, { abortEarly: false });
+
+    try {
+        if (!error) {
+            const { id } = req.params;
+            const filter = { "_id": id }
+            let { EventName, Description, Date, Status, DurationHours, DurationMinutes } = req.body;
+            const UpdateTask = await Task.findOneAndUpdate(filter, { EventName, Description, Date, Status, DurationHours, DurationMinutes, UserID });
+            res.status(200).json(UpdateTask);
+        }
+        else {
+            return res.status(400).send({
+                message: `Bad request, error:${error}`
+            })
+            console.error(error)
+        }
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({
+            message: "Internal server error"
+        })
+    }
+
+})
+
+Router.delete('/api/deleteTask/:id', authenticateToken, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const filter = { "_id": id }
+        const DeleteTeam = await Task.findOneAndDelete(filter);
+        res.status(200).json(DeleteTeam);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send({
+            message: "Internal server error"
+        })
+    }
 })
 
 module.exports = Router; // Export the router object to be used in other parts of the application

@@ -104,6 +104,9 @@ const Login = () => {
           profile: userLogin.picture,
         });
         localStorage.setItem("Profile", userLogin.picture)
+        const { token } = await response.data
+        console.log(response)
+        localStorage.setItem("TokenizedValue", token)
         setIsLoggedIn(true)
         navigate("/MainPage")
         console.log("Google sign-in response:", response.data);
