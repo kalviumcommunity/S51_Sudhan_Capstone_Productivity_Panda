@@ -1,0 +1,27 @@
+meta {
+  name: postRequestChecking after one to one relationship
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8000/tasks/
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2Njg3NGFlOTRmMTEwZWQ5NGVmNmU2ZTIiLCJpYXQiOjE3MjAxNDI1NjksImV4cCI6MTcyMDE0NjE2OX0.bvn-S-Wgt4Sqfc9m0xtM0RnDC2ujvIZRXT60HDiqSBs
+}
+
+body:json {
+  {
+    "EventName": "am I able to make request",
+    "Description": "Am I ABLE to make request or not checking process is going on",
+    "Date": "2024-10-13T04:48:00.000Z",
+    "Status": "Awaiting",
+    "DurationHours": 0,
+    "DurationMinutes": 45
+  }
+  
+}

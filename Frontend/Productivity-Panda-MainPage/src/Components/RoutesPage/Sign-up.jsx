@@ -150,8 +150,11 @@ const SignUp = () => {
           profile: userLogin.picture,
         });
         localStorage.setItem("Profile", userLogin.picture)
-        navigate("/MainPage")
+        const { token } = await response.data
+        console.log(response)
+        localStorage.setItem("TokenizedValue", token)
         setIsLoggedIn(true)
+        navigate("/MainPage")
         console.log("Google sign-in response:", response.data);
       } catch (error) {
         console.error("Error in the google sign-in:", error);

@@ -5,16 +5,20 @@ meta {
 }
 
 post {
-  url: http://localhost:8000/addTaskForm
+  url: http://localhost:8000/api/addtask
   body: json
   auth: none
 }
 
+headers {
+  : 
+}
+
 body:json {
   {
-    "EventName": "Enhanced Error Handling:",
-    "Description": "Don't consider this has a main Event",
-    "Date": "22-12-2025",
+    "EventName": "Created Sample test Task",
+    "Description": "Marvel is better DC",
+    "Date": "10-07-2024",
     "Time": 2222,
     "Status": "To-Do",
     "Priority": "Low"

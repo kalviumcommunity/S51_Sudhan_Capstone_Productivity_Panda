@@ -10,13 +10,11 @@ const ppdbSchema = new mongoose.Schema({
     // Field for storing the password of the user
     Password : String,
     // Field for storing the profile of the user
-    Profile : String,
-    // Adding a reference to the task
-    task: { type: mongoose.Schema.Types.ObjectId, ref: 'userTaskFormDetails' }
+    Profile : String
 })
 
 // Creating a mongoose model based on the defined schema
-const userDetailsModel = mongoose.model("userDetails", ppdbSchema);
+const User = mongoose.model("userDetails", ppdbSchema);
 
 // Exporting the userDetailsModel to be used in other modules
-module.exports = userDetailsModel;
+module.exports = User;

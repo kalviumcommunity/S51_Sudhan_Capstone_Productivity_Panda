@@ -1,40 +1,70 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form'; // Importing react-hook-form for form handling
-import logo_icon from '../../assets/images/Logo-Icon.png'; // Importing logo icon image
-import edit_icon from "../../assets/images/Edit_fill.png"
-import Log_in from '../../assets/images/Log-out.png'; // Importing login icon image
+import { useForm } from 'react-hook-form';
+import logo_icon from '../../assets/images/Logo-Icon.png';
+import edit_icon from "../../assets/images/Edit_fill.png";
+import Log_out from '../../assets/images/Log-out.png';
 import { ParentComponent } from '../ParentComponent';
-import { toast, ToastContainer } from 'react-toastify'; // Import ToastContainer here
-import 'react-toastify/dist/ReactToastify.css'; // Import Toastify CSS
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import '../CSS components/MainPageCSS.css';
 
 function MainPage() {
   const { setIsLoggedIn } = useContext(ParentComponent);
   const navigate = useNavigate();
-
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
-
   const { reset, register, handleSubmit, formState: { errors } } = useForm();
   const [tasks, setTasks] = useState([]);
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post('http://localhost:8000/addTaskForm', data);
+      console.log('Data before sending:', data);  // Log the data being sent
+      console.log('Token being sent:', localStorage.getItem('TokenizedValue'));
+  
+      const response = await axios({
+        method: 'POST',
+        url: 'http://localhost:8000/api/addtask',
+        data: data, // Send body instead
+        headers: {
+          Authorization: `Bearer ${window.localStorage.getItem('TokenizedValue')}`,
+          'Content-Type': 'application/json'
+        },
+      });
+  
       toast.success('Task Added successfully');
       reset();
       setShowAddTaskForm(false);
-      setTasks([...tasks, res.data.task]);
-    } catch (error) {
-      toast.error(`Some error occurred in the form: ${error.message}`);
+      console.log("Response from backend:", response.data);
+      setTasks([...tasks, response.data]);
+    } catch (err) {
+      console.log("Error response from backend:", err.response?.data);  // Log the error response
+      toast.error(`Error: ${err.response?.data?.message}`);
     }
   };
+
+  
+  useEffect(() => {
+    axios({
+      method: 'GET',
+      url: `http://localhost:8000/api/getalltask`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('TokenizedValue')}`,
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(response => {
+        setTasks(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the tasks!', error);
+      });
+  }, []);
+
 
   const validateDateTime = (value) => {
     const currentDateTime = new Date();
     const selectedDateTime = new Date(value);
-
     if (selectedDateTime <= currentDateTime) {
       return 'Date and time must be in the future';
     }
@@ -56,47 +86,35 @@ function MainPage() {
   };
 
   const deleteTask = async (taskId) => {
-    try{
-      await axios.delete(`http://localhost:8000/deleteTask/${taskId}`);
+    try {
+      await axios.delete(`http://localhost:8000/tasks/${taskId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('TokenizedValue')}` }
+      });
       setTasks(tasks.filter(task => task._id !== taskId));
       toast.success('Task deleted successfully');
     } catch (error) {
       toast.error('Error deleting task');
     }
-  }
-  
+  };
+
   const handleCheckboxClick = (taskId) => {
-    if(window.confirm('Are you sure you want to delete this task?')){
+    if (window.confirm('Are you sure you want to delete this task?')) {
       deleteTask(taskId);
     }
-  }
+  };
 
-
-  useEffect(() => {
-    axios.get('http://localhost:8000/tasks')
-      .then(response => {
-        setTasks(response.data);
-      })
-      .catch(error => {
-        console.error('There was an error fetching the tasks!', error);
-      });
-  }, []);
 
   const categorizeTasks = (tasks) => {
     const today = new Date().toISOString().split('T')[0];
-
-    const mustDoTasks = tasks.filter(task => task.Status === 'Must do' && task.Date >= today);
-    const awaitingTasks = tasks.filter(task => task.Status === 'Awaiting' && task.Date >= today);
-    const pendingTasks = tasks.filter(task => task.Status === 'Pending' && task.Date >= today);
-
-    const overdueTasks = tasks.filter(task => task.Date < today && task.Status !== 'Completed');
-
+    const mustDoTasks = tasks.filter(task => task && task.Status === 'Must do' && task.Date >= today);
+    const awaitingTasks = tasks.filter(task => task && task.Status === 'Awaiting' && task.Date >= today);
+    const pendingTasks = tasks.filter(task => task && task.Status === 'Pending' && task.Date >= today);
+    const overdueTasks = tasks.filter(task => task && task.Date < today && task.Status !== 'Completed');
     const todayTasks = [
       ...overdueTasks.filter(task => task.Status === 'Must do'),
       ...overdueTasks.filter(task => task.Status === 'Awaiting'),
       ...overdueTasks.filter(task => task.Status === 'Pending'),
     ];
-
     return { mustDoTasks, awaitingTasks, pendingTasks, todayTasks };
   };
 
@@ -119,13 +137,13 @@ function MainPage() {
     <div key={task._id} className="task-card">
       <div className='task_eventname_container'>
         <div></div>
-        <p className='taskContainer_eventname'>{task.EventName.length > 30 ? `${task.EventName.substring(0,25)}...` : task.EventName}</p>
+        <p className='taskContainer_eventname'>{task.EventName.length > 30 ? `${task.EventName.substring(0, 25)}...` : task.EventName}</p>
         <img src={edit_icon} alt="edit_icon" />
-        </div>
-        <div className='task_description_container'>
-          <input type="checkbox" onChange={() =>  handleCheckboxClick(task._id)}/> 
-          <p>{task.Description.length > 50 ? `${task.Description.substring(0, 35)}...` : task.Description}</p>
-        </div>
+      </div>
+      <div className='task_description_container'>
+        <input type="checkbox" onChange={() => handleCheckboxClick(task._id)} />
+        <p>{task.Description.length > 50 ? `${task.Description.substring(0, 35)}...` : task.Description}</p>
+      </div>
       <p className='duration_paragraph_tag'>Task Duration: {formatDuration(task.DurationHours, task.DurationMinutes)}</p>
     </div>
   );
@@ -133,36 +151,43 @@ function MainPage() {
   return (
     <>
       <ToastContainer />
-      <div className='ProductivityPandaImage'>
-        <img src={logo_icon} alt="Logo" />
-      </div>
-      <div className="log-in" onClick={handleLogoutButton}>
-        <img src={Log_in} alt="Log-inIcon" style={{ width: "35px", height: "35px", cursor: "pointer" }} />
-      </div>
-      <div className='Add-task-Container' onClick={toggleAddTaskForm}>
-        <lord-icon
-          src="https://cdn.lordicon.com/jgnvfzqg.json"
-          trigger="hover"
-          style={{ width: '40px', height: '40px' }}>
-        </lord-icon>
-        <span className="tooltiptext">Add task</span>
-      </div>
-      <div className="task-container">
-        <div className="task-column">
-          <h3>Must Do</h3>
-          {mustDoTasks.map(renderTask)}
+      <div className='overall-container-div'>
+        <div className='side-vertical-navigation-container'>
+          <div className='ProductivityPandaImage'>
+            <img src={logo_icon} alt="Logo" />
+          </div>
+          <div className="log-out" onClick={handleLogoutButton}>
+            <img src={Log_out} alt="Log-outIcon" style={{ width: "35px", height: "35px", cursor: "pointer" }} />
+          </div>
         </div>
-        <div className="task-column">
-          <h3>Awaiting</h3>
-          {awaitingTasks.map(renderTask)}
-        </div>
-        <div className="task-column">
-          <h3>Pending</h3>
-          {pendingTasks.map(renderTask)}
-        </div>
-        <div className="task-column">
-          <h3>Today's Task</h3>
-          {todayTasks.map(renderTask)}
+        <div className='content-mainpage-container'>
+          <div className='horizontal-line'></div>
+          <div className='Add-task-Container' onClick={toggleAddTaskForm}>
+            <lord-icon
+              src="https://cdn.lordicon.com/hqymfzvj.json"
+              trigger="hover"
+              style={{ width: '40px', height: '40px' }}>
+            </lord-icon>
+            <span className="tooltiptext">Add task</span>
+          </div>
+          <div className="task-container">
+            <div className="task-column">
+              <h3>Must Do</h3>
+              {mustDoTasks.map(renderTask)}
+            </div>
+            <div className="task-column-two">
+              <h3>Awaiting</h3>
+              {awaitingTasks.map(renderTask)}
+            </div>
+            <div className="task-column">
+              <h3>Pending</h3>
+              {pendingTasks.map(renderTask)}
+            </div>
+            <div className="task-column-todays-column">
+              <h2>Today's Task</h2>
+              {todayTasks.map(renderTask)}
+            </div>
+          </div>
         </div>
       </div>
       {showAddTaskForm && (
@@ -208,44 +233,44 @@ function MainPage() {
                 type="datetime-local"
                 {...register("Date", {
                   required: "Date is required",
-                  validate: validateDateTime  // Validate date and time
+                  validate: validateDateTime
                 })}
               />
               {errors.Date && <p className='error-message'>{errors.Date.message}</p>}
             </div>
           </div>
-          <div className='Event-adding-status-and-priority-field'>
-            <div className='Event-adding-task-status-field'>
-              <label className="Event-adding-task-status-label" htmlFor="status">Status</label>
-              <select {...register("Status", { required: "Status is required" })}>
-                <option value="Must do">Must do</option>
-                <option value="Awaiting">Awaiting</option>
-                <option value="Pending">Pending</option>
-              </select>
-              {errors.Status && <p className='error-message'>{errors.Status.message}</p>}
+          <div className='Event-adding-Event-status-dropdown-field'>
+            <label className="Event-adding-task-Status-label" htmlFor="Status">Status</label>
+            <select className="Event-adding-task-Status-input" {...register("Status", { required: "Status is required" })}>
+              <option value="Must do">Must do</option>
+              <option value="Awaiting">Awaiting</option>
+              <option value="Pending">Pending</option>
+            </select>
+            {errors.Status && <p className='error-message'>{errors.Status.message}</p>}
+          </div>
+          <div className='Event-adding-Event-task-duration-input-field'>
+            <div className='Event-adding-Event-task-duration-hours-input-field'>
+              <label className="Event-adding-task-task-duration-hours-label" htmlFor="DurationHours">Duration (Hours)</label>
+              <input className="Event-adding-task-task-duration-hours-input" type="number" {...register("DurationHours", {
+                min: { value: 0, message: "Duration hours must be greater than or equal to 0" },
+                required: "Hours is required",
+                valueAsNumber: true
+              })} />
+              {errors.DurationHours && <p className='error-message'>{errors.DurationHours.message}</p>}
+            </div>
+            <div className='Event-adding-Event-task-duration-minutes-input-field'>
+              <label className="Event-adding-task-task-duration-minutes-label" htmlFor="DurationMinutes">Duration (Minutes)</label>
+              <input className="Event-adding-task-task-duration-minutes-input" type="number" {...register("DurationMinutes", {
+                min: { value: 0, message: "Duration minutes must be greater than or equal to 0" },
+                required: "Minutes is required",
+                valueAsNumber: true
+              })} />
+              {errors.DurationMinutes && <p className='error-message'>{errors.DurationMinutes.message}</p>}
             </div>
           </div>
-          <div className='Event-adding-Event-duration-time'>
-            <div className='Event-adding-Event-duration-hours'>
-              <label className="Event-adding-task-Duration-hours-label" htmlFor="durationHours">Duration Hours</label>
-              <input
-                className="Event-adding-task-Duration-hours-input"
-                type="number"
-                {...register("DurationHours", { min: 0 })}
-              />
-            </div>
-            <div className='Event-adding-Event-duration-minutes'>
-              <label className="Event-adding-task-Duration-minutes-label" htmlFor="durationMinutes">Duration Minutes</label>
-              <input
-                className="Event-adding-task-Duration-minutes-input"
-                type="number"
-                {...register("DurationMinutes", { min: 0 })}
-              />
-            </div>
-          </div>
-          <div className='Event-adding-task-submit-button-container'>
-            <button className='Event-adding-task-submit-button' type='submit'>Submit</button>
-            <button className='Event-adding-task-cancel-button' type='button' onClick={handleCancelChange}>Cancel</button>
+          <div className='Event-adding-form-cancel-and-submit-button-container'>
+            <button className="Event-adding-form-cancel-button" type='button' onClick={handleCancelChange}>Cancel</button>
+            <button className="Event-adding-form-submit-button" type="submit">Submit</button>
           </div>
         </form>
       )}
