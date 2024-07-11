@@ -16,12 +16,13 @@ function MainPage() {
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
   const { reset, register, handleSubmit, formState: { errors } } = useForm();
   const [tasks, setTasks] = useState([]);
+  const [todaysTasks, setTodaysTasks] = useState([]); // Changed name to avoid confusion
 
   const onSubmit = async (data) => {
     try {
       console.log('Data before sending:', data);  // Log the data being sent
       console.log('Token being sent:', localStorage.getItem('TokenizedValue'));
-  
+
       const response = await axios({
         method: 'POST',
         url: 'http://localhost:8000/api/addtask',
@@ -31,36 +32,42 @@ function MainPage() {
           'Content-Type': 'application/json'
         },
       });
-  
+
       toast.success('Task Added successfully');
       reset();
       setShowAddTaskForm(false);
+      fetchTasks(); // Fetch the updated task list
       console.log("Response from backend:", response.data);
-      setTasks([...tasks, response.data]);
     } catch (err) {
       console.log("Error response from backend:", err.response?.data);  // Log the error response
       toast.error(`Error: ${err.response?.data?.message}`);
     }
   };
 
-  
-  useEffect(() => {
-    axios({
-      method: 'GET',
-      url: `http://localhost:8000/api/getalltask`,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('TokenizedValue')}`,
-        'Content-Type': 'application/json'
-      },
-    })
-      .then(response => {
-        setTasks(response.data);
-      })
-      .catch(error => {
-        console.error('There was an error fetching the tasks!', error);
+  const fetchTasks = async () => {
+    try {
+      const response = await axios({
+        method: 'GET',
+        url: `http://localhost:8000/api/getalltask`,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('TokenizedValue')}`,
+          'Content-Type': 'application/json'
+        },
       });
+      setTasks(response.data);
+    } catch (error) {
+      console.error('There was an error fetching the tasks!', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTasks();
   }, []);
 
+  useEffect(() => {
+    const { todaysTasks } = categorizeTasks(tasks);
+    setTodaysTasks(todaysTasks);
+  }, [tasks]);
 
   const validateDateTime = (value) => {
     const currentDateTime = new Date();
@@ -83,19 +90,22 @@ function MainPage() {
     localStorage.removeItem('TokenizedValue');
     navigate('/');
     setIsLoggedIn(false);
+    window.location.reload();
   };
 
   const deleteTask = async (taskId) => {
     try {
-      await axios.delete(`http://localhost:8000/tasks/${taskId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('TokenizedValue')}` }
-      });
-      setTasks(tasks.filter(task => task._id !== taskId));
-      toast.success('Task deleted successfully');
+        await axios.delete(`http://localhost:8000/tasks/${taskId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('TokenizedValue')}` }
+        });
+        fetchTasks(); // Refresh the task list
+        toast.success('Task deleted successfully');
     } catch (error) {
-      toast.error('Error deleting task');
+        console.error('Error deleting task:', error);
+        toast.error('Error deleting task');
     }
-  };
+};
+
 
   const handleCheckboxClick = (taskId) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
@@ -103,22 +113,25 @@ function MainPage() {
     }
   };
 
-
   const categorizeTasks = (tasks) => {
     const today = new Date().toISOString().split('T')[0];
     const mustDoTasks = tasks.filter(task => task && task.Status === 'Must do' && task.Date >= today);
     const awaitingTasks = tasks.filter(task => task && task.Status === 'Awaiting' && task.Date >= today);
     const pendingTasks = tasks.filter(task => task && task.Status === 'Pending' && task.Date >= today);
     const overdueTasks = tasks.filter(task => task && task.Date < today && task.Status !== 'Completed');
-    const todayTasks = [
+
+    // Define today's tasks
+    const todaysTasks = [
+      ...tasks.filter(task => task && task.Date === today && task.Status === 'Must do'),
+      ...tasks.filter(task => task && task.Date === today && task.Status === 'Awaiting'),
+      ...tasks.filter(task => task && task.Date === today && task.Status === 'Pending'),
       ...overdueTasks.filter(task => task.Status === 'Must do'),
       ...overdueTasks.filter(task => task.Status === 'Awaiting'),
-      ...overdueTasks.filter(task => task.Status === 'Pending'),
+      ...overdueTasks.filter(task => task.Status === 'Pending')
     ];
-    return { mustDoTasks, awaitingTasks, pendingTasks, todayTasks };
-  };
 
-  const { mustDoTasks, awaitingTasks, pendingTasks, todayTasks } = categorizeTasks(tasks);
+    return { mustDoTasks, awaitingTasks, pendingTasks, todaysTasks };
+  };
 
   const formatDuration = (hours, minutes) => {
     if (hours === 0 && minutes > 0) {
@@ -133,20 +146,48 @@ function MainPage() {
     return '';
   };
 
-  const renderTask = (task) => (
-    <div key={task._id} className="task-card">
-      <div className='task_eventname_container'>
-        <div></div>
-        <p className='taskContainer_eventname'>{task.EventName.length > 30 ? `${task.EventName.substring(0, 25)}...` : task.EventName}</p>
-        <img src={edit_icon} alt="edit_icon" />
+  const renderTask = (task) => {
+    let taskClassName = '';
+    let taskDescriptionClass = 'task-description';
+
+    // Determine the className based on the status
+    switch (task.Status) {
+      case 'Must do':
+        taskClassName = 'must-do-task';
+        break;
+      case 'Awaiting':
+        taskClassName = 'awaiting-task';
+        break;
+      case 'Pending':
+        taskClassName = 'pending-task';
+        break;
+      default:
+        taskClassName = '';
+        break;
+    }
+
+    // If the task is today’s task, add the 'today-task' class
+    if (todaysTasks.includes(task)) {
+      taskClassName += ` today-task`;
+    }
+
+    return (
+      <div key={task._id} className={`task-card ${taskClassName}`}>
+        <div className='task_eventname_container'>
+          <div></div>
+          <p className='taskContainer_eventname'>{task.EventName.length > 30 ? `${task.EventName.substring(0, 25)}...` : task.EventName}</p>
+          <img src={edit_icon} alt="edit_icon" />
+        </div>
+        <div className='task_description_container'>
+          <input type="checkbox" onChange={() => handleCheckboxClick(task._id)} />
+          <p className={taskDescriptionClass}>{task.Description.length > 50 ? `${task.Description.substring(0, 35)}...` : task.Description}</p>
+        </div>
+        <p className='duration_paragraph_tag'>Task Duration: {formatDuration(task.DurationHours, task.DurationMinutes)}</p>
       </div>
-      <div className='task_description_container'>
-        <input type="checkbox" onChange={() => handleCheckboxClick(task._id)} />
-        <p>{task.Description.length > 50 ? `${task.Description.substring(0, 35)}...` : task.Description}</p>
-      </div>
-      <p className='duration_paragraph_tag'>Task Duration: {formatDuration(task.DurationHours, task.DurationMinutes)}</p>
-    </div>
-  );
+    );
+  };
+
+  const { mustDoTasks, awaitingTasks, pendingTasks } = categorizeTasks(tasks);
 
   return (
     <>
@@ -173,21 +214,22 @@ function MainPage() {
           <div className="task-container">
             <div className="task-column">
               <h3>Must Do</h3>
-              {mustDoTasks.map(renderTask)}
+              {mustDoTasks.slice(0, 4).map(renderTask)}
             </div>
             <div className="task-column-two">
               <h3>Awaiting</h3>
-              {awaitingTasks.map(renderTask)}
+              {awaitingTasks.slice(0, 4).map(renderTask)}
             </div>
             <div className="task-column">
               <h3>Pending</h3>
-              {pendingTasks.map(renderTask)}
+              {pendingTasks.slice(0, 4).map(renderTask)}
             </div>
             <div className="task-column-todays-column">
               <h2>Today's Task</h2>
-              {todayTasks.map(renderTask)}
+              {todaysTasks.slice(0, 4).map(renderTask)}
             </div>
           </div>
+
         </div>
       </div>
       {showAddTaskForm && (
@@ -209,7 +251,7 @@ function MainPage() {
               type="text"
               {...register("EventName", {
                 required: "Event name is required",
-                maxLength: { value: 50, message: "Event should be less than 30 characters" }
+                maxLength: { value: 50, message: "Event should be less than 50 characters" }
               })}
             />
             {errors.EventName && <p className='error-message'>{errors.EventName.message}</p>}
@@ -220,7 +262,7 @@ function MainPage() {
               className="Event-adding-task-Description-input"
               {...register("Description", {
                 required: "Description field is required",
-                maxLength: { value: 200, message: "Description should be less than 100 characters" }
+                maxLength: { value: 200, message: "Description should be less than 200 characters" }
               })}
             />
             {errors.Description && <p className='error-message'>{errors.Description.message}</p>}

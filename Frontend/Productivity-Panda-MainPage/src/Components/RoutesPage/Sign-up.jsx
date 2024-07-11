@@ -105,9 +105,11 @@ const SignUp = () => {
 
         if (response.status === 201) {
           // If successful, navigate to MainPage and store token in localStorage
-          navigate("/MainPage");
           localStorage.setItem("TokenizedValue", token);
-          setIsLoggedIn(true)
+          if(token){
+            navigate("/MainPage");
+            setIsLoggedIn(true)
+          }
           console.log("UserName: ", Username);
           console.log("Email: ", Email);
           console.log("Password: ", Password);
@@ -153,8 +155,10 @@ const SignUp = () => {
         const { token } = await response.data
         console.log(response)
         localStorage.setItem("TokenizedValue", token)
-        setIsLoggedIn(true)
-        navigate("/MainPage")
+        if(token){
+          navigate("/MainPage");
+          setIsLoggedIn(true)
+        }
         console.log("Google sign-in response:", response.data);
       } catch (error) {
         console.error("Error in the google sign-in:", error);

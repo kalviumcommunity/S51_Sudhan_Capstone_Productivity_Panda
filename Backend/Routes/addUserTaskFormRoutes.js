@@ -17,8 +17,7 @@ Router.post('/api/addtask', authenticateToken, async (req, res) => {
   
     try {
       let { EventName, Description, Date, Status, DurationHours, DurationMinutes } = req.body;
-      const {userID} = req.body;  // Get userID from the request object set by authMiddleware
-      console.log('userID:', userID);  // Log userID to check if it's correctly set
+      const {userID} = req.body;  
   
       const addTask = await Task.create({ EventName, Description, Date, Status, DurationHours, DurationMinutes, userID: userID });
       res.status(201).json(addTask);
@@ -34,14 +33,12 @@ Router.post('/api/addtask', authenticateToken, async (req, res) => {
 Router.get('/api/getalltask', authenticateToken, async (req, res) => {
     try {
         let { userID } = req.body;
-        // console.log("userID", userID)
         const getTask = await Task.find();
         const filteredTask = getTask.filter((taskcontainer) => {
             if(taskcontainer.userID == userID) {
                 return taskcontainer
             }
         })
-        console.log("printedTask", filteredTask)
         res.status(200).json(filteredTask);
     } catch (err) {
         console.log(err);
@@ -50,22 +47,6 @@ Router.get('/api/getalltask', authenticateToken, async (req, res) => {
         })
     }
 })
-
-Router.get('/api/gettask/:id', authenticateToken, async (req, res) => {
-    try {
-        const getTaskbyId = await Task.findOne({ _id: req.params.id });
-        if (!getTaskbyId) {
-            return res.status(404).json({ message: "Task not found" });
-        }
-        res.status(200).json(getTaskbyId);
-    } catch (err) {
-        console.log(err);
-        return res.status(500).send({
-            message: "Internal server error"
-        })
-    }
-})
-
 
 Router.patch('/api/updatetask/:id', authenticateToken, async (req, res) => {
     const { error, value } = addTaskFormValidator.validate(req.body, { abortEarly: false });
@@ -93,18 +74,22 @@ Router.patch('/api/updatetask/:id', authenticateToken, async (req, res) => {
 
 })
 
-Router.delete('/api/deleteTask/:id', authenticateToken, async (req, res) => {
+Router.delete('/tasks/:id', authenticateToken, async (req, res) => {
     try {
         const { id } = req.params;
         const filter = { "_id": id }
-        const DeleteTeam = await Task.findOneAndDelete(filter);
-        res.status(200).json(DeleteTeam);
+        const deleteTask = await Task.findOneAndDelete(filter);
+        if (!deleteTask) {
+            return res.status(404).send({ message: "Task not found" });
+        }
+        res.status(200).json(deleteTask);
     } catch (err) {
         console.log(err);
         return res.status(500).send({
             message: "Internal server error"
-        })
+        });
     }
-})
+});
+
 
 module.exports = Router; // Export the router object to be used in other parts of the application

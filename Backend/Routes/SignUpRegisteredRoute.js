@@ -44,9 +44,9 @@ SignUpRegisteringRoute.post("/Sign-Up", async (req, res) => {
 
         // Generate a JWT token for the newly registered user
         const token = JWT.sign({ userID: savedUser._id }, process.env.SECRET_KEY, {
-            expiresIn: "1h" // Token expires in 1 hour
+            expiresIn: "2h" // Token expires in 2 hour
         });
-
+        console.log("Token expired:", token);
         // Respond with a success message and the JWT token
         res.status(201).json({ message: "User registered successfully", token });
     } catch (err) {

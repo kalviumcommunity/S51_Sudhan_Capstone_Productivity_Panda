@@ -33,8 +33,9 @@ LoginInRoute.post("/log-in", async (req, res) => {
 
         // Generate a JWT token for the user
         const token = JWT.sign({ userID: userEmailID._id }, process.env.SECRET_KEY, {
-            expiresIn: "1h" // Token expires in 1 hour
+            expiresIn: "2h" // Token expires in 2 hour
         });
+        console.log("Token expired:", token);
 
         // Respond with a success message and the JWT token
         res.status(200).json({ message: "User Logged-In successfully", token });
