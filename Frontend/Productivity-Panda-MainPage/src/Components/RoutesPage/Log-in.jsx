@@ -62,9 +62,11 @@ const Login = () => {
         console.log(response)
 
         if (response.status == 200) {
-          navigate("/MainPage")
           localStorage.setItem("TokenizedValue", token)
-          setIsLoggedIn(true)
+          if(token){
+            navigate("/MainPage");
+            setIsLoggedIn(true)
+          }
         } else {
           console.error("error:", response.statusText)
         }
@@ -107,8 +109,10 @@ const Login = () => {
         const { token } = await response.data
         console.log(response)
         localStorage.setItem("TokenizedValue", token)
-        setIsLoggedIn(true)
-        navigate("/MainPage")
+        if(token){
+          navigate("/MainPage");
+          setIsLoggedIn(true)
+        }
         console.log("Google sign-in response:", response.data);
       } catch (error) {
         console.error("Error in the google sign-in:", error);

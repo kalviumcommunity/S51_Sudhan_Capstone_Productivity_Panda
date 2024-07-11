@@ -127,8 +127,13 @@
 }
 
 .task-column h3,
-.task-card-two h3,
 .task-column-todays-column h2 {
+    margin-bottom: 5%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.task-column-two h3{
     margin-bottom: 5%;
     justify-content: center;
     display: flex;
@@ -261,3 +266,80 @@
     font-size: 22px;
     font-weight: 500;
 }
+/* General styles for task containers */
+.must-do-task {
+    border-left-color: #14FF00;
+}
+
+.must-do-task .task_eventname_container div {
+    background-color: #14FF00;
+}
+
+.awaiting-task {
+    border-left-color: #FFA500;
+}
+
+.awaiting-task .task_eventname_container div {
+    background-color: #FFA500;
+}
+
+.pending-task {
+    border-left-color: #8B4513;
+}
+
+.pending-task .task_eventname_container div {
+    background-color: #8B4513;
+}
+
+/* Specific styles for today's tasks */
+.today-task.must-do-task {
+    background-color: #14FF00;
+    border-left-color: #14FF00;
+}
+
+.today-task.must-do-task .task-description {
+    color: white; /* White text color for today's Must Do tasks */
+}
+
+.today-task.awaiting-task {
+    background-color: #FFA500;
+    border-left-color: #FFA500;
+}
+
+.today-task.awaiting-task .task-description {
+    color: white; /* White text color for today's Awaiting tasks */
+}
+
+.today-task.pending-task {
+    background-color: #8B4513;
+    border-left-color: #8B4513;
+}
+
+.today-task.pending-task .task-description {
+    color: white; /* White text color for today's Pending tasks */
+}
+
+/* General styles for non-today tasks */
+.must-do-task .task-description,
+.awaiting-task .task-description,
+.pending-task .task-description {
+    color: black; /* Black text color for all other tasks */
+}
+
+/* Ensure the task event name container text is black */
+.taskContainer_eventname {
+    color: black;
+}
+
+/* Ensure the task duration text is black */
+.duration_paragraph_tag {
+    color: black;
+}
+
+/* Additional styles for the task event name container */
+.task_eventname_container div {
+    background-color: inherit; /* Inherit background color from task-card */
+}
+
+
+
