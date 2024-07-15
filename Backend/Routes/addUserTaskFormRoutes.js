@@ -4,16 +4,17 @@ const addTaskFormValidator = require("../Validators/AddTaskFormValidator")
 require("dotenv").config(); // Load environment variables from .env file
 const authenticateToken = require("../middleware/authMiddleware")
 const Task = require("../models/userAddTaskDetails")
+const { updateTask } = require('../controllers/taskController');
 
 // Define a POST route for adding a task form
 Router.post('/api/addtask', authenticateToken, async (req, res) => {
-    const { error, value } = addTaskFormValidator.validate(req.body, { abortEarly: false });
+    // const { error, value } = addTaskFormValidator.validate(req.body, { abortEarly: false });
   
-    if (error) {
-      return res.status(400).send({
-        message: `Bad request, error:${error}`
-      });
-    }
+    // if (error) {
+    //   return res.status(400).send({
+    //     message: `Bad request, error:${error}`
+    //   });
+    // }
   
     try {
       let { EventName, Description, Date, Status, DurationHours, DurationMinutes } = req.body;
@@ -30,51 +31,46 @@ Router.post('/api/addtask', authenticateToken, async (req, res) => {
   });
 
 
+// Router.get('/api/getalltask', authenticateToken, async (req, res) => {
+//     try {
+//         let { userID } = req.body.userID;
+//         const getTask = await Task.find();
+//         const filteredTask = getTask.filter((taskcontainer) => {
+//             if(taskcontainer.userID == userID) {
+//                 return taskcontainer
+//             }
+//         })
+//         res.status(200).json(filteredTask);
+//     } catch (err) {
+//         console.log(err);
+//         return res.status(500).send({
+//             message: `Internal server error ${err}` 
+//         })
+//     }
+// })
+
 Router.get('/api/getalltask', authenticateToken, async (req, res) => {
     try {
-        let { userID } = req.body;
+        console.log('Request received in route handler.');
+        // Destructure userID directly from req.body
+        const { userID } = req.body; 
+
+        // Log the userID for debugging purposes
+        console.log('UserID received in route handler:', userID);
+
+        // Fetch all tasks and filter based on userID
         const getTask = await Task.find();
-        const filteredTask = getTask.filter((taskcontainer) => {
-            if(taskcontainer.userID == userID) {
-                return taskcontainer
-            }
-        })
+        const filteredTask = getTask.filter((taskcontainer) => taskcontainer.userID.toString() === userID);
+
+        // Send the filtered tasks in the response
         res.status(200).json(filteredTask);
     } catch (err) {
-        console.log(err);
-        return res.status(500).send({
-            message: `Internal server error ${err}` 
-        })
+        console.error('Internal server error:', err);
+        return res.status(500).send({ message: `Internal server error: ${err.message}` });
     }
-})
+});
 
-Router.patch('/api/updatetask/:id', authenticateToken, async (req, res) => {
-    const { error, value } = addTaskFormValidator.validate(req.body, { abortEarly: false });
-
-    try {
-        if (!error) {
-            const { id } = req.params;
-            const filter = { "_id": id }
-            let { EventName, Description, Date, Status, DurationHours, DurationMinutes } = req.body;
-            const UpdateTask = await Task.findOneAndUpdate(filter, { EventName, Description, Date, Status, DurationHours, DurationMinutes, UserID });
-            res.status(200).json(UpdateTask);
-        }
-        else {
-            return res.status(400).send({
-                message: `Bad request, error:${error}`
-            })
-            console.error(error)
-        }
-    } catch (err) {
-        console.log(err);
-        return res.status(500).send({
-            message: "Internal server error"
-        })
-    }
-
-})
-
-Router.delete('/tasks/:id', authenticateToken, async (req, res) => {
+Router.delete('/api/deletetasks/:id', authenticateToken, async (req, res) => {
     try {
         const { id } = req.params;
         const filter = { "_id": id }
@@ -90,6 +86,9 @@ Router.delete('/tasks/:id', authenticateToken, async (req, res) => {
         });
     }
 });
+
+
+// Router.patch('/api/updatetask/:id', authenticateToken, updateTask);
 
 
 module.exports = Router; // Export the router object to be used in other parts of the application

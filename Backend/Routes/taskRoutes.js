@@ -3,12 +3,14 @@ const Router = express.Router();
 const taskController = require('../controllers/taskController');
 const authMiddleware = require('../middleware/authMiddleware');
 
-Router.post('/create', authMiddleware, taskController.createTask);
-Router.get('/tasks', authMiddleware, taskController.getAllTasks);
-Router.get('/tasks/:id', authMiddleware, taskController.getTaskById);
-Router.patch('/tasks/:id', authMiddleware, taskController.updateTask);
-Router.delete('/tasks/:id', authMiddleware, taskController.deleteTask);
+Router.post('/api/addtask', authMiddleware, taskController.createTask);
+Router.get('/api/getalltask', authMiddleware, taskController.getAllTasks);
+Router.delete('/api/deletetasks/:id', authMiddleware, taskController.deleteTask);
+// Router.patch('/api/updatetask/:id', authMiddleware, taskController.updateTask);
 
-
+// Router.post('/api/addtask', authMiddleware);
+// Router.get('/api/getalltask', authMiddleware);
+// Router.delete('/api/deletetasks/:id', authMiddleware);
+// Router.patch('/api/updatetask/:id', authMiddleware, taskController.updateTask);
 
 module.exports = Router;

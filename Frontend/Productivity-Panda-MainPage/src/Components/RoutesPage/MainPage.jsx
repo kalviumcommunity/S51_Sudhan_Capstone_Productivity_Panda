@@ -14,8 +14,10 @@ function MainPage() {
   const { setIsLoggedIn } = useContext(ParentComponent);
   const navigate = useNavigate();
   const [showAddTaskForm, setShowAddTaskForm] = useState(false);
+  const [showEditTaskForm, setShowEditTaskForm] = useState(false);
   const { reset, register, handleSubmit, formState: { errors } } = useForm();
   const [tasks, setTasks] = useState([]);
+  const [selectedTask, setSelectedTask] = useState([]);
   const [todaysTasks, setTodaysTasks] = useState([]); // Changed name to avoid confusion
 
   const onSubmit = async (data) => {
@@ -46,11 +48,14 @@ function MainPage() {
 
   const fetchTasks = async () => {
     try {
+      const token = localStorage.getItem('TokenizedValue');
+      console.log('Token in fetchTasks:', token); // Log the token
+
       const response = await axios({
         method: 'GET',
         url: `http://localhost:8000/api/getalltask`,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('TokenizedValue')}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
       });
@@ -82,6 +87,55 @@ function MainPage() {
     setShowAddTaskForm(!showAddTaskForm);
   };
 
+  const toggleEditTaskForm = (task) => {
+    setSelectedTask({
+      ...task,
+      Date: task.Date ? new Date(task.Date).toISOString().slice(0, 16) : '',
+      DurationHours: task.DurationHours || 0,
+      DurationMinutes: task.DurationMinutes || 0
+    });
+    setShowEditTaskForm(true);
+  };
+
+  const handlesubmit = async (e) => {
+    e.preventDefault();
+
+    const url = `http://localhost:8000/api/updatetask/${selectedTask._id}`;
+    console.log('Sending PATCH request to:', url);
+    console.log('Request data:', selectedTask);
+
+    try {
+      const response = await axios({
+        method: 'PATCH',
+        url: url,
+        data: selectedTask,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('TokenizedValue')}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.log('Response:', response.data);
+      setTasks((prevTasks) => prevTasks.map((task) =>
+        task._id === selectedTask._id ? response.data : task
+      ));
+      setShowEditTaskForm(false);
+      toast.success("Successfully updated the task");
+    } catch (error) {
+      console.error("Error updating task:", error);
+      if (error.response) {
+        console.error("Error data:", error.response.data);
+        console.error("Error status:", error.response.status);
+        console.error("Error headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+      } else {
+        console.error("Error message:", error.message);
+      }
+      toast.error(`Error updating task: ${error.response?.data?.message || error.message || 'Unknown error'}`);
+    }
+  };
+
   const handleCancelChange = () => {
     reset();
   };
@@ -95,16 +149,16 @@ function MainPage() {
 
   const deleteTask = async (taskId) => {
     try {
-        await axios.delete(`http://localhost:8000/tasks/${taskId}`, {
-            headers: { Authorization: `Bearer ${localStorage.getItem('TokenizedValue')}` }
-        });
-        fetchTasks(); // Refresh the task list
-        toast.success('Task deleted successfully');
+      await axios.delete(`http://localhost:8000/api/deletetasks/${taskId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('TokenizedValue')}` }
+      });
+      fetchTasks(); // Refresh the task list
+      toast.success('Task deleted successfully');
     } catch (error) {
-        console.error('Error deleting task:', error);
-        toast.error('Error deleting task');
+      console.error('Error deleting task:', error);
+      toast.error('Error deleting task');
     }
-};
+  };
 
 
   const handleCheckboxClick = (taskId) => {
@@ -175,8 +229,8 @@ function MainPage() {
       <div key={task._id} className={`task-card ${taskClassName}`}>
         <div className='task_eventname_container'>
           <div></div>
-          <p className='taskContainer_eventname'>{task.EventName.length > 30 ? `${task.EventName.substring(0, 25)}...` : task.EventName}</p>
-          <img src={edit_icon} alt="edit_icon" />
+          <p className='taskContainer_eventname'>{task.EventName.length > 25 ? `${task.EventName.substring(0, 20)}...` : task.EventName}</p>
+          <img src={edit_icon} alt="edit_icon" onClick={() => toggleEditTaskForm(task)} />
         </div>
         <div className='task_description_container'>
           <input type="checkbox" onChange={() => handleCheckboxClick(task._id)} />
@@ -189,6 +243,7 @@ function MainPage() {
 
   const { mustDoTasks, awaitingTasks, pendingTasks } = categorizeTasks(tasks);
 
+  
   return (
     <>
       <ToastContainer />
@@ -203,13 +258,13 @@ function MainPage() {
         </div>
         <div className='content-mainpage-container'>
           <div className='horizontal-line'></div>
-          <div className='Add-task-Container' onClick={toggleAddTaskForm}>
-            <lord-icon
-              src="https://cdn.lordicon.com/hqymfzvj.json"
-              trigger="hover"
-              style={{ width: '40px', height: '40px' }}>
-            </lord-icon>
-            <span className="tooltiptext">Add task</span>
+            <div className='Add-task-Container' onClick={toggleAddTaskForm}>
+              <lord-icon
+                src="https://cdn.lordicon.com/hqymfzvj.json"
+                trigger="hover"
+                style={{ width: '40px', height: '40px' }}>
+              </lord-icon>
+              <span className="tooltiptext">Add task</span>
           </div>
           <div className="task-container">
             <div className="task-column">
@@ -313,6 +368,92 @@ function MainPage() {
           <div className='Event-adding-form-cancel-and-submit-button-container'>
             <button className="Event-adding-form-cancel-button" type='button' onClick={handleCancelChange}>Cancel</button>
             <button className="Event-adding-form-submit-button" type="submit">Submit</button>
+          </div>
+        </form>
+      )}
+
+      {showEditTaskForm && selectedTask && (
+        <form className='add-task-form-container' onSubmit={handlesubmit}>
+          <div className='Cross-lordIcon-and-Heading-of-Add-Task-Form-Container'>
+            <div className='headin-of-add-task-container'><p>Edit task form</p></div>
+            <div className='Cross-lordIcon' onClick={() => setShowEditTaskForm(false)}>
+              <lord-icon
+                src="https://cdn.lordicon.com/nqtddedc.json"
+                trigger="hover"
+                style={{ width: "40px", height: "40px" }}>
+              </lord-icon>
+            </div>
+          </div>
+          <div className='Event-adding-Event-input-field'>
+            <label className="Event-adding-task-label" htmlFor="EventName">Event Name</label>
+            <input
+              className="Event-adding-task-input"
+              type="text"
+              name="EventName"
+              value={selectedTask.EventName}
+              onChange={(e) => setSelectedTask({ ...selectedTask, EventName: e.target.value })}
+            />
+          </div>
+          <div className='Event-adding-Event-description-input-field'>
+            <label className="Event-adding-task-Description-label" htmlFor="Description">Description</label>
+            <textarea
+              className="Event-adding-task-Description-input"
+              name="Description"
+              value={selectedTask.Description}
+              onChange={(e) => setSelectedTask({ ...selectedTask, Description: e.target.value })}
+            />
+          </div>
+          <div className='Event-adding-Event-date-and-time-field'>
+            <div className='Event-adding-Event-date-input-field'>
+              <label className="Event-adding-task-Date-label" htmlFor="Date">Date </label>
+              <input
+                className="Event-adding-task-Date-input"
+                type="datetime-local"
+                name="Date"
+                value={new Date(selectedTask.Date).toISOString().slice(0, 16)}  // Format the date correctly
+                onChange={(e) => setSelectedTask({ ...selectedTask, Date: e.target.value })}
+              />
+            </div>
+          </div>
+          <div className='Event-adding-Event-status-dropdown-field'>
+            <label className="Event-adding-task-Status-label" htmlFor="Status">Status</label>
+            <select
+              className="Event-adding-task-Status-input"
+              name="Status"
+              value={selectedTask.Status}
+              onChange={(e) => setSelectedTask({ ...selectedTask, Status: e.target.value })}
+            >
+              <option value="Must do">Must do</option>
+              <option value="Awaiting">Awaiting</option>
+              <option value="Pending">Pending</option>
+            </select>
+          </div>
+          <div className='Event-adding-Event-task-duration-input-field'>
+            <div className='Event-adding-Event-task-duration-hours-input-field'>
+              <label className="Event-adding-task-task-duration-hours-label" htmlFor="DurationHours">Duration (Hours)</label>
+
+              <input
+                className="Event-adding-task-task-duration-hours-input"
+                type="number"
+                name="DurationHours"
+                value={selectedTask.DurationHours}
+                onChange={(e) => setSelectedTask({ ...selectedTask, DurationHours: parseInt(e.target.value) })}
+              />
+            </div>
+            <div className='Event-adding-Event-task-duration-minutes-input-field'>
+              <label className="Event-adding-task-task-duration-minutes-label" htmlFor="DurationMinutes">Duration (Minutes)</label>
+              <input
+                className="Event-adding-task-task-duration-minutes-input"
+                type="number"
+                name="DurationMinutes"
+                value={selectedTask.DurationMinutes}
+                onChange={(e) => setSelectedTask({ ...selectedTask, DurationMinutes: parseInt(e.target.value) })}
+              />
+            </div>
+          </div>
+          <div className='Event-adding-form-cancel-and-submit-button-container'>
+            <button className="Event-adding-form-cancel-button" type='button' onClick={() => { setShowEditTaskForm(false) }}>Cancel</button>
+            <button className="Event-adding-form-submit-button" type="submit">Update</button>
           </div>
         </form>
       )}

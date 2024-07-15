@@ -1,0 +1,27 @@
+meta {
+  name: Get request testing
+  type: http
+  seq: 8
+}
+
+patch {
+  url: http://localhost:8000/api/updatetask/66935cee3046cb951688fe90
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOiI2NjhlYzk4YjRkZmE5YzExYWJjN2EzOTYiLCJpYXQiOjE3MjA5MzY4NzV9.y--OsXdb-CWUrSoGFa4f5I9Ts08rpX72NTePM5uN6pk
+}
+
+body:json {
+  {
+    "EventName": "Updated Event Name",
+    "Description": "Updated Description",
+    "Date": "2024-07-14",
+    "Status": "Completed",
+    "DurationHours": 2,
+    "DurationMinutes": 30,
+    "userID": "668ec98b4dfa9c11abc7a396"
+  }
+}
