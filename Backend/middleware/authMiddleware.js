@@ -14,10 +14,11 @@ const authMiddleware = (req, res, next) => {
     req.body.userID = decoded.userID;  // Set userID in req object
     next();
   } catch (ex) {
-    console.log('Token verification error:', ex);
+    console.error('Token verification error:', ex.message);
+    console.error('Token:', token);
+    console.error('SECRET_KEY:', process.env.SECRET_KEY);
     res.status(400).json({ message: 'Invalid token.' });
   }
 };
 
 module.exports = authMiddleware;
-

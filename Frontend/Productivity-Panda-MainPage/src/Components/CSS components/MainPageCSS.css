@@ -202,7 +202,7 @@
     height: 10%;
 }
 .ProductivityPandaImage img {
-    height: 95%;
+    height: 100%;
     width: 80%;
 }
 .ProductivityPandaImage{
@@ -257,7 +257,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    height: 8%;
+    height: 10%;
     width: 10%;
     cursor: pointer;
     margin-left: 85%;

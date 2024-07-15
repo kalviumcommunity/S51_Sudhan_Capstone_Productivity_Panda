@@ -105,6 +105,7 @@ const SignUp = () => {
 
         if (response.status === 201) {
           // If successful, navigate to MainPage and store token in localStorage
+          localStorage.setItem("userName", Username)
           localStorage.setItem("TokenizedValue", token);
           if(token){
             navigate("/MainPage");
@@ -154,6 +155,7 @@ const SignUp = () => {
         localStorage.setItem("Profile", userLogin.picture)
         const { token } = await response.data
         console.log(response)
+        localStorage.setItem("username", userLogin.given_name)
         localStorage.setItem("TokenizedValue", token)
         if(token){
           navigate("/MainPage");

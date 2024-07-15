@@ -24,7 +24,7 @@ app.use(bodyParser.json()); // Middleware for parsing JSON bodies
 app.use(SignUpRegisteringRoute); // Using sign-up/register route
 app.use(LoginInRoute); // Using login route
 app.use(GoogleSignupRoutes); // Using Google sign-up route
-app.use("/taskroute", taskRoutes)
+app.use("/api",taskRoutes)
 app.use("/", addTaskForm); // Using add task form route
 
 // Set the port for the server to listen on
