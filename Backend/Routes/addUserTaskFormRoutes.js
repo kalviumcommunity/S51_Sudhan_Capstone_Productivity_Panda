@@ -30,25 +30,6 @@ Router.post('/api/addtask', authenticateToken, async (req, res) => {
     }
   });
 
-
-// Router.get('/api/getalltask', authenticateToken, async (req, res) => {
-//     try {
-//         let { userID } = req.body.userID;
-//         const getTask = await Task.find();
-//         const filteredTask = getTask.filter((taskcontainer) => {
-//             if(taskcontainer.userID == userID) {
-//                 return taskcontainer
-//             }
-//         })
-//         res.status(200).json(filteredTask);
-//     } catch (err) {
-//         console.log(err);
-//         return res.status(500).send({
-//             message: `Internal server error ${err}` 
-//         })
-//     }
-// })
-
 Router.get('/api/getalltask', authenticateToken, async (req, res) => {
     try {
         console.log('Request received in route handler.');
