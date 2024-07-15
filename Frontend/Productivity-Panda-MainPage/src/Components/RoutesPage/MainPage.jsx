@@ -100,20 +100,19 @@ function MainPage() {
   const handlesubmit = async (e) => {
     e.preventDefault();
 
-    const url = `http://localhost:8000/api/updatetask/${selectedTask._id}`;
+    const url = `http://localhost:8000/api/api/updatetask/${selectedTask._id}`;
     console.log('Sending PATCH request to:', url);
     console.log('Request data:', selectedTask);
 
     try {
-      const response = await axios({
-        method: 'PATCH',
-        url: url,
-        data: selectedTask,
+      const response = await axios.patch(url, {
+        selectedTask
+      }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('TokenizedValue')}`,
           'Content-Type': 'application/json'
         }
-      });
+      })
 
       console.log('Response:', response.data);
       setTasks((prevTasks) => prevTasks.map((task) =>
