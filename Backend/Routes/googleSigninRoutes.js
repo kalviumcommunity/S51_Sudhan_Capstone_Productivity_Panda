@@ -8,7 +8,7 @@ require("dotenv").config(); // Load environment variables from .env file
 Router.post("/GoogleSignupRoutes", async (req, res) => {
   try {
     // Destructure the request body to get user details
-    const { name, email, profile } = req.body;
+    const { name, email } = req.body;
 
     // Check if a user with the provided email already exists
     let existingUser = await UserSchemaModelChecking.findOne({ Email: email });
@@ -19,8 +19,6 @@ Router.post("/GoogleSignupRoutes", async (req, res) => {
       const newUser = new UserSchemaModelChecking({
         Username: name,
         Email: email,
-        Password: null, // No password since it's a Google signup
-        Profile: profile,
       });
 
       await newUser.save(); // Save the new user to the database

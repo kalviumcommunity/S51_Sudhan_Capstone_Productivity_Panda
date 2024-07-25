@@ -21,11 +21,12 @@ LoginInRoute.post("/log-in", async (req, res) => {
         if (!userEmailID) {
             return res.status(404).json({ Error: "Email ID wasn't found" });
         }
-
+        console.log(userEmailID , Password)
         // Comparing the entered password with the stored hashed password
         const userPassword = await bcrypt.compare(Password, userEmailID.Password);
 
         // If passwords don't match, return a 400 error
+        console.log(userPassword); // Logging the result of password comparison
         if (!userPassword) {
             return res.status(400).json({ Error: "Please Enter valid password" });
         }
