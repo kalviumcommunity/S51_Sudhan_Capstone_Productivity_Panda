@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import '../CSS components/MainPageCSS.css';
+import { jwtDecode } from 'jwt-decode';
 
 function MainPage() {
   const { setIsLoggedIn } = useContext(ParentComponent);
@@ -19,6 +20,39 @@ function MainPage() {
   const [tasks, setTasks] = useState([]);
   const [selectedTask, setSelectedTask] = useState([]);
   const [todaysTasks, setTodaysTasks] = useState([]); // Changed name to avoid confusion
+  const [ProfileCard, setProfileCard] = useState(false)
+  const [user, setUser] = useState(null);
+  const [loading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem('TokenizedValue');
+        console.log(token)
+        if (token) {
+          const response = await axios.get('http://localhost:8000/api/user/me',
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          console.log("API response:", response.data);
+          setUser(response.data);
+        } else {
+          console.log("No token available, unable to fetch user data");
+          setError("No token available. Please log in again.");
+        }
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+        setError('Failed to load user data: ' + error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   const onSubmit = async (data) => {
     try {
@@ -146,6 +180,11 @@ function MainPage() {
     window.location.reload();
   };
 
+  const handleProfileCardButton = () => {
+    setProfileCard(!ProfileCard);
+  }
+
+
   const deleteTask = async (taskId) => {
     try {
       await axios.delete(`http://localhost:8000/api/deletetasks/${taskId}`, {
@@ -242,7 +281,7 @@ function MainPage() {
 
   const { mustDoTasks, awaitingTasks, pendingTasks } = categorizeTasks(tasks);
 
-  
+
   return (
     <>
       <ToastContainer />
@@ -251,19 +290,19 @@ function MainPage() {
           <div className='ProductivityPandaImage'>
             <img src={logo_icon} alt="Logo" />
           </div>
-          <div className="log-out" onClick={handleLogoutButton}>
-            <img src={Log_out} alt="Log-outIcon" style={{ width: "35px", height: "35px", cursor: "pointer" }} />
+          <div className="log-out">
+            <img onClick={handleProfileCardButton} style={{ borderRadius: "100px", width: "50px", height: "50px", cursor: "pointer", border: "1px solid black" }} src={`https://avatar.iran.liara.run/public/boy?username=${user ? user.Username : ""}`} alt={`${user ? user.Username : ""}'s avatar`} />
           </div>
         </div>
         <div className='content-mainpage-container'>
           <div className='horizontal-line'></div>
-            <div className='Add-task-Container' onClick={toggleAddTaskForm}>
-              <lord-icon
-                src="https://cdn.lordicon.com/hqymfzvj.json"
-                trigger="hover"
-                style={{ width: '40px', height: '40px' }}>
-              </lord-icon>
-              <span className="tooltiptext">Add task</span>
+          <div className='Add-task-Container' onClick={toggleAddTaskForm}>
+            <lord-icon
+              src="https://cdn.lordicon.com/hqymfzvj.json"
+              trigger="hover"
+              style={{ width: '40px', height: '40px' }}>
+            </lord-icon>
+            <span className="tooltiptext">Add task</span>
           </div>
           <div className="task-container">
             <div className="task-column">
@@ -286,6 +325,33 @@ function MainPage() {
 
         </div>
       </div>
+
+      {ProfileCard && (
+        <div className='ProfileCard_container'>
+          <div className='Cross-lordIcon-profileCard' onClick={handleProfileCardButton}>
+            <lord-icon
+              src="https://cdn.lordicon.com/nqtddedc.json"
+              trigger="hover"
+              style={{ width: "40px", height: "40px" }}>
+            </lord-icon>
+          </div>
+          <div>
+            <img style={{ borderRadius: "100px" }} width="100px" height="100px" src={`https://avatar.iran.liara.run/public/boy?username=${user.Username}`} alt={`${user.Username}'s avatar`} />
+          </div>
+          <div className='UserName_container'>
+            <h2>{user.Username}</h2>
+          </div>
+          <div className='UseremailId_container'>
+            <strong>{user.Email}</strong>
+          </div>
+          <div className='Logout_btn' onClick={handleLogoutButton}>
+            <img src={Log_out} alt="Log-outIcon" style={{ width: "35px", height: "35px" }} />
+            <b>Log Out</b>
+          </div>
+        </div>
+      )}
+
+
       {showAddTaskForm && (
         <form className='add-task-form-container' onSubmit={handleSubmit(onSubmit)}>
           <div className='Cross-lordIcon-and-Heading-of-Add-Task-Form-Container'>
@@ -354,7 +420,7 @@ function MainPage() {
               })} />
               {errors.DurationHours && <p className='error-message'>{errors.DurationHours.message}</p>}
             </div>
-            <div className='Event-adding-Event-task-duration-minutes-input-field'>
+            <div className='Event-adding-Event-tafsk-duration-minutes-input-field'>
               <label className="Event-adding-task-task-duration-minutes-label" htmlFor="DurationMinutes">Duration (Minutes)</label>
               <input className="Event-adding-task-task-duration-minutes-input" type="number" {...register("DurationMinutes", {
                 min: { value: 0, message: "Duration minutes must be greater than or equal to 0" },

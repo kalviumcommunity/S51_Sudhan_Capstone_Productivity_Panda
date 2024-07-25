@@ -103,11 +103,8 @@ const Login = () => {
         const response = await axios.post("http://localhost:8000/GoogleSignupRoutes", {
           name: userLogin.given_name,
           email: userLogin.email,
-          profile: userLogin.picture,
         });
-        localStorage.setItem("Profile", userLogin.picture)
         const { token } = await response.data
-        console.log(response)
         localStorage.setItem("TokenizedValue", token)
         if(token){
           navigate("/MainPage");
@@ -119,7 +116,7 @@ const Login = () => {
       }
     };
 
-    if (userLogin.given_name && userLogin.email && userLogin.picture) {
+    if (userLogin.given_name && userLogin.email) {
       sendGoogleSignInData();
     }
   }, [userLogin]);
