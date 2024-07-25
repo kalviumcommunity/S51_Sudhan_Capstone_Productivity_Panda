@@ -336,7 +336,7 @@ function MainPage() {
             </lord-icon>
           </div>
           <div>
-            <img style={{ borderRadius: "100px" }} width="100px" height="100px" src={`https://avatar.iran.liara.run/public/boy?username=${user.Username}`} alt={`${user.Username}'s avatar`} />
+            <img style={{ borderRadius: "100px", border: "2px solid #4C4848" }} width="100px" height="100px" src={`https://avatar.iran.liara.run/public/boy?username=${user.Username}`} alt={`${user.Username}'s avatar`} />
           </div>
           <div className='UserName_container'>
             <h2>{user.Username}</h2>
@@ -387,28 +387,30 @@ function MainPage() {
             />
             {errors.Description && <p className='error-message'>{errors.Description.message}</p>}
           </div>
-          <div className='Event-adding-Event-date-and-time-field'>
-            <div className='Event-adding-Event-date-input-field'>
-              <label className="Event-adding-task-Date-label" htmlFor="date">Date </label>
-              <input
-                className="Event-adding-task-Date-input"
-                type="datetime-local"
-                {...register("Date", {
-                  required: "Date is required",
-                  validate: validateDateTime
-                })}
-              />
-              {errors.Date && <p className='error-message'>{errors.Date.message}</p>}
+          <div className='Event-adding-Event-data-and-time-and-status-dropdown-field'>
+            <div className='Event-adding-Event-date-and-time-field'>
+              <div className='Event-adding-Event-date-input-field'>
+                <label className="Event-adding-task-Date-label" htmlFor="date">Date </label>
+                <input
+                  className="Event-adding-task-Date-input"
+                  type="datetime-local"
+                  {...register("Date", {
+                    required: "Date is required",
+                    validate: validateDateTime
+                  })}
+                />
+                {errors.Date && <p className='error-message'>{errors.Date.message}</p>}
+              </div>
             </div>
-          </div>
-          <div className='Event-adding-Event-status-dropdown-field'>
-            <label className="Event-adding-task-Status-label" htmlFor="Status">Status</label>
-            <select className="Event-adding-task-Status-input" {...register("Status", { required: "Status is required" })}>
-              <option value="Must do">Must do</option>
-              <option value="Awaiting">Awaiting</option>
-              <option value="Pending">Pending</option>
-            </select>
-            {errors.Status && <p className='error-message'>{errors.Status.message}</p>}
+            <div className='Event-adding-Event-status-dropdown-field'>
+              <label className="Event-adding-task-Status-label" htmlFor="Status">Status</label>
+              <select className="Event-adding-task-Status-input" {...register("Status", { required: "Status is required" })}>
+                <option value="Must do">Must do</option>
+                <option value="Awaiting">Awaiting</option>
+                <option value="Pending">Pending</option>
+              </select>
+              {errors.Status && <p className='error-message'>{errors.Status.message}</p>}
+            </div>
           </div>
           <div className='Event-adding-Event-task-duration-input-field'>
             <div className='Event-adding-Event-task-duration-hours-input-field'>
@@ -420,7 +422,7 @@ function MainPage() {
               })} />
               {errors.DurationHours && <p className='error-message'>{errors.DurationHours.message}</p>}
             </div>
-            <div className='Event-adding-Event-tafsk-duration-minutes-input-field'>
+            <div className='Event-adding-Event-task-duration-minutes-input-field'>
               <label className="Event-adding-task-task-duration-minutes-label" htmlFor="DurationMinutes">Duration (Minutes)</label>
               <input className="Event-adding-task-task-duration-minutes-input" type="number" {...register("DurationMinutes", {
                 min: { value: 0, message: "Duration minutes must be greater than or equal to 0" },
@@ -432,7 +434,7 @@ function MainPage() {
           </div>
           <div className='Event-adding-form-cancel-and-submit-button-container'>
             <button className="Event-adding-form-cancel-button" type='button' onClick={handleCancelChange}>Cancel</button>
-            <button className="Event-adding-form-submit-button" type="submit">Submit</button>
+            <button className="Event-adding-form-submit-button" type="submit">Add Task</button>
           </div>
         </form>
       )}
@@ -468,30 +470,30 @@ function MainPage() {
               onChange={(e) => setSelectedTask({ ...selectedTask, Description: e.target.value })}
             />
           </div>
-          <div className='Event-adding-Event-date-and-time-field'>
-            <div className='Event-adding-Event-date-input-field'>
-              <label className="Event-adding-task-Date-label" htmlFor="Date">Date </label>
-              <input
-                className="Event-adding-task-Date-input"
-                type="datetime-local"
-                name="Date"
-                value={new Date(selectedTask.Date).toISOString().slice(0, 16)}  // Format the date correctly
-                onChange={(e) => setSelectedTask({ ...selectedTask, Date: e.target.value })}
-              />
+          <div className='Event-adding-Event-data-and-time-and-status-dropdown-field'>
+            <div className='Event-editing-Event-date-and-time-field'>
+                <label className="Event-adding-task-Date-label" htmlFor="Date">Date </label>
+                <input
+                  className="Event-editing-task-Date-input"
+                  type="datetime-local"
+                  name="Date"
+                  value={new Date(selectedTask.Date).toISOString().slice(0, 16)}  // Format the date correctly
+                  onChange={(e) => setSelectedTask({ ...selectedTask, Date: e.target.value })}
+                />
             </div>
-          </div>
-          <div className='Event-adding-Event-status-dropdown-field'>
-            <label className="Event-adding-task-Status-label" htmlFor="Status">Status</label>
-            <select
-              className="Event-adding-task-Status-input"
-              name="Status"
-              value={selectedTask.Status}
-              onChange={(e) => setSelectedTask({ ...selectedTask, Status: e.target.value })}
-            >
-              <option value="Must do">Must do</option>
-              <option value="Awaiting">Awaiting</option>
-              <option value="Pending">Pending</option>
-            </select>
+            <div className='Event-adding-Event-status-dropdown-field'>
+              <label className="Event-adding-task-Status-label" htmlFor="Status">Status</label>
+              <select
+                className="Event-adding-task-Status-input"
+                name="Status"
+                value={selectedTask.Status}
+                onChange={(e) => setSelectedTask({ ...selectedTask, Status: e.target.value })}
+              >
+                <option value="Must do">Must do</option>
+                <option value="Awaiting">Awaiting</option>
+                <option value="Pending">Pending</option>
+              </select>
+            </div>
           </div>
           <div className='Event-adding-Event-task-duration-input-field'>
             <div className='Event-adding-Event-task-duration-hours-input-field'>
@@ -518,7 +520,7 @@ function MainPage() {
           </div>
           <div className='Event-adding-form-cancel-and-submit-button-container'>
             <button className="Event-adding-form-cancel-button" type='button' onClick={() => { setShowEditTaskForm(false) }}>Cancel</button>
-            <button className="Event-adding-form-submit-button" type="submit">Update</button>
+            <button className="Event-adding-form-submit-button" type="submit">Update Task</button>
           </div>
         </form>
       )}
