@@ -281,6 +281,13 @@ function MainPage() {
 
   const { mustDoTasks, awaitingTasks, pendingTasks } = categorizeTasks(tasks);
 
+  const taskCounts = {
+    mustDo: mustDoTasks.length,
+    awaiting: awaitingTasks.length,
+    pending: pendingTasks.length,
+    today: todaysTasks.length
+  };
+
 
   return (
     <>
@@ -339,10 +346,28 @@ function MainPage() {
             <img style={{ borderRadius: "100px", border: "2px solid #4C4848" }} width="100px" height="100px" src={`https://avatar.iran.liara.run/public/boy?username=${user.Username}`} alt={`${user.Username}'s avatar`} />
           </div>
           <div className='UserName_container'>
-            <h2>{user.Username}</h2>
+            <h1>{user.Username}</h1>
           </div>
           <div className='UseremailId_container'>
-            <strong>{user.Email}</strong>
+            <h2>{user.Email}</h2>
+          </div>
+          <div className='TaskCounts_container'>
+            <div className='taskCounts_container_columns' id='taskCounts_container_columns_1'>
+              <p style={{fontSize:"18px", fontWeight:"500", color:"#14FF00"}}>Must Do</p>
+              <p style={{fontSize:"24px", fontWeight:"600"}}>{taskCounts.mustDo}</p>
+            </div>
+            <div className='taskCounts_container_columns' id='taskCounts_container_columns_2'>
+              <p style={{fontSize:"18px", fontWeight:"500", color:"#FFA500"}}>Awaiting</p>
+              <p style={{fontSize:"24px", fontWeight:"600"}}>{taskCounts.awaiting}</p>
+            </div>
+            <div className='taskCounts_container_columns' id='taskCounts_container_columns_3'>
+              <p style={{fontSize:"18px", fontWeight:"500", color:"#8B4513"}}>Pending</p>
+              <p style={{fontSize:"24px", fontWeight:"600"}}>{taskCounts.pending}</p>
+            </div>
+            <div className='taskCounts_container_columns' id='taskCounts_container_columns_4'>
+              <p style={{fontSize:"18px", fontWeight:"500", color:"#2F3645"}}>Today's Tasks</p>
+              <p style={{fontSize:"24px", fontWeight:"600"}}>{taskCounts.today}</p>
+            </div>
           </div>
           <div className='Logout_btn' onClick={handleLogoutButton}>
             <img src={Log_out} alt="Log-outIcon" style={{ width: "35px", height: "35px" }} />
@@ -472,14 +497,14 @@ function MainPage() {
           </div>
           <div className='Event-adding-Event-data-and-time-and-status-dropdown-field'>
             <div className='Event-editing-Event-date-and-time-field'>
-                <label className="Event-adding-task-Date-label" htmlFor="Date">Date </label>
-                <input
-                  className="Event-editing-task-Date-input"
-                  type="datetime-local"
-                  name="Date"
-                  value={new Date(selectedTask.Date).toISOString().slice(0, 16)}  // Format the date correctly
-                  onChange={(e) => setSelectedTask({ ...selectedTask, Date: e.target.value })}
-                />
+              <label className="Event-adding-task-Date-label" htmlFor="Date">Date </label>
+              <input
+                className="Event-editing-task-Date-input"
+                type="datetime-local"
+                name="Date"
+                value={new Date(selectedTask.Date).toISOString().slice(0, 16)}  // Format the date correctly
+                onChange={(e) => setSelectedTask({ ...selectedTask, Date: e.target.value })}
+              />
             </div>
             <div className='Event-adding-Event-status-dropdown-field'>
               <label className="Event-adding-task-Status-label" htmlFor="Status">Status</label>
