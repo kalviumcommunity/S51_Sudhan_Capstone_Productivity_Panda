@@ -30,7 +30,7 @@ function MainPage() {
         const token = localStorage.getItem('TokenizedValue');
         console.log(token)
         if (token) {
-          const response = await axios.get('http://localhost:8000/api/user/me',
+          const response = await axios.get('https://s51-sudhan-capstone-productivity-panda-5.onrender.com/api/user/me',
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -61,7 +61,7 @@ function MainPage() {
 
       const response = await axios({
         method: 'POST',
-        url: 'http://localhost:8000/api/addtask',
+        url: 'https://s51-sudhan-capstone-productivity-panda-5.onrender.com/api/addtask',
         data: data, // Send body instead
         headers: {
           Authorization: `Bearer ${window.localStorage.getItem('TokenizedValue')}`,
@@ -87,7 +87,7 @@ function MainPage() {
 
       const response = await axios({
         method: 'GET',
-        url: `http://localhost:8000/api/getalltask`,
+        url: `https://s51-sudhan-capstone-productivity-panda-5.onrender.com/api/getalltask`,
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -134,7 +134,7 @@ function MainPage() {
   const handlesubmit = async (e) => {
     e.preventDefault();
 
-    const url = `http://localhost:8000/api/api/updatetask/${selectedTask._id}`;
+    const url = `https://s51-sudhan-capstone-productivity-panda-5.onrender.com/api/api/updatetask/${selectedTask._id}`;
     console.log('Sending PATCH request to:', url);
     console.log('Request data:', selectedTask);
 
@@ -187,7 +187,7 @@ function MainPage() {
 
   const deleteTask = async (taskId) => {
     try {
-      await axios.delete(`http://localhost:8000/api/deletetasks/${taskId}`, {
+      await axios.delete(`https://s51-sudhan-capstone-productivity-panda-5.onrender.com/api/deletetasks/${taskId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('TokenizedValue')}` }
       });
       fetchTasks(); // Refresh the task list
@@ -280,14 +280,13 @@ function MainPage() {
   };
 
   const { mustDoTasks, awaitingTasks, pendingTasks } = categorizeTasks(tasks);
-
+  
   const taskCounts = {
     mustDo: mustDoTasks.length,
     awaiting: awaitingTasks.length,
     pending: pendingTasks.length,
     today: todaysTasks.length
   };
-
 
   return (
     <>
@@ -353,20 +352,20 @@ function MainPage() {
           </div>
           <div className='TaskCounts_container'>
             <div className='taskCounts_container_columns' id='taskCounts_container_columns_1'>
-              <p style={{fontSize:"18px", fontWeight:"500", color:"#14FF00"}}>Must Do</p>
-              <p style={{fontSize:"24px", fontWeight:"600"}}>{taskCounts.mustDo}</p>
+              <p style={{ fontSize: "18px", fontWeight: "500", color: "#14FF00" }}>Must Do</p>
+              <p style={{ fontSize: "24px", fontWeight: "600" }}>{taskCounts.mustDo}</p>
             </div>
             <div className='taskCounts_container_columns' id='taskCounts_container_columns_2'>
-              <p style={{fontSize:"18px", fontWeight:"500", color:"#FFA500"}}>Awaiting</p>
-              <p style={{fontSize:"24px", fontWeight:"600"}}>{taskCounts.awaiting}</p>
+              <p style={{ fontSize: "18px", fontWeight: "500", color: "#FFA500" }}>Awaiting</p>
+              <p style={{ fontSize: "24px", fontWeight: "600" }}>{taskCounts.awaiting}</p>
             </div>
             <div className='taskCounts_container_columns' id='taskCounts_container_columns_3'>
-              <p style={{fontSize:"18px", fontWeight:"500", color:"#8B4513"}}>Pending</p>
-              <p style={{fontSize:"24px", fontWeight:"600"}}>{taskCounts.pending}</p>
+              <p style={{ fontSize: "18px", fontWeight: "500", color: "#8B4513" }}>Pending</p>
+              <p style={{ fontSize: "24px", fontWeight: "600" }}>{taskCounts.pending}</p>
             </div>
             <div className='taskCounts_container_columns' id='taskCounts_container_columns_4'>
-              <p style={{fontSize:"18px", fontWeight:"500", color:"#2F3645"}}>Today's Tasks</p>
-              <p style={{fontSize:"24px", fontWeight:"600"}}>{taskCounts.today}</p>
+              <p style={{ fontSize: "18px", fontWeight: "500", color: "#2F3645" }}>Today's Tasks</p>
+              <p style={{ fontSize: "24px", fontWeight: "600" }}>{taskCounts.today}</p>
             </div>
           </div>
           <div className='Logout_btn' onClick={handleLogoutButton}>

@@ -100,7 +100,7 @@ const SignUp = () => {
     // If no error, proceed with form submission
     if (!isError) {
       try {
-        const response = await axios.post("http://localhost:8000/Sign-Up", { Username, Email, Password });
+        const response = await axios.post("https://s51-sudhan-capstone-productivity-panda-5.onrender.com/Sign-Up", { Username, Email, Password });
         const { token } = response.data;
 
         if (response.status === 201) {
@@ -143,7 +143,7 @@ const SignUp = () => {
   useEffect(() => {
     const sendGoogleSignInData = async () => {
       try {
-        const response = await axios.post("http://localhost:8000/GoogleSignupRoutes", {
+        const response = await axios.post("https://s51-sudhan-capstone-productivity-panda-5.onrender.com/GoogleSignupRoutes", {
           name: userLogin.given_name,
           email: userLogin.email,
         });
