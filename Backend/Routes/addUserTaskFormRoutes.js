@@ -9,32 +9,32 @@ const { updateTask } = require('../controllers/taskController');
 // Define a POST route for adding a task form
 Router.post('/api/addtask', authenticateToken, async (req, res) => {
     // const { error, value } = addTaskFormValidator.validate(req.body, { abortEarly: false });
-  
+
     // if (error) {
     //   return res.status(400).send({
     //     message: `Bad request, error:${error}`
     //   });
     // }
-  
+
     try {
-      let { EventName, Description, Date, Status, DurationHours, DurationMinutes } = req.body;
-      const {userID} = req.body;  
-  
-      const addTask = await Task.create({ EventName, Description, Date, Status, DurationHours, DurationMinutes, userID: userID });
-      res.status(201).json(addTask);
+        let { EventName, Description, Date, Status, DurationHours, DurationMinutes } = req.body;
+        const { userID } = req.body;
+
+        const addTask = await Task.create({ EventName, Description, Date, Status, DurationHours, DurationMinutes, userID: userID });
+        res.status(201).json(addTask);
     } catch (err) {
-      console.log(err);
-      return res.status(500).send({
-        message: "Internal server error"
-      });
+        console.log(err);
+        return res.status(500).send({
+            message: "Internal server error"
+        });
     }
-  });
+});
 
 Router.get('/api/getalltask', authenticateToken, async (req, res) => {
     try {
         console.log('Request received in route handler.');
         // Destructure userID directly from req.body
-        const { userID } = req.body; 
+        const { userID } = req.body;
 
         // Log the userID for debugging purposes
         console.log('UserID received in route handler:', userID);

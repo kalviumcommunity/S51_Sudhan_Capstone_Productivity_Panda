@@ -14,7 +14,7 @@ function FooterLandingPage() {
             <img src={Footer_Image} alt="Footer_Image" />
             <div className='contact_list_container'>
                 <div className='contact'>
-                    <a href="https://github.com/sudhanvelss" target='_blank'><img src={Git_hub_image} alt="Git-hub_image" /></a>
+                    <a href="https://github.com/Sudhan1112" target='_blank'><img src={Git_hub_image} alt="Git-hub_image" /></a>
                 </div>
                 <div className='contact'>
                 <a href="https://www.linkedin.com/feed/" target="_blank"><img src={LinkedIN_image} alt="LinkedIN_image" /></a>
