@@ -25,7 +25,7 @@ Users can utilize Productivity Panda to manage tasks, prioritize plans, set remi
 https://s51-sudhan-capstone-productivity-panda-5.onrender.com/
 
 ## Frontend Deployed Link
-https://productivitypanda.netlify.app/
+https://productivitypanda.pages.dev/
 ## License
 This project is licensed under the [MIT License](LICENSE).
 
