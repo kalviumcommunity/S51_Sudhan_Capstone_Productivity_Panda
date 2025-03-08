@@ -21,7 +21,19 @@ git clone https://github.com/kalviumcommunity/S51_Sudhan_Capstone_Productivity_P
 ## Usage
 Users can utilize Productivity Panda to manage tasks, prioritize plans, set reminders, and collaborate with team members effectively. Simply log in using Google authentication, create and prioritize tasks based on deadlines, and utilize the integrated chatbot for seamless communication. Stay focused on goals and enhance productivity with Productivity Panda!
 
-## First Page Look
+## Landing Home Page 
+![Alt text]![image](https://github.com/user-attachments/assets/cdbfdfdc-8b40-44ac-adbb-0150e609dfef)
+
+## Landing About Page
+![Alt text]![image](https://github.com/user-attachments/assets/bda75c08-2245-4d82-9ae2-0fb129df0407)
+
+## Landing About Page 1
+![Alt text]![image](https://github.com/user-attachments/assets/f967a2c9-2184-4445-98fb-ee27c8bf320c)
+
+## Contact Page
+![Alt text]![image](https://github.com/user-attachments/assets/0c63aa02-fc86-4038-8d99-09783c8a7c25)
+
+## SignUp and SignIn Page
 ![Alt text]![image](https://github.com/user-attachments/assets/04386c6f-24e9-4aa1-b5e3-ba492fc9d696)
 
 ## MainPage
