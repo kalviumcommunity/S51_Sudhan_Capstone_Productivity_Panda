@@ -12,6 +12,12 @@ Introducing our task management web application: an intuitive platform designed 
 - **Integrated Chatbot:** Facilitate seamless team communication and collaboration through an integrated chatbot feature.
 - **Google Authentication:** Ensure secure user access with authentication via Google for reliable login mechanisms.
 
+## TEST STACKS
+  - **Frontend:** React Js, **Context API** for Global STATE MANAGEMENT.
+  - **Backend:** Node Js, Express Js.
+  - **Database:** MongoDB.
+
+     
 ## Installation
 To install Productivity Panda, clone the repository using the following command:
 ```bash
