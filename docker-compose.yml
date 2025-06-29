@@ -1,0 +1,28 @@
+services:
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: ./backend
+    image: sudhan1112/productivity-panda-backend:latest
+    ports:
+      - "5000:5000"
+    environment:
+      - MongoURL=mongodb://mongo:27017/productivity-panda-db
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./frontend/productivity-panda-mainpage
+    image: sudhan1112/productivity-panda-frontend:latest
+    ports:
+    - "8080:80"
+    depends_on:
+    - backend
+
+volumes:
+  mongo-data:
